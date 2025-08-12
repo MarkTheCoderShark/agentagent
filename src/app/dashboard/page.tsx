@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -19,15 +18,12 @@ import {
   BarChart3,
   Clock,
   CheckCircle,
-  AlertCircle,
   Users,
   Zap,
   TrendingUp,
   Activity,
-  Mail,
   MessageSquare,
   FileText,
-  Calendar,
   ArrowRight,
   MoreVertical,
 } from "lucide-react";

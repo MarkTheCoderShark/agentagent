@@ -14,7 +14,6 @@ import {
   Star,
   Users,
   Zap,
-  Shield,
   Headphones,
   X,
   Plus,

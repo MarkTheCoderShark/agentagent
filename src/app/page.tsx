@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   Bot,
   Zap,
-  Users,
   BarChart3,
   Clock,
   Shield,
@@ -18,10 +17,7 @@ import {
   CheckCircle,
   Star,
   Sparkles,
-  Brain,
   Workflow,
-  Target,
-  TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";

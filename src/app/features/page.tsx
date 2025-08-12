@@ -1,27 +1,18 @@
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Bot,
-  Zap,
-  Users,
   BarChart3,
-  Clock,
   Shield,
   ArrowRight,
   CheckCircle,
   Workflow,
-  Brain,
-  Target,
-  TrendingUp,
   MessageSquare,
-  Calendar,
   FileText,
   Database,
   Globe,
@@ -30,6 +21,9 @@ import {
   Headphones,
   Settings,
   Layers,
+  Calendar,
+  Brain,
+  Target,
 } from "lucide-react";
 import Link from "next/link";
 
