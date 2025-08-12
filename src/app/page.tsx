@@ -24,6 +24,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -125,13 +126,15 @@ export default function HomePage() {
           <p className="text-gray-500 mb-8">
             Trusted by innovative companies worldwide
           </p>
-          <div className="flex items-center justify-center space-x-12 opacity-60">
-            {/* Placeholder for company logos */}
-            <div className="w-24 h-8 bg-gray-200 rounded"></div>
-            <div className="w-24 h-8 bg-gray-200 rounded"></div>
-            <div className="w-24 h-8 bg-gray-200 rounded"></div>
-            <div className="w-24 h-8 bg-gray-200 rounded"></div>
-            <div className="w-24 h-8 bg-gray-200 rounded"></div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center opacity-80">
+            <Image src="/logos/spmg.svg" alt="SPMG" width={160} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100" />
+            <Image src="/logos/seo-web-pros.svg" alt="SEO&WEB PROS" width={180} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100" />
+            <Image src="/logos/novascale.svg" alt="NovaScale" width={160} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100" />
+            <Image src="/logos/quantum-ops.svg" alt="QuantumOps" width={170} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100" />
+            <Image src="/logos/blue-orbit.svg" alt="BlueOrbit" width={160} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100" />
+            <Image src="/logos/apex-forge.svg" alt="ApexForge" width={160} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100" />
+            <Image src="/logos/lumenflow.svg" alt="LumenFlow" width={160} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100 hidden sm:block" />
+            <Image src="/logos/hexalytics.svg" alt="Hexalytics" width={170} height={48} className="grayscale hover:grayscale-0 transition-all duration-200 opacity-80 hover:opacity-100 hidden md:block" />
           </div>
         </div>
       </section>
