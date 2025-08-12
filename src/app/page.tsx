@@ -53,15 +53,19 @@ export default function HomePage() {
             >
               How it Works
             </Link>
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-            >
-              Get Started
-            </Button>
+            <Link href="/auth/signin">
+              <Button variant="outline" size="sm">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              >
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </nav>
@@ -87,13 +91,15 @@ export default function HomePage() {
               workflows.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-4 text-lg"
-              >
-                Start Free Trial
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+              <Link href="/auth/signup">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-4 text-lg"
+                >
+                  Start Free Trial
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
               <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
                 Watch Demo
               </Button>
@@ -326,9 +332,11 @@ export default function HomePage() {
                     Email support
                   </li>
                 </ul>
-                <Button className="w-full mt-6" variant="outline">
-                  Start Free Trial
-                </Button>
+                <Link href="/auth/signup">
+                  <Button className="w-full mt-6" variant="outline">
+                    Start Free Trial
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -373,9 +381,11 @@ export default function HomePage() {
                     Analytics dashboard
                   </li>
                 </ul>
-                <Button className="w-full mt-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                  Start Free Trial
-                </Button>
+                <Link href="/auth/signup">
+                  <Button className="w-full mt-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                    Start Free Trial
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -525,10 +535,12 @@ export default function HomePage() {
             Join thousands of businesses already scaling with AI agents
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="px-8 py-4 text-lg">
-              Start Free Trial
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+            <Link href="/auth/signup">
+              <Button size="lg" variant="secondary" className="px-8 py-4 text-lg">
+                Start Free Trial
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
             <Button
               size="lg"
               variant="outline"

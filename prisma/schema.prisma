@@ -1,0 +1,186 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Subscription and billing
+  subscriptionTier String @default("free") // free, starter, pro, enterprise
+  subscriptionStatus String @default("active") // active, canceled, past_due
+  subscriptionEndDate DateTime?
+
+  // Relations
+  accounts Account[]
+  sessions Session[]
+  agents   Agent[]
+  workflows Workflow[]
+  tasks    Task[]
+  integrations Integration[]
+
+  @@map("users")
+}
+
+model Agent {
+  id          String   @id @default(cuid())
+  name        String
+  role        String   // e.g., "Marketing Assistant", "Customer Support", "Data Analyst"
+  description String?
+  status      String   @default("active") // active, paused, offline
+  avatar      String?  // emoji or image URL
+  tone        String   @default("professional") // professional, casual, friendly
+  workingHours String? // JSON string for working hours
+  permissions Json?    // JSON object for permissions
+  
+  // Performance metrics
+  tasksCompletedToday Int @default(0)
+  tasksCompletedWeek  Int @default(0)
+  efficiency          Float @default(0)
+  lastActive          DateTime @default(now())
+  
+  // Memory and context
+  memory Json? // Persistent context for the agent
+  
+  // Relations
+  userId    String
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workflows Workflow[]
+  tasks     Task[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("agents")
+}
+
+model Workflow {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        String   // manual, scheduled, event-driven
+  status      String   @default("active") // active, paused, draft
+  
+  // Workflow configuration
+  triggers    Json     // JSON array of triggers
+  actions     Json     // JSON array of actions
+  conditions  Json?    // JSON object for conditional logic
+  
+  // Scheduling
+  schedule    Json?    // Cron expression or schedule config
+  
+  // Relations
+  userId  String
+  user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agentId String?
+  agent   Agent? @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  tasks   Task[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("workflows")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        String   // content, support, analysis, data, automation
+  status      String   @default("pending") // pending, in_progress, completed, failed, needs_review
+  
+  // Task execution
+  input       Json?    // Input data for the task
+  output      Json?    // Output/result of the task
+  error       String?  // Error message if failed
+  
+  // Performance tracking
+  startedAt   DateTime?
+  completedAt DateTime?
+  duration    Int?     // Duration in seconds
+  
+  // Relations
+  userId    String
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agentId   String?
+  agent     Agent? @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  workflowId String?
+  workflow  Workflow? @relation(fields: [workflowId], references: [id], onDelete: SetNull)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tasks")
+}
+
+model Integration {
+  id          String   @id @default(cuid())
+  name        String   // e.g., "Gmail", "Slack", "Google Sheets"
+  type        String   // oauth, api_key, webhook
+  status      String   @default("connected") // connected, disconnected, error
+  
+  // Connection details
+  config      Json     // OAuth tokens, API keys, etc. (encrypted)
+  scopes      String[] // Array of granted scopes/permissions
+  
+  // Relations
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("integrations")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

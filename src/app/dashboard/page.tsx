@@ -164,13 +164,15 @@ export default function DashboardPage() {
             <span className="text-xl font-bold gradient-text">AgentForce</span>
           </Link>
           <div className="flex items-center space-x-4">
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Hire Agent
-            </Button>
+            <Link href="/dashboard/hire-agent">
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Hire Agent
+              </Button>
+            </Link>
             <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
           </div>
         </div>
@@ -252,14 +254,16 @@ export default function DashboardPage() {
                 <h2 className="text-xl font-semibold text-gray-900">
                   Your AI Agents
                 </h2>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="text-purple-600 border-purple-200 hover:bg-purple-50"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Agent
-                </Button>
+                <Link href="/dashboard/hire-agent">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-purple-600 border-purple-200 hover:bg-purple-50"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Agent
+                  </Button>
+                </Link>
               </div>
 
               <div className="space-y-4">

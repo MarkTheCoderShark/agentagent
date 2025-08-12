@@ -1,1 +1,14 @@
- 
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g7" x1="0" y1="0" x2="160" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="158" height="46" rx="10" fill="url(#g7)"/>
+  <rect x="1" y="1" width="158" height="46" rx="10" stroke="white" opacity="0.1"/>
+  <g opacity="0.45" transform="translate(16,10)">
+    <path d="M2 12 C6 2, 18 2, 22 12 C18 22, 6 22, 2 12 Z" fill="white"/>
+  </g>
+  <text x="46" y="30" fill="white" font-size="18" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" letter-spacing="1.1">LumenFlow</text>
+</svg> 
