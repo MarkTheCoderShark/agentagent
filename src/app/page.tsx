@@ -24,16 +24,16 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
+      <nav className="nav-appway section-padding py-4">
         <div className="container-width flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-white" />
+                      <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#4527a4] rounded-lg flex items-center justify-center">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[#4527a4]">AgentForce</span>
             </div>
-            <span className="text-xl font-bold gradient-text">AgentForce</span>
-          </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="#features"
@@ -59,19 +59,19 @@ export default function HomePage() {
               </Button>
             </Link>
             <Link href="/auth/signup">
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-              >
-                Get Started
-              </Button>
+                          <Button
+              size="sm"
+              className="theme-btn-two"
+            >
+              Get Started
+            </Button>
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="section-padding py-20 lg:py-32">
+      <section className="sec-pad section-padding">
         <div className="container-width text-center">
           <div className="animate-fade-in">
             <Badge
@@ -81,30 +81,30 @@ export default function HomePage() {
               <Sparkles className="w-4 h-4 mr-2" />
               Hire Your First AI Employee in 60 Seconds
             </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 text-balance">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#222222] mb-6 text-balance">
               Scale Your Business with{" "}
-              <span className="gradient-text">AI Agents</span>
+              <span className="text-[#4527a4]">AI Agents</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto text-balance">
+            <p className="text-xl md:text-2xl text-[#777777] mb-8 max-w-3xl mx-auto text-balance">
               Deploy AI agents as virtual employees. Available 24/7, never need
               breaks, and integrate directly with your existing tools and
               workflows.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Link href="/auth/signup">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-4 text-lg"
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
+                              <Button
+                size="lg"
+                className="theme-btn-two px-8 py-4 text-lg"
+              >
+                Start Free Trial
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
               </Link>
               <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
                 Watch Demo
               </Button>
             </div>
-            <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
+            <div className="flex items-center justify-center space-x-8 text-sm text-[#777777]">
               <div className="flex items-center">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
                 No credit card required
@@ -123,7 +123,7 @@ export default function HomePage() {
       </section>
 
       {/* Social Proof */}
-      <section className="section-padding py-16 bg-white/50">
+      <section className="sec-pad-two section-padding bg-gray-50">
         <div className="container-width text-center">
           <p className="text-gray-500 mb-8">
             Trusted by innovative companies worldwide
@@ -142,22 +142,18 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="section-padding py-20">
+      <section id="features" className="sec-pad section-padding">
         <div className="container-width">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Everything you need to manage AI employees
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From hiring to performance tracking, our platform handles it all
-            </p>
+          <div className="sec-title center mb-16">
+            <h2>Everything you need to manage AI employees</h2>
+            <p>From hiring to performance tracking, our platform handles it all</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="hover-lift border-0 shadow-lg">
+            <Card className="card-appway hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Bot className="w-6 h-6 text-purple-600" />
+                <div className="feature-icon mb-4">
+                  <Bot className="w-6 h-6" />
                 </div>
                 <CardTitle>Agent Management</CardTitle>
                 <CardDescription>
@@ -167,10 +163,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="hover-lift border-0 shadow-lg">
+            <Card className="card-appway hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Workflow className="w-6 h-6 text-blue-600" />
+                <div className="feature-icon mb-4">
+                  <Workflow className="w-6 h-6" />
                 </div>
                 <CardTitle>Workflow Engine</CardTitle>
                 <CardDescription>
@@ -180,10 +176,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="hover-lift border-0 shadow-lg">
+            <Card className="card-appway hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <Zap className="w-6 h-6 text-green-600" />
+                <div className="feature-icon mb-4">
+                  <Zap className="w-6 h-6" />
                 </div>
                 <CardTitle>Smart Integrations</CardTitle>
                 <CardDescription>
@@ -193,10 +189,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="hover-lift border-0 shadow-lg">
+            <Card className="card-appway hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                  <BarChart3 className="w-6 h-6 text-orange-600" />
+                <div className="feature-icon mb-4">
+                  <BarChart3 className="w-6 h-6" />
                 </div>
                 <CardTitle>Performance Analytics</CardTitle>
                 <CardDescription>
@@ -206,10 +202,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="hover-lift border-0 shadow-lg">
+            <Card className="card-appway hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                  <Shield className="w-6 h-6 text-red-600" />
+                <div className="feature-icon mb-4">
+                  <Shield className="w-6 h-6" />
                 </div>
                 <CardTitle>Enterprise Security</CardTitle>
                 <CardDescription>
@@ -219,10 +215,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="hover-lift border-0 shadow-lg">
+            <Card className="card-appway hover-lift">
               <CardHeader>
-                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                  <Clock className="w-6 h-6 text-indigo-600" />
+                <div className="feature-icon mb-4">
+                  <Clock className="w-6 h-6" />
                 </div>
                 <CardTitle>24/7 Operation</CardTitle>
                 <CardDescription>
@@ -238,47 +234,43 @@ export default function HomePage() {
       {/* How It Works */}
       <section
         id="how-it-works"
-        className="section-padding py-20 bg-gradient-to-r from-purple-50 to-blue-50"
+        className="sec-pad-two section-padding bg-gray-50"
       >
         <div className="container-width">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Get started in 3 simple steps
-            </h2>
-            <p className="text-xl text-gray-600">
-              From setup to productivity in under 5 minutes
-            </p>
+          <div className="sec-title center mb-16">
+            <h2>Get started in 3 simple steps</h2>
+            <p>From setup to productivity in under 5 minutes</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-[#4527a4] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Choose Your Agent</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-4 text-[#222222]">Choose Your Agent</h3>
+              <p className="text-[#777777]">
                 Select from pre-built roles like Marketing Assistant, Customer
                 Support Rep, or create a custom agent
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-[#4527a4] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Connect Your Tools</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-4 text-[#222222]">Connect Your Tools</h3>
+              <p className="text-[#777777]">
                 Link your existing apps and services with one-click OAuth
                 integrations
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-[#4527a4] rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h3 className="text-xl font-semibold mb-4">Watch It Work</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-4 text-[#222222]">Watch It Work</h3>
+              <p className="text-[#777777]">
                 Your AI agent starts working immediately, handling tasks and
                 reporting back to you
               </p>
@@ -288,24 +280,20 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="section-padding py-20">
+      <section id="pricing" className="sec-pad section-padding">
         <div className="container-width">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Simple, transparent pricing
-            </h2>
-            <p className="text-xl text-gray-600">
-              Pay per agent, scale as you grow
-            </p>
+          <div className="sec-title center mb-16">
+            <h2>Simple, transparent pricing</h2>
+            <p>Pay per agent, scale as you grow</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 hover-lift">
+            <Card className="pricing-card">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl">Starter</CardTitle>
-                <div className="text-4xl font-bold text-gray-900 mt-4">
+                <div className="text-4xl font-bold text-[#222222] mt-4">
                   $49
-                  <span className="text-lg font-normal text-gray-500">
+                  <span className="text-lg font-normal text-[#777777]">
                     /agent/month
                   </span>
                 </div>
@@ -340,17 +328,12 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-purple-200 hover-lift relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
-                  Most Popular
-                </Badge>
-              </div>
+            <Card className="pricing-card featured">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl">Pro</CardTitle>
-                <div className="text-4xl font-bold text-gray-900 mt-4">
+                <div className="text-4xl font-bold text-[#222222] mt-4">
                   $99
-                  <span className="text-lg font-normal text-gray-500">
+                  <span className="text-lg font-normal text-[#777777]">
                     /agent/month
                   </span>
                 </div>
@@ -382,19 +365,19 @@ export default function HomePage() {
                   </li>
                 </ul>
                 <Link href="/auth/signup">
-                  <Button className="w-full mt-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                    Start Free Trial
-                  </Button>
+                                  <Button className="w-full mt-6 theme-btn-two">
+                  Start Free Trial
+                </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover-lift">
+            <Card className="pricing-card">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl">Enterprise</CardTitle>
-                <div className="text-4xl font-bold text-gray-900 mt-4">
+                <div className="text-4xl font-bold text-[#222222] mt-4">
                   $199
-                  <span className="text-lg font-normal text-gray-500">
+                  <span className="text-lg font-normal text-[#777777]">
                     /agent/month
                   </span>
                 </div>
@@ -435,16 +418,14 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding py-20 bg-gray-50">
+      <section className="sec-pad-two section-padding bg-gray-50">
         <div className="container-width">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              What our customers say
-            </h2>
+          <div className="sec-title center mb-16">
+            <h2>What our customers say</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg">
+            <Card className="testimonial-card">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -454,7 +435,7 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#777777] mb-4">
                   "AgentForce has transformed our customer support. Our AI agent
                   handles 80% of inquiries automatically, and our response time
                   went from hours to minutes."
@@ -462,14 +443,14 @@ export default function HomePage() {
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
                   <div>
-                    <p className="font-semibold">Sarah Chen</p>
-                    <p className="text-sm text-gray-500">CEO, TechStart</p>
+                    <p className="font-semibold text-[#222222]">Sarah Chen</p>
+                    <p className="text-sm text-[#777777]">CEO, TechStart</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="testimonial-card">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -479,15 +460,15 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#777777] mb-4">
                   "We're saving 15 hours per week on data entry and reporting.
                   The ROI was clear within the first month."
                 </p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
                   <div>
-                    <p className="font-semibold">Mike Rodriguez</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="font-semibold text-[#222222]">Mike Rodriguez</p>
+                    <p className="text-sm text-[#777777]">
                       Operations Manager, GrowthCo
                     </p>
                   </div>
@@ -495,7 +476,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="testimonial-card">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -505,7 +486,7 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#777777] mb-4">
                   "The setup was incredibly easy. Within 10 minutes, our
                   marketing agent was creating social media posts and scheduling
                   campaigns."
@@ -513,8 +494,8 @@ export default function HomePage() {
                 <div className="flex items-center">
                   <div className="w-10 h-10 bg-gray-300 rounded-full mr-3"></div>
                   <div>
-                    <p className="font-semibold">Emily Johnson</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="font-semibold text-[#222222]">Emily Johnson</p>
+                    <p className="text-sm text-[#777777]">
                       Marketing Director, ScaleUp
                     </p>
                   </div>
@@ -526,7 +507,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding py-20 bg-gradient-to-r from-purple-600 to-blue-600">
+      <section className="sec-pad-two section-padding bg-[#4527a4]">
         <div className="container-width text-center text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to hire your first AI employee?
@@ -536,10 +517,10 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/auth/signup">
-              <Button size="lg" variant="secondary" className="px-8 py-4 text-lg">
-                Start Free Trial
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+                          <Button size="lg" variant="secondary" className="px-8 py-4 text-lg theme-btn-two">
+              Start Free Trial
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
             </Link>
             <Button
               size="lg"
@@ -553,16 +534,16 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="section-padding py-16 bg-gray-900 text-white">
+      <footer className="sec-pad-two section-padding bg-[#222222] text-white">
         <div className="container-width">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">AgentForce</span>
+                          <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-[#4527a4] rounded-lg flex items-center justify-center">
+                <Bot className="w-5 h-5 text-white" />
               </div>
+              <span className="text-xl font-bold">AgentForce</span>
+            </div>
               <p className="text-gray-400">
                 The future of work is here. Scale your business with AI agents.
               </p>
