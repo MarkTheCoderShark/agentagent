@@ -355,36 +355,154 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section aria-labelledby="faq-heading" className="py-16">
-        <div className="container-width">
-          <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold text-[#222] text-center mb-8">FAQ</h2>
-          <div className="mx-auto max-w-3xl">
-            <Accordion type="single" collapsible>
-              <AccordionItem value="q1">
-                <AccordionTrigger>How does pricing work?</AccordionTrigger>
-                <AccordionContent>
-                  Pricing scales with usage and number of agents. See our <Link className="underline" href="/pricing"><span>pricing</span></Link> page or contact sales.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q2">
-                <AccordionTrigger>Is there a free trial?</AccordionTrigger>
-                <AccordionContent>
-                  Yes—start free to deploy a basic agent and invite your team to evaluate.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q3">
-                <AccordionTrigger>How do you keep data safe?</AccordionTrigger>
-                <AccordionContent>
-                  We enforce least‑privilege access, human approvals, and detailed audit logs. Data never leaves your configured boundaries.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q4">
-                <AccordionTrigger>Which tools do you integrate with?</AccordionTrigger>
-                <AccordionContent>
-                  Slack, Google Workspace, Notion, HubSpot, and more. Our agents connect through secure API integrations.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+      <section aria-labelledby="faq-heading" className="py-20 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 via-transparent to-[#6a4c93]/5 opacity-50"></div>
+        <div className="container-width relative z-10">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-2xl flex items-center justify-center shadow-lg">
+                <MessageSquare className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold text-[#222] mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-[#666] max-w-2xl mx-auto">
+              Everything you need to know about AgentForce. Can't find the answer you're looking for? 
+              <Link href="/contact" className="text-[#4527a4] hover:underline ml-1">Contact our team</Link>.
+            </p>
+          </div>
+          
+          <div className="mx-auto max-w-4xl">
+            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+              <Accordion type="single" collapsible className="space-y-0">
+                <AccordionItem value="q1" className="border-b border-gray-100 last:border-b-0">
+                  <AccordionTrigger className="px-8 py-6 text-left hover:bg-gradient-to-r hover:from-[#4527a4]/5 hover:to-transparent transition-all duration-300 text-lg font-semibold text-[#222] hover:text-[#4527a4]">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">💰</span>
+                      </div>
+                      <span>How does pricing work?</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-6 text-[#666] leading-relaxed">
+                    <div className="ml-14">
+                      Pricing scales with usage and number of agents. Start with our free tier that includes 1 agent with basic integrations. 
+                      Our Growth plan at $49/month supports up to 5 agents with full feature access. Enterprise plans offer unlimited agents 
+                      with custom pricing. See our <Link className="text-[#4527a4] hover:underline font-medium" href="/pricing"><span>pricing page</span></Link> or contact sales for detailed information.
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="q2" className="border-b border-gray-100 last:border-b-0">
+                  <AccordionTrigger className="px-8 py-6 text-left hover:bg-gradient-to-r hover:from-[#4527a4]/5 hover:to-transparent transition-all duration-300 text-lg font-semibold text-[#222] hover:text-[#4527a4]">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">🆓</span>
+                      </div>
+                      <span>Is there a free trial?</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-6 text-[#666] leading-relaxed">
+                    <div className="ml-14">
+                      Yes! Start completely free with our Starter plan that includes 1 agent, basic integrations, and email support. 
+                      No credit card required. Deploy your first agent, invite your team, and evaluate how AgentForce fits your workflow. 
+                      Upgrade anytime as your team grows and needs advance.
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="q3" className="border-b border-gray-100 last:border-b-0">
+                  <AccordionTrigger className="px-8 py-6 text-left hover:bg-gradient-to-r hover:from-[#4527a4]/5 hover:to-transparent transition-all duration-300 text-lg font-semibold text-[#222] hover:text-[#4527a4]">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">🔒</span>
+                      </div>
+                      <span>How do you keep data safe?</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-6 text-[#666] leading-relaxed">
+                    <div className="ml-14">
+                      Security is our top priority. We enforce least-privilege access controls, require human approvals for sensitive actions, 
+                      and maintain detailed audit logs for full transparency. Your data never leaves your configured boundaries and we're 
+                      SOC 2 Type II certified with enterprise-grade encryption both in transit and at rest.
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="q4" className="border-b border-gray-100 last:border-b-0">
+                  <AccordionTrigger className="px-8 py-6 text-left hover:bg-gradient-to-r hover:from-[#4527a4]/5 hover:to-transparent transition-all duration-300 text-lg font-semibold text-[#222] hover:text-[#4527a4]">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">🔗</span>
+                      </div>
+                      <span>Which tools do you integrate with?</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-6 text-[#666] leading-relaxed">
+                    <div className="ml-14">
+                      We integrate with 50+ popular business tools including Slack, Google Workspace, Notion, HubSpot, Salesforce, 
+                      Microsoft Teams, and many more. Our agents connect through secure API integrations and we're constantly adding 
+                      new integrations based on customer demand. Need a custom integration? Our Enterprise plan includes custom connector development.
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="q5" className="border-b border-gray-100 last:border-b-0">
+                  <AccordionTrigger className="px-8 py-6 text-left hover:bg-gradient-to-r hover:from-[#4527a4]/5 hover:to-transparent transition-all duration-300 text-lg font-semibold text-[#222] hover:text-[#4527a4]">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">⚡</span>
+                      </div>
+                      <span>How quickly can I deploy an agent?</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-6 text-[#666] leading-relaxed">
+                    <div className="ml-14">
+                      Most teams have their first agent deployed in under 15 minutes. Our guided setup wizard walks you through 
+                      connecting your tools, defining workflows, and setting up approval processes. Pre-built templates for common 
+                      use cases like customer support, data entry, and reporting help you get started instantly.
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="q6" className="border-b border-gray-100 last:border-b-0">
+                  <AccordionTrigger className="px-8 py-6 text-left hover:bg-gradient-to-r hover:from-[#4527a4]/5 hover:to-transparent transition-all duration-300 text-lg font-semibold text-[#222] hover:text-[#4527a4]">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-sm">📞</span>
+                      </div>
+                      <span>What support do you provide?</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-6 text-[#666] leading-relaxed">
+                    <div className="ml-14">
+                      We offer comprehensive support across all plans. Free tier includes email support with 24-hour response time. 
+                      Growth plans add priority support and live chat. Enterprise customers get dedicated success managers, 
+                      phone support, and custom SLAs. Plus, our extensive documentation and video tutorials help you maximize your agents' potential.
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </div>
+          
+          {/* FAQ CTA */}
+          <div className="text-center mt-12">
+            <div className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] rounded-2xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
+              <p className="text-white/90 mb-6 max-w-lg mx-auto">
+                Our team is here to help you get the most out of AgentForce. Get in touch and we'll respond within 24 hours.
+              </p>
+              <Link href="/contact">
+                <span>
+                  <Button className="bg-white text-[#4527a4] hover:bg-white/90 font-semibold px-8">
+                    Contact Support
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
