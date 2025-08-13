@@ -26,7 +26,7 @@ export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen" style={{backgroundColor: '#ffffff'}}>
+    <div className="min-h-screen bg-white" style={{backgroundColor: '#ffffff !important'}}>
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50">
         <div className="container-width flex items-center justify-between py-6">
@@ -157,31 +157,6 @@ export default function HomePage() {
         ></div>
         <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-white/10 rounded-full animate-rotate-me backdrop-blur-sm"></div>
 
-        {/* Multilayered Wave Divider Bottom - Appway Style */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg
-            className="relative block w-full h-32"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            {/* First wave layer */}
-            <path
-              d="M0,0 C150,80 350,0 600,40 C850,80 1050,0 1200,60 L1200,120 L0,120 Z"
-              fill="#ffffff"
-            />
-            {/* Second wave layer */}
-            <path
-              d="M0,20 C200,100 400,20 600,60 C800,100 1000,20 1200,80 L1200,120 L0,120 Z"
-              fill="#ffffff"
-            />
-            {/* Third wave layer */}
-            <path
-              d="M0,40 C250,120 450,40 600,80 C750,120 950,40 1200,100 L1200,120 L0,120 Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
-
         <div className="container-width text-center relative z-10">
           <div className="animate-fade-in">
             <Badge
@@ -213,10 +188,32 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Wave transition wrapper */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+          <svg
+            className="relative block w-full h-32"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,0 C150,80 350,0 600,40 C850,80 1050,0 1200,60 L1200,120 L0,120 Z"
+              fill="#ffffff"
+            />
+            <path
+              d="M0,20 C200,100 400,20 600,60 C800,100 1000,20 1200,80 L1200,120 L0,120 Z"
+              fill="#ffffff"
+            />
+            <path
+              d="M0,40 C250,120 450,40 600,80 C750,120 950,40 1200,100 L1200,120 L0,120 Z"
+              fill="#ffffff"
+            />
+          </svg>
+        </div>
       </section>
 
       {/* Organization Section - Appway Style */}
-      <section className="organization-section centred sec-pad section-padding pt-10" style={{backgroundColor: '#ffffff'}}>
+      <section className="organization-section centred sec-pad section-padding pt-10 bg-white">
         <div className="container-width">
           <div className="sec-title center mb-16">
             <h2>Why Organizations Love AgentForce</h2>
