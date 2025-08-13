@@ -79,6 +79,35 @@ body {
     box-shadow: 0 0 15px rgba(69, 39, 164, 0.5);
 }
 
+/* Appway btn-one style */
+.btn-one {
+    @apply relative inline-block text-white font-medium text-lg px-10 py-4 bg-[#4527a4] rounded-[30px] overflow-hidden z-[1] transition-all duration-500;
+    box-shadow: 0 5px 20px rgba(69, 39, 164, 0.3);
+}
+
+.btn-one::before {
+    content: "";
+    @apply absolute top-0 left-0 w-full h-full bg-white opacity-0 transition-all duration-500 z-[-1];
+}
+
+.btn-one:hover::before {
+    @apply opacity-100;
+}
+
+.btn-one:hover {
+    @apply text-[#4527a4] transform scale-105;
+    box-shadow: 0 8px 25px rgba(69, 39, 164, 0.4);
+}
+
+/* Video button style */
+.video-btn {
+    @apply inline-flex items-center gap-3 text-white font-medium text-lg;
+}
+
+.video-btn:hover {
+    @apply text-white;
+}
+
 /* Section padding */
 .sec-pad {
     @apply py-[100px] px-0; /* Further reduced for better spacing with waves */
@@ -323,7 +352,7 @@ body {
 /* Banner specific styles */
 .banner-style-11 {
     @apply relative overflow-hidden;
-    margin-bottom: -1px; /* Create seamless connection with wave */
+    margin-bottom: 0;
 }
 
 .banner-style-11::before {
@@ -341,9 +370,33 @@ body {
     z-index: 1;
 }
 
-/* Reduce bottom spacing for banner section */
-.banner-style-11 {
-    margin-bottom: -1px; /* Ensure perfect connection with next section */
+/* Multilayered Wave transition styles */
+.banner-style-11 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 128px;
+}
+
+.banner-style-11 svg path {
+    transform: translateX(0);
+}
+
+/* Organization section styles */
+.organization-section {
+    position: relative;
+    background-color: #ffffff !important;
+    margin-top: 0;
+    padding-top: 2rem;
+}
+
+/* Ensure all white sections use the same exact white */
+.bg-white, 
+.organization-section,
+.security-invisible,
+.feature-style-ten,
+.testimonial-style-ten {
+    background-color: #ffffff !important;
 }
 
 /* Multilayered Wave transition styles - Appway Style */
