@@ -19,6 +19,7 @@ export default function SignUpPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +31,7 @@ export default function SignUpPage() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    setSuccess("");
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
@@ -38,6 +40,8 @@ export default function SignUpPage() {
     }
 
     try {
+      console.log("Attempting signup with:", { name: formData.name, email: formData.email });
+      
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -50,16 +54,30 @@ export default function SignUpPage() {
         }),
       });
 
+      console.log("Signup response status:", response.status);
       const data = await response.json();
+      console.log("Signup response data:", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       }
 
+      console.log("Signup successful, redirecting...");
       // Redirect to signin page after successful signup
-      router.push("/auth/signin?message=Account created successfully! Please sign in.");
-    } catch (_error) {
-      setError("An error occurred");
+      try {
+        router.push("/auth/signin?message=Account created successfully! Please sign in.");
+      } catch (routerError) {
+        console.error("Router error:", routerError);
+        // Fallback: show success message and manual redirect
+        setSuccess("Account created successfully! Please go to the signin page.");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An error occurred during signup. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -101,6 +119,11 @@ export default function SignUpPage() {
             {error && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
                 {error}
+              </div>
+            )}
+            {success && (
+              <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-green-600 text-sm">
+                {success}
               </div>
             )}
 

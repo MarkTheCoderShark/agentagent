@@ -83,7 +83,7 @@ export default function PricingPage() {
           <div className="mx-auto max-w-5xl text-center">
             <h1 id="pricing-heading" className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               Simple, Transparent{" "}
-              <span className="gradient-text">Pricing</span>
+              <span className="text-white">Pricing</span>
             </h1>
             <p className="mt-4 text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
               Pay per agent, scale as you grow. No hidden fees, no long-term contracts. Start free and upgrade when you're ready.
@@ -103,7 +103,7 @@ export default function PricingPage() {
                 />
               </button>
               <span className={`ml-3 transition-colors ${isAnnual ? 'text-white' : 'text-white/60'}`}>Annual</span>
-              <Badge variant="secondary" className="ml-2">Save 15%</Badge>
+              <Badge className="ml-2 bg-green-500 hover:bg-green-600 text-white border-0 px-3 py-1 text-sm font-medium">Save 15%</Badge>
             </div>
           </div>
         </div>
