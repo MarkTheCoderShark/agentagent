@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,53 +18,123 @@ import {
   Users,
   Target,
   Settings,
+  Menu,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function HomePage() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="nav-appway section-padding py-4">
-        <div className="container-width flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-[#4527a4] rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-white" />
+      <nav className="absolute top-0 left-0 w-full z-50">
+        <div className="container-width flex items-center justify-between py-6">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/30">
+              <Bot className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-[#4527a4]">AgentForce</span>
+            <span className="text-2xl font-bold text-white">
+              AgentForce
+            </span>
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="#features"
-              className="text-gray-600 hover:text-purple-600 transition-colors"
+              className="text-white/90 hover:text-white transition-all duration-300 font-medium"
             >
               Features
             </Link>
             <Link
               href="#pricing"
-              className="text-gray-600 hover:text-purple-600 transition-colors"
+              className="text-white/90 hover:text-white transition-all duration-300 font-medium"
             >
               Pricing
             </Link>
             <Link
               href="#how-it-works"
-              className="text-gray-600 hover:text-purple-600 transition-colors"
+              className="text-white/90 hover:text-white transition-all duration-300 font-medium"
             >
               How it Works
             </Link>
             <Link href="/auth/signin">
-              <Button variant="outline" size="sm">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="border-white/30 text-white hover:bg-white hover:text-[#4527a4] transition-all duration-300 font-medium px-6 py-2.5 rounded-full backdrop-blur-sm bg-white/10"
+              >
                 Sign In
               </Button>
             </Link>
             <Link href="/auth/signup">
-              <Button size="sm" className="theme-btn-two">
+              <Button 
+                size="sm" 
+                className="bg-white text-[#4527a4] hover:bg-white/90 font-semibold px-8 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
                 Get Started
               </Button>
             </Link>
           </div>
+          
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-lg text-white hover:bg-white/20 transition-all duration-300"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
+        
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-[#4527a4]/95 backdrop-blur-md border-t border-white/20">
+            <div className="container-width py-4 space-y-4">
+              <Link
+                href="#features"
+                className="block text-white/90 hover:text-white transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Features
+              </Link>
+              <Link
+                href="#pricing"
+                className="block text-white/90 hover:text-white transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link
+                href="#how-it-works"
+                className="block text-white/90 hover:text-white transition-colors font-medium py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                How it Works
+              </Link>
+              <div className="flex flex-col space-y-3 pt-4">
+                <Link href="/auth/signin" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-white/30 text-white hover:bg-white hover:text-[#4527a4] transition-all duration-300 font-medium rounded-full backdrop-blur-sm bg-white/10"
+                  >
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/auth/signup" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button 
+                    className="w-full bg-white text-[#4527a4] hover:bg-white/90 font-semibold rounded-full shadow-lg"
+                  >
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Banner Section - Appway Style */}
