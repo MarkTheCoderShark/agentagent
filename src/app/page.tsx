@@ -26,7 +26,7 @@ export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{backgroundColor: '#ffffff'}}>
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50">
         <div className="container-width flex items-center justify-between py-6">
@@ -230,7 +230,7 @@ export default function HomePage() {
             <AnimatedSection animation="flipInY" delay={0}>
               <div className="single-item">
                 <div className="inner-box card-appway hover-lift relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-50"></div>
+                  <div className="absolute inset-0 bg-white"></div>
                   <div className="relative z-10">
                     <div className="feature-icon mb-4">
                       <Target className="w-8 h-8" />
@@ -255,7 +255,7 @@ export default function HomePage() {
             <AnimatedSection animation="flipInY" delay={300}>
               <div className="single-item">
                 <div className="inner-box card-appway hover-lift relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-50"></div>
+                  <div className="absolute inset-0 bg-white"></div>
                   <div className="relative z-10">
                     <div className="feature-icon mb-4">
                       <Settings className="w-8 h-8" />
@@ -280,7 +280,7 @@ export default function HomePage() {
             <AnimatedSection animation="flipInY" delay={600}>
               <div className="single-item">
                 <div className="inner-box card-appway hover-lift relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent opacity-50"></div>
+                  <div className="absolute inset-0 bg-white"></div>
                   <div className="relative z-10">
                     <div className="feature-icon mb-4">
                       <Workflow className="w-8 h-8" />
