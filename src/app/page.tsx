@@ -77,7 +77,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full overflow-hidden"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
+        <div className="w-full overflow-hidden -mb-1"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
       </section>
 
       {/* Value Proposition */}
@@ -154,94 +154,604 @@ export default function HomePage() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div className="w-full overflow-hidden rotate-180 relative z-20"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
+        <div className="w-full overflow-hidden rotate-180 relative z-20 -mb-1"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
         <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/70 via-[#6a4c93]/70 to-[#8b5fbf]/70 z-10"></div>
         <div className="container-width py-16 relative z-30">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Agents that work where your team works</h2>
-            <p className="mt-3 text-white/90">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
-            <ul className="mt-6 space-y-3 text-sm text-white/80">
-              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Guided workflows and playbooks</li>
-              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Role-based permissions and guardrails</li>
-              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Real-time analytics and savings</li>
-            </ul>
-            <div className="mt-6">
-              <Link href="/auth/signup">
-                <span>
-                  <Button className="bg-white text-[#4527a4] hover:bg-white/90">Start Free</Button>
-                </span>
-              </Link>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Main Content */}
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">Agents that work where your team works</h2>
+              <p className="mt-3 text-white/90">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
+              <ul className="mt-6 space-y-3 text-sm text-white/80">
+                <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Guided workflows and playbooks</li>
+                <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Role-based permissions and guardrails</li>
+                <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Real-time analytics and savings</li>
+              </ul>
+              <div className="mt-6">
+                <Link href="/auth/signup">
+                  <span>
+                    <Button className="bg-white text-[#4527a4] hover:bg-white/90">Start Free</Button>
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column - Enhanced Content */}
+            <div className="space-y-8">
+              {/* Integration Stats */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-4">Seamless Integration</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">50+</div>
+                    <div className="text-sm text-white/80">Tools Connected</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">15min</div>
+                    <div className="text-sm text-white/80">Setup Time</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">99.9%</div>
+                    <div className="text-sm text-white/80">Uptime</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">24/7</div>
+                    <div className="text-sm text-white/80">Agent Availability</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Popular Integrations */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-4">Popular Integrations</h3>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="bg-white/20 rounded-lg p-3 text-center hover:bg-white/30 transition-colors cursor-pointer">
+                    <div className="text-white font-semibold text-sm">Slack</div>
+                  </div>
+                  <div className="bg-white/20 rounded-lg p-3 text-center hover:bg-white/30 transition-colors cursor-pointer">
+                    <div className="text-white font-semibold text-sm">Notion</div>
+                  </div>
+                  <div className="bg-white/20 rounded-lg p-3 text-center hover:bg-white/30 transition-colors cursor-pointer">
+                    <div className="text-white font-semibold text-sm">HubSpot</div>
+                  </div>
+                  <div className="bg-white/20 rounded-lg p-3 text-center hover:bg-white/30 transition-colors cursor-pointer">
+                    <div className="text-white font-semibold text-sm">Salesforce</div>
+                  </div>
+                  <div className="bg-white/20 rounded-lg p-3 text-center hover:bg-white/30 transition-colors cursor-pointer">
+                    <div className="text-white font-semibold text-sm">Google Workspace</div>
+                  </div>
+                  <div className="bg-white/20 rounded-lg p-3 text-center hover:bg-white/30 transition-colors cursor-pointer">
+                    <div className="text-white font-semibold text-sm">Microsoft Teams</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Benefits */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-4">Why Teams Choose AgentForce</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="text-white font-medium text-sm">No Code Required</div>
+                      <div className="text-white/70 text-xs">Deploy agents without technical expertise</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="text-white font-medium text-sm">Enterprise Security</div>
+                      <div className="text-white/70 text-xs">SOC 2 Type II certified with SSO/SAML</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="text-white font-medium text-sm">Proven ROI</div>
+                      <div className="text-white/70 text-xs">Average 40% time savings per task</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-full overflow-hidden relative z-30 -mt-1"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
+        <div className="w-full overflow-hidden relative z-30 -mt-1 -mb-1"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
       </section>
 
       {/* How It Works */}
-      <section aria-labelledby="how-heading" className="py-16 bg-white">
-        <div className="container-width">
-          <div className="mx-auto max-w-3xl text-center mb-10">
-            <h2 id="how-heading" className="text-3xl md:text-4xl font-bold text-[#222]">How it works</h2>
-            <p className="text-[#555] mt-3">Three simple steps to launch your first AI Agent Employee.</p>
+      <section aria-labelledby="how-heading" className="py-20 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 via-transparent to-[#6a4c93]/5 opacity-30"></div>
+        <div className="container-width relative z-10">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-2xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <h2 id="how-heading" className="text-4xl md:text-5xl font-bold text-[#222] mb-6">How it works</h2>
+            <p className="text-xl text-[#555] leading-relaxed max-w-3xl mx-auto">
+              Deploy AI Agent Employees in three simple steps. From initial setup to full team adoption, 
+              we guide you through every phase of your AI transformation journey.
+            </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card className="shadow-sm">
-              <CardContent className="p-6 text-center">
-                <Sparkles className="mx-auto h-7 w-7 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">1. Configure</h3>
-                <p className="mt-2 text-sm text-[#666]">Define goals, tools, and policies. Pick from templates or start from scratch.</p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-sm">
-              <CardContent className="p-6 text-center">
-                <Workflow className="mx-auto h-7 w-7 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">2. Integrate</h3>
-                <p className="mt-2 text-sm text-[#666]">Connect Slack, docs, data, and apps. Agents work within your existing workflows.</p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-sm">
-              <CardContent className="p-6 text-center">
-                <CheckCircle2 className="mx-auto h-7 w-7 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">3. Launch</h3>
-                <p className="mt-2 text-sm text-[#666]">Roll out to teams with guardrails. Iterate using analytics and feedback.</p>
-              </CardContent>
-            </Card>
+
+          {/* Main Steps */}
+          <div className="grid gap-8 lg:grid-cols-3 mb-16">
+            <div className="group relative">
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg z-10">1</div>
+              <Card className="h-full bg-white shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden transform transition-all duration-500 hover:-translate-y-2">
+                <CardContent className="p-8 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
+                    <Sparkles className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Configure Your Agent</h3>
+                  <p className="text-[#666] leading-relaxed mb-6">
+                    Define your agent's role, goals, and capabilities. Choose from pre-built templates or create custom configurations.
+                  </p>
+                  <div className="space-y-3 text-left">
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Select role templates (Support, Sales, Operations)</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Define workflows and approval processes</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Set security policies and guardrails</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="group relative">
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg z-10">2</div>
+              <Card className="h-full bg-white shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden transform transition-all duration-500 hover:-translate-y-2">
+                <CardContent className="p-8 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
+                    <Workflow className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Connect Your Tools</h3>
+                  <p className="text-[#666] leading-relaxed mb-6">
+                    Integrate with your existing workflow tools. Agents work seamlessly within your current processes.
+                  </p>
+                  <div className="space-y-3 text-left">
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Connect Slack, email, and messaging platforms</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Link CRM, docs, and knowledge bases</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Configure data access and permissions</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="group relative">
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg z-10">3</div>
+              <Card className="h-full bg-white shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden transform transition-all duration-500 hover:-translate-y-2">
+                <CardContent className="p-8 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
+                    <CheckCircle2 className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Launch & Scale</h3>
+                  <p className="text-[#666] leading-relaxed mb-6">
+                    Deploy to your team with confidence. Monitor performance and iterate based on real usage data.
+                  </p>
+                  <div className="space-y-3 text-left">
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Roll out with human-in-the-loop approvals</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Monitor performance and usage analytics</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Check className="h-4 w-4 text-[#4527a4] flex-shrink-0" />
+                      <span className="text-[#555]">Scale across teams and departments</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Timeline Section */}
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 mb-16">
+            <h3 className="text-2xl font-bold text-[#222] text-center mb-8">Your Journey to AI-Powered Teams</h3>
+            <div className="flex items-center justify-center gap-4 lg:gap-8">
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-110 border-4 border-white">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-[#222] mb-2 group-hover:text-[#4527a4] transition-colors duration-300">Quick Setup</h4>
+                <p className="text-sm text-[#666]">15-minute configuration and first agent deployment</p>
+              </div>
+              
+              <div className="hidden md:flex items-center">
+                <ArrowRight className="w-8 h-8 text-[#4527a4]" />
+              </div>
+              
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-110 border-4 border-white">
+                  <Workflow className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-[#222] mb-2 group-hover:text-[#4527a4] transition-colors duration-300">Team Adoption</h4>
+                <p className="text-sm text-[#666]">Initial team training and workflow integration</p>
+              </div>
+              
+              <div className="hidden lg:flex items-center">
+                <ArrowRight className="w-8 h-8 text-[#4527a4]" />
+              </div>
+              
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-110 border-4 border-white">
+                  <BarChart3 className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-[#222] mb-2 group-hover:text-[#4527a4] transition-colors duration-300">Optimization</h4>
+                <p className="text-sm text-[#666]">Performance tuning and additional agent deployment</p>
+              </div>
+              
+              <div className="hidden lg:flex items-center">
+                <ArrowRight className="w-8 h-8 text-[#4527a4]" />
+              </div>
+              
+              <div className="text-center group">
+                <div className="w-20 h-20 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-110 border-4 border-white">
+                  <CheckCircle2 className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-semibold text-[#222] mb-2 group-hover:text-[#4527a4] transition-colors duration-300">Scale & Grow</h4>
+                <p className="text-sm text-[#666]">Expand across departments and new use cases</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Success Metrics */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <BarChart3 className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold">What Success Looks Like</h3>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white/90 font-medium">Time to First Agent</span>
+                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    <div className="text-2xl font-bold text-white">15 minutes</div>
+                    <div className="text-white/70 text-sm mt-1">Lightning-fast deployment</div>
+                  </div>
+                  
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white/90 font-medium">Team Adoption Rate</span>
+                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">↑</span>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-bold text-white">85%+</div>
+                    <div className="text-white/70 text-sm mt-1">High user engagement</div>
+                  </div>
+                  
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white/90 font-medium">Task Automation Rate</span>
+                      <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">⚡</span>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-bold text-white">60-80%</div>
+                    <div className="text-white/70 text-sm mt-1">Significant efficiency gains</div>
+                  </div>
+                  
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-white/90 font-medium">ROI Timeline</span>
+                      <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">💰</span>
+                      </div>
+                    </div>
+                    <div className="text-2xl font-bold text-white">30 days</div>
+                    <div className="text-white/70 text-sm mt-1">Quick return on investment</div>
+                  </div>
+                </div>
+                
+                {/* Success Badge */}
+                <div className="mt-8 bg-white/20 backdrop-blur-sm rounded-2xl p-4 border border-white/30">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                      <Check className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-white">Proven Results</div>
+                      <div className="text-white/80 text-sm">Based on 500+ successful deployments</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 relative overflow-hidden">
+              {/* Background Pattern */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#4527a4]/5 to-[#6a4c93]/5 rounded-full -translate-y-16 translate-x-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-[#4527a4]/5 to-[#6a4c93]/5 rounded-full translate-y-12 -translate-x-12"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center shadow-lg">
+                    <CheckCircle2 className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-[#222]">Getting Started Checklist</h3>
+                </div>
+                
+                <div className="space-y-4 mb-8">
+                  <div className="group flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-[#4527a4]/30 hover:shadow-md transition-all duration-300 cursor-pointer">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-[#222] group-hover:text-[#4527a4] transition-colors duration-300">Choose your first use case</div>
+                      <div className="text-sm text-[#666] mt-1">Identify the most impactful automation opportunity</div>
+                    </div>
+                  </div>
+                  
+                  <div className="group flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-[#4527a4]/30 hover:shadow-md transition-all duration-300 cursor-pointer">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-[#222] group-hover:text-[#4527a4] transition-colors duration-300">Identify team champions</div>
+                      <div className="text-sm text-[#666] mt-1">Find advocates who will drive adoption</div>
+                    </div>
+                  </div>
+                  
+                  <div className="group flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-[#4527a4]/30 hover:shadow-md transition-all duration-300 cursor-pointer">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-[#222] group-hover:text-[#4527a4] transition-colors duration-300">Prepare integration credentials</div>
+                      <div className="text-sm text-[#666] mt-1">Gather API keys and access permissions</div>
+                    </div>
+                  </div>
+                  
+                  <div className="group flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-[#4527a4]/30 hover:shadow-md transition-all duration-300 cursor-pointer">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-[#222] group-hover:text-[#4527a4] transition-colors duration-300">Set up approval workflows</div>
+                      <div className="text-sm text-[#666] mt-1">Define human-in-the-loop processes</div>
+                    </div>
+                  </div>
+                  
+                  <div className="group flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-[#4527a4]/30 hover:shadow-md transition-all duration-300 cursor-pointer">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-[#222] group-hover:text-[#4527a4] transition-colors duration-300">Plan training sessions</div>
+                      <div className="text-sm text-[#666] mt-1">Schedule team onboarding and education</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Progress Indicator */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-[#666]">Ready to start?</span>
+                    <span className="text-sm font-bold text-[#4527a4]">5/5 Complete</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] h-2 rounded-full transition-all duration-500" style={{ width: '100%' }}></div>
+                  </div>
+                </div>
+                
+                {/* Enhanced CTA */}
+                <div className="bg-gradient-to-r from-[#4527a4]/5 to-[#6a4c93]/5 rounded-2xl p-4 border border-[#4527a4]/10">
+                  <Link href="/contact">
+                    <span>
+                      <Button className="w-full bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#6a4c93] hover:to-[#8b5fbf] text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300">
+                        Get Started Today
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </span>
+                  </Link>
+                  <p className="text-center text-sm text-[#666] mt-3">No credit card required • 15-minute setup</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Integrations */}
-      <section className="py-16 bg-gradient-to-br from-[#fafafa] to-[#f5f5f5]">
-        <div className="container-width">
-          <div className="mx-auto max-w-3xl text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <Plug className="h-6 w-6 text-[#4527a4] mr-2" />
-              <h2 className="text-2xl md:text-3xl font-bold text-[#222]">Connect your stack</h2>
+      <section className="py-20 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 via-transparent to-[#6a4c93]/5 opacity-30"></div>
+        <div className="container-width relative z-10">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-2xl flex items-center justify-center shadow-lg">
+                <Plug className="w-8 h-8 text-white" />
+              </div>
             </div>
-            <p className="text-[#555] mt-3 text-lg">Plug into tools your teams use daily.</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#222] mb-6">Connect your stack</h2>
+            <p className="text-xl text-[#555] leading-relaxed max-w-2xl mx-auto">
+              Seamlessly integrate with the tools your teams use daily. Our agents work within your existing workflows, 
+              so there's no disruption to your current processes.
+            </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Slack</span>
+
+          {/* Integration Categories */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                <MessageSquare className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-[#222] mb-4">Communication</h3>
+              <p className="text-[#666] mb-6">Connect with your team's preferred messaging and collaboration tools.</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Slack & Discord</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Microsoft Teams</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Email & Calendar</span>
+                </div>
+              </div>
             </div>
-            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">HubSpot</span>
+
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6">
+                <BarChart3 className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-[#222] mb-4">Business Tools</h3>
+              <p className="text-[#666] mb-6">Integrate with your CRM, analytics, and productivity platforms.</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Salesforce & HubSpot</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Google Workspace</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Notion & Airtable</span>
+                </div>
+              </div>
             </div>
-            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Notion</span>
-            </div>
-            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Salesforce</span>
-            </div>
-            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Google Workspace</span>
-            </div>
-            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Microsoft Teams</span>
+
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6">
+                <Workflow className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-[#222] mb-4">Development</h3>
+              <p className="text-[#666] mb-6">Connect with your development and project management tools.</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">GitHub & GitLab</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Jira & Linear</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <Check className="h-4 w-4 text-[#4527a4]" />
+                  <span className="text-[#555]">Figma & Miro</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="text-center mt-8">
-            <p className="text-sm text-[#666]">+ 50 more integrations</p>
+
+          {/* Popular Integrations Grid */}
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 mb-12">
+            <h3 className="text-2xl font-bold text-[#222] text-center mb-8">Popular Integrations</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              <div className="group flex flex-col items-center justify-center h-24 px-4 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <div className="w-8 h-8 bg-[#4A154B] rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-xs">S</span>
+                </div>
+                <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Slack</span>
+              </div>
+              
+              <div className="group flex flex-col items-center justify-center h-24 px-4 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <div className="w-8 h-8 bg-[#FF6B6B] rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-xs">H</span>
+                </div>
+                <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">HubSpot</span>
+              </div>
+              
+              <div className="group flex flex-col items-center justify-center h-24 px-4 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <div className="w-8 h-8 bg-[#000000] rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-xs">N</span>
+                </div>
+                <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Notion</span>
+              </div>
+              
+              <div className="group flex flex-col items-center justify-center h-24 px-4 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <div className="w-8 h-8 bg-[#00A1E0] rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-xs">S</span>
+                </div>
+                <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Salesforce</span>
+              </div>
+              
+              <div className="group flex flex-col items-center justify-center h-24 px-4 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <div className="w-8 h-8 bg-[#4285F4] rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-xs">G</span>
+                </div>
+                <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Google</span>
+              </div>
+              
+              <div className="group flex flex-col items-center justify-center h-24 px-4 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/30 hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+                <div className="w-8 h-8 bg-[#6264A7] rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-xs">M</span>
+                </div>
+                <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Teams</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Integration Stats */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] rounded-2xl p-6 text-white text-center">
+              <div className="text-3xl font-bold mb-2">50+</div>
+              <div className="text-white/90">Integrations Available</div>
+            </div>
+            <div className="bg-gradient-to-br from-[#6a4c93] to-[#8b5fbf] rounded-2xl p-6 text-white text-center">
+              <div className="text-3xl font-bold mb-2">5min</div>
+              <div className="text-white/90">Average Setup Time</div>
+            </div>
+            <div className="bg-gradient-to-br from-[#8b5fbf] to-[#4527a4] rounded-2xl p-6 text-white text-center">
+              <div className="text-3xl font-bold mb-2">99.9%</div>
+              <div className="text-white/90">Uptime Guarantee</div>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center">
+            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-[#222] mb-4">Need a custom integration?</h3>
+              <p className="text-[#666] mb-6">Our Enterprise plan includes custom connector development for your specific tools and workflows.</p>
+              <Link href="/contact">
+                <span>
+                  <Button className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#6a4c93] hover:to-[#8b5fbf] text-white font-semibold px-8">
+                    Request Custom Integration
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -270,23 +780,67 @@ export default function HomePage() {
       </section>
 
       {/* CTA band with quick demo form */}
-      <section aria-labelledby="cta-heading" className="py-16 bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white">
-        <div className="container-width">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 id="cta-heading" className="text-2xl md:text-3xl font-bold">Boost productivity with AI Agent Employees</h2>
-            <p className="mt-2 text-white/90">Tell us where agents can help and we'll set up a tailored demo.</p>
-            <form onSubmit={onQuickDemoSubmit} className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto] max-w-xl mx-auto">
-              <Input name="email" type="email" placeholder="Work email" required className="bg-white text-[#222]" />
-              <Button type="submit" disabled={ctaStatus === "loading"}>
-                {ctaStatus === "loading" ? "Submitting..." : "Book a Demo"}
-              </Button>
-            </form>
-            {ctaStatus === "success" && (
-              <p className="mt-3 text-sm text-green-200">Thanks! We'll reach out shortly.</p>
-            )}
-            {ctaStatus === "error" && (
-              <p className="mt-3 text-sm text-red-200">Something went wrong. Please try again.</p>
-            )}
+      <section aria-labelledby="cta-heading" className="py-20 bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24"></div>
+        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-white/5 rounded-full -translate-x-16 -translate-y-16"></div>
+        
+        <div className="container-width relative z-10">
+          <div className="mx-auto max-w-4xl text-center">
+            {/* Header Section */}
+            <div className="flex items-center justify-center mb-8">
+              <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-xl border border-white/30">
+                <Bot className="w-10 h-10 text-white" />
+              </div>
+            </div>
+            
+            <Link href="/auth/signup">
+              <span>
+                <h2 id="cta-heading" className="text-4xl md:text-5xl font-bold mb-6 leading-tight hover:scale-105 transition-transform duration-300 cursor-pointer">
+                  Start using AI Agent Employees today
+                </h2>
+              </span>
+            </Link>
+                        <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto mb-12">
+              Get set up in minutes and start automating your workflows immediately. No lengthy demos - just instant access to powerful AI agents.
+            </p>
+
+            {/* Primary CTA Button */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <Link href="/auth/signup">
+                <span>
+                  <Button className="bg-white text-[#4527a4] hover:bg-white/90 font-semibold py-4 px-8 text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                    <span>Get Started Now</span>
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </span>
+              </Link>
+              <Link href="/pricing">
+                <span>
+                  <Button variant="outline" className="border-white text-white hover:bg-white/10 font-semibold py-4 px-8 text-lg">
+                    View Pricing
+                  </Button>
+                </span>
+              </Link>
+            </div>
+
+                         {/* Trust Indicators */}
+             <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+               <div className="flex items-center justify-center gap-3 text-white/80">
+                 <Check className="h-5 w-5 text-green-300" />
+                 <span className="text-sm font-medium">Set up in 5 minutes</span>
+               </div>
+               <div className="flex items-center justify-center gap-3 text-white/80">
+                 <Check className="h-5 w-5 text-green-300" />
+                 <span className="text-sm font-medium">Start using immediately</span>
+               </div>
+               <div className="flex items-center justify-center gap-3 text-white/80">
+                 <Check className="h-5 w-5 text-green-300" />
+                 <span className="text-sm font-medium">Cancel anytime</span>
+               </div>
+             </div>
           </div>
         </div>
       </section>
@@ -298,56 +852,139 @@ export default function HomePage() {
             <h2 className="text-2xl md:text-3xl font-bold text-[#222]">Simple, usage‑based pricing</h2>
             <p className="text-[#555] mt-3">Start free. Upgrade as your team and agents scale.</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card className="shadow-sm">
+          <div className="grid gap-6 md:grid-cols-4">
+            <Card className="shadow-sm border-2 border-gray-100">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-[#222]">Starter</h3>
-                <p className="text-sm text-[#666]">For small teams exploring agents</p>
-                <p className="mt-4 text-3xl font-bold text-[#222]">Free</p>
-                <ul className="mt-4 space-y-2 text-sm text-[#444]">
-                  <li>1 Agent</li>
-                  <li>Basic integrations</li>
-                  <li>Email support</li>
-                </ul>
-                <Link href="/auth/signup">
-                  <span>
-                    <Button className="mt-6 w-full">Get started</Button>
-                  </span>
-                </Link>
+                <div className="text-center">
+                  <h3 className="font-semibold text-[#222]">Intern</h3>
+                  <p className="text-sm text-[#666]">Free trial with limited functionality</p>
+                  <p className="mt-4 text-3xl font-bold text-[#222]">Free</p>
+                  <ul className="mt-4 space-y-2 text-sm text-[#444] text-left">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>1 Agent</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Basic integrations</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Email support</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>7-day trial</span>
+                    </li>
+                  </ul>
+                  <Link href="/auth/signup">
+                    <span>
+                      <Button className="mt-6 w-full bg-[#4527a4] hover:bg-[#6a4c93]">Start Free Trial</Button>
+                    </span>
+                  </Link>
+                </div>
               </CardContent>
             </Card>
-            <Card className="shadow-sm">
+            
+            <Card className="shadow-sm border-2 border-[#4527a4]/20 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-[#4527a4] text-white text-xs font-semibold px-3 py-1 rounded-full">Most Popular</span>
+              </div>
               <CardContent className="p-6">
-                <h3 className="font-semibold text-[#222]">Growth</h3>
-                <p className="text-sm text-[#666]">For teams deploying across functions</p>
-                <p className="mt-4 text-3xl font-bold text-[#222]">$49<span className="text-base font-normal">/mo</span></p>
-                <ul className="mt-4 space-y-2 text-sm text-[#444]">
-                  <li>Up to 5 Agents</li>
-                  <li>Slack + Docs + CRM</li>
-                  <li>Analytics</li>
-                </ul>
-                <Link href="/pricing">
-                  <span>
-                    <Button className="mt-6 w-full">See full pricing</Button>
-                  </span>
-                </Link>
+                <div className="text-center">
+                  <h3 className="font-semibold text-[#222]">Starter</h3>
+                  <p className="text-sm text-[#666]">For small teams getting started</p>
+                  <p className="mt-4 text-3xl font-bold text-[#222]">$49<span className="text-base font-normal">/mo</span></p>
+                  <ul className="mt-4 space-y-2 text-sm text-[#444] text-left">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Up to 3 Agents</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Slack + Docs + CRM</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Basic analytics</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Email support</span>
+                    </li>
+                  </ul>
+                  <Link href="/auth/signup">
+                    <span>
+                      <Button className="mt-6 w-full bg-[#4527a4] hover:bg-[#6a4c93]">Get Started</Button>
+                    </span>
+                  </Link>
+                </div>
               </CardContent>
             </Card>
-            <Card className="shadow-sm">
+            
+            <Card className="shadow-sm border-2 border-gray-100">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-[#222]">Enterprise</h3>
-                <p className="text-sm text-[#666]">Scale with SSO, SAML, and custom SLAs</p>
-                <p className="mt-4 text-3xl font-bold text-[#222]">Custom</p>
-                <ul className="mt-4 space-y-2 text-sm text-[#444]">
-                  <li>Unlimited agents</li>
-                  <li>Advanced security</li>
-                  <li>Dedicated support</li>
-                </ul>
-                <Link href="/contact">
-                  <span>
-                    <Button className="mt-6 w-full">Contact sales</Button>
-                  </span>
-                </Link>
+                <div className="text-center">
+                  <h3 className="font-semibold text-[#222]">Growth</h3>
+                  <p className="text-sm text-[#666]">For teams scaling automation</p>
+                  <p className="mt-4 text-3xl font-bold text-[#222]">$100<span className="text-base font-normal">/mo</span></p>
+                  <ul className="mt-4 space-y-2 text-sm text-[#444] text-left">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Up to 10 Agents</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>All integrations</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Advanced analytics</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Priority support</span>
+                    </li>
+                  </ul>
+                  <Link href="/auth/signup">
+                    <span>
+                      <Button className="mt-6 w-full bg-[#4527a4] hover:bg-[#6a4c93]">Get Started</Button>
+                    </span>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="shadow-sm border-2 border-gray-100">
+              <CardContent className="p-6">
+                <div className="text-center">
+                  <h3 className="font-semibold text-[#222]">Enterprise</h3>
+                  <p className="text-sm text-[#666]">For large organizations</p>
+                  <p className="mt-4 text-3xl font-bold text-[#222]">$250<span className="text-base font-normal">/mo</span></p>
+                  <ul className="mt-4 space-y-2 text-sm text-[#444] text-left">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Unlimited agents</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>SSO & SAML</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Custom integrations</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#4527a4]" />
+                      <span>Dedicated support</span>
+                    </li>
+                  </ul>
+                  <Link href="/contact">
+                    <span>
+                      <Button className="mt-6 w-full bg-[#4527a4] hover:bg-[#6a4c93]">Contact Sales</Button>
+                    </span>
+                  </Link>
+                </div>
               </CardContent>
             </Card>
           </div>
