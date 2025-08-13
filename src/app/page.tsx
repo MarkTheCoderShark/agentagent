@@ -46,7 +46,7 @@ export default function HomePage() {
       {/* Hero */}
       <section
         aria-labelledby="hero-heading"
-        className="relative overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white"
+        className="relative -mt-16 overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white"
       >
         <div className="container-width pt-20 md:pt-24 pb-16">
           <div className="mx-auto max-w-5xl text-center">
