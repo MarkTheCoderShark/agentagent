@@ -125,12 +125,13 @@ export default function HomePage() {
       </section>
 
       {/* Product Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white" style={{
+      <section className="relative overflow-hidden text-white" style={{
         backgroundImage: 'url(/images/icons/device-bg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
+        <div className="w-full overflow-hidden rotate-180"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
         <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/80 via-[#6a4c93]/80 to-[#8b5fbf]/80"></div>
         <div className="container-width py-16 relative z-10">
           <div className="max-w-2xl">
