@@ -4,6 +4,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import {
   Bot,
   Shield,
@@ -70,6 +71,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-purple-200 rounded-full opacity-30 animate-float-bob-y"></div>
         <div className="absolute bottom-20 right-10 w-16 h-16 bg-blue-200 rounded-full opacity-30 animate-float-bob-y" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-indigo-200 rounded-full opacity-20 animate-rotate-me"></div>
         
         <div className="container-width text-center relative z-10">
           <div className="animate-fade-in">
@@ -112,62 +114,68 @@ export default function HomePage() {
             <p>AgentForce makes it easy to secure and manage<br />any AI agent workflow.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="single-item wow flipInY" data-wow-delay="00ms" data-wow-duration="1500ms">
-              <div className="inner-box card-appway hover-lift relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-50"></div>
-                <div className="relative z-10">
-                  <div className="feature-icon mb-4">
-                    <Target className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-xl font-semibold mb-4 text-[#222222]">
-                    <Link href="#" className="hover:text-[#4527a4] transition-colors">
-                      Depth of Integrations
-                    </Link>
-                  </h4>
-                  <div className="text-[#777777]">
-                    Build granular policies to address critical business needs, without disrupting user workflows.
+            <AnimatedSection animation="flipInY" delay={0}>
+              <div className="single-item">
+                <div className="inner-box card-appway hover-lift relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-50"></div>
+                  <div className="relative z-10">
+                    <div className="feature-icon mb-4">
+                      <Target className="w-8 h-8" />
+                    </div>
+                    <h4 className="text-xl font-semibold mb-4 text-[#222222]">
+                      <Link href="#" className="hover:text-[#4527a4] transition-colors">
+                        Depth of Integrations
+                      </Link>
+                    </h4>
+                    <div className="text-[#777777]">
+                      Build granular policies to address critical business needs, without disrupting user workflows.
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
 
-            <div className="single-item wow flipInY" data-wow-delay="300ms" data-wow-duration="1500ms">
-              <div className="inner-box card-appway hover-lift relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-50"></div>
-                <div className="relative z-10">
-                  <div className="feature-icon mb-4">
-                    <Settings className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-xl font-semibold mb-4 text-[#222222]">
-                    <Link href="#" className="hover:text-[#4527a4] transition-colors">
-                      Purpose-Built Policies
-                    </Link>
-                  </h4>
-                  <div className="text-[#777777]">
-                    Build granular policies to address critical security threats, without disrupting user workflows.
+            <AnimatedSection animation="flipInY" delay={300}>
+              <div className="single-item">
+                <div className="inner-box card-appway hover-lift relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-50"></div>
+                  <div className="relative z-10">
+                    <div className="feature-icon mb-4">
+                      <Settings className="w-8 h-8" />
+                    </div>
+                    <h4 className="text-xl font-semibold mb-4 text-[#222222]">
+                      <Link href="#" className="hover:text-[#4527a4] transition-colors">
+                        Purpose-Built Policies
+                      </Link>
+                    </h4>
+                    <div className="text-[#777777]">
+                      Build granular policies to address critical security threats, without disrupting user workflows.
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
 
-            <div className="single-item wow flipInY" data-wow-delay="600ms" data-wow-duration="1500ms">
-              <div className="inner-box card-appway hover-lift relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent opacity-50"></div>
-                <div className="relative z-10">
-                  <div className="feature-icon mb-4">
-                    <Workflow className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-xl font-semibold mb-4 text-[#222222]">
-                    <Link href="#" className="hover:text-[#4527a4] transition-colors">
-                      Customizable Orchestration
-                    </Link>
-                  </h4>
-                  <div className="text-[#777777]">
-                    Build granular policies to address critical security threats, without disrupting user workflows.
+            <AnimatedSection animation="flipInY" delay={600}>
+              <div className="single-item">
+                <div className="inner-box card-appway hover-lift relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent opacity-50"></div>
+                  <div className="relative z-10">
+                    <div className="feature-icon mb-4">
+                      <Workflow className="w-8 h-8" />
+                    </div>
+                    <h4 className="text-xl font-semibold mb-4 text-[#222222]">
+                      <Link href="#" className="hover:text-[#4527a4] transition-colors">
+                        Customizable Orchestration
+                      </Link>
+                    </h4>
+                    <div className="text-[#777777]">
+                      Build granular policies to address critical security threats, without disrupting user workflows.
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
           <div className="text-center mt-12">
             <Link href="#features">
@@ -184,29 +192,33 @@ export default function HomePage() {
         <div className="container-width">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="content-column">
-              <div className="content-box wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
-                <div className="sec-title mb-6">
-                  <h2>Robust security that's invisible to your users</h2>
+              <AnimatedSection animation="fadeInLeft" delay={0}>
+                <div className="content-box">
+                  <div className="sec-title mb-6">
+                    <h2>Robust security that's invisible to your users</h2>
+                  </div>
+                  <div className="text-[#777777] mb-8 text-lg">
+                    AgentForce provides IT and security with complete control over your AI agents' interactions. By using granular policies, AgentForce only targets the specific events that are a security threat - rather than applying blanket rules to every situation - creating a secure and frictionless environment for your users.
+                  </div>
+                  <div className="btn-box">
+                    <Link href="#features">
+                      <Button className="theme-btn-two">
+                        Learn More
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-                <div className="text-[#777777] mb-8 text-lg">
-                  AgentForce provides IT and security with complete control over your AI agents' interactions. By using granular policies, AgentForce only targets the specific events that are a security threat - rather than applying blanket rules to every situation - creating a secure and frictionless environment for your users.
-                </div>
-                <div className="btn-box">
-                  <Link href="#features">
-                    <Button className="theme-btn-two">
-                      Learn More
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+              </AnimatedSection>
             </div>
             <div className="image-column">
               <div className="image-box js-tilt">
-                <figure className="image clearfix wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
-                  <div className="w-full h-80 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center">
-                    <Bot className="w-32 h-32 text-[#4527a4] opacity-30" />
-                  </div>
-                </figure>
+                <AnimatedSection animation="slideInRight" delay={0}>
+                  <figure className="image clearfix animate-float-bob-y">
+                    <div className="w-full h-80 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center">
+                      <Bot className="w-32 h-32 text-[#4527a4] opacity-30" />
+                    </div>
+                  </figure>
+                </AnimatedSection>
               </div>
             </div>
           </div>

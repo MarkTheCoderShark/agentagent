@@ -123,31 +123,96 @@ body {
   @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
 }
 
-/* Animation classes */
-@keyframes float-bob-y {
-  0%, 100% {
-    transform: translateY(0px);
+/* Animation and wow classes */
+.wow {
+  visibility: hidden;
+}
+
+.wow.animated {
+  visibility: visible;
+}
+
+/* Appway specific animations */
+.flipInY {
+  animation: flipInY 1.5s ease-in-out;
+}
+
+@keyframes flipInY {
+  0% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    opacity: 0;
   }
-  50% {
-    transform: translateY(-20px);
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+  }
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+  }
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+  100% {
+    transform: perspective(400px);
+    opacity: 1;
   }
 }
 
-.float-bob-y {
-  animation: float-bob-y 3s ease-in-out infinite;
+.fadeInLeft {
+  animation: fadeInLeft 1.5s ease-in-out;
 }
 
-@keyframes rotate-me {
-  from {
-    transform: rotate(0deg);
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
-.rotate-me {
-  animation: rotate-me 20s linear infinite;
+.fadeInRight {
+  animation: fadeInRight 1.5s ease-in-out;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation: slideInLeft 1.5s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInRight {
+  animation: slideInRight 1.5s ease-in-out;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* Preloader */
@@ -226,6 +291,128 @@ body {
   @apply text-[#777777] text-sm;
 }
 
+/* Appway pattern backgrounds */
+.pattern-bg {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(69, 39, 164, 0.1) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.pattern-bg1 {
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(69, 39, 164, 0.08) 2px, transparent 0);
+  background-size: 30px 30px;
+}
+
+.pattern-bg2 {
+  background-image: 
+    linear-gradient(45deg, rgba(69, 39, 164, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(69, 39, 164, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(69, 39, 164, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(69, 39, 164, 0.05) 75%);
+  background-size: 20px 20px;
+}
+
+/* Banner specific styles */
+.banner-style-11 {
+  @apply relative overflow-hidden;
+}
+
+.banner-style-11::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(69, 39, 164, 0.05) 0%, rgba(106, 76, 147, 0.05) 100%);
+  z-index: 1;
+}
+
+/* Organization section styles */
+.organization-section .single-item {
+  @apply mb-8;
+}
+
+.organization-section .inner-box {
+  @apply p-8 rounded-lg transition-all duration-300;
+}
+
+/* Feature style ten */
+.feature-style-ten .inner-box {
+  @apply mb-16;
+}
+
+.feature-style-ten .bg-layer {
+  @apply absolute inset-0 rounded-2xl opacity-30;
+}
+
+/* Clients section */
+.clients-style-two .thumb {
+  @apply transition-all duration-300 filter grayscale hover:grayscale-0;
+}
+
+/* Software product section */
+.software-product {
+  @apply relative;
+}
+
+.software-product::before {
+  content: '';
+  @apply absolute inset-0 bg-black/20;
+}
+
+/* Testimonial styles */
+.testimonial-style-ten .user-thumb {
+  @apply relative;
+}
+
+.testimonial-style-ten .thumb-box {
+  @apply relative p-8;
+}
+
+/* Enhanced button hover effects */
+.theme-btn-enhanced {
+  @apply relative overflow-hidden transform transition-all duration-300 hover:scale-105;
+}
+
+.theme-btn-enhanced::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 transition-opacity duration-300;
+}
+
+.theme-btn-enhanced:hover::after {
+  @apply opacity-10;
+}
+
+/* Text balance utility for better typography */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Backdrop blur utilities */
+.backdrop-blur-glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Centred class for sections */
+.centred {
+  @apply text-center;
+}
+
+/* JS Tilt effect placeholder */
+.js-tilt {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Image clearfix */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* Responsive utilities */
 @media (max-width: 768px) {
   .sec-pad {
@@ -239,4 +426,9 @@ body {
   .sec-title h2 {
     @apply text-[28px] leading-[36px];
   }
+  
+  .container-width {
+    @apply px-4;
+  }
 }
+
