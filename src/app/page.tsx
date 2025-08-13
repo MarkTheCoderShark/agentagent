@@ -2,19 +2,12 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Bot,
-  Zap,
-  BarChart3,
-  Clock,
   Shield,
   ArrowRight,
-  CheckCircle,
   Star,
   Sparkles,
   Workflow,
@@ -22,10 +15,6 @@ import {
   Users,
   Target,
   Settings,
-  TrendingUp,
-  MessageSquare,
-  FileText,
-  Calendar,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
