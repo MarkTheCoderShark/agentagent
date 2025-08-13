@@ -63,7 +63,7 @@ export default function SignUpPage() {
         redirect: false,
       });
 
-      router.push("/dashboard");
+      router.push("/onboarding");
     } catch (_error) {
       setError("An error occurred");
     } finally {
@@ -74,7 +74,7 @@ export default function SignUpPage() {
   const handleGoogleSignUp = async () => {
     setIsLoading(true);
     try {
-      await signIn("google", { callbackUrl: "/dashboard" });
+      await signIn("google", { callbackUrl: "/onboarding" });
     } catch (_error) {
       setError("An error occurred. Please try again.");
       setIsLoading(false);

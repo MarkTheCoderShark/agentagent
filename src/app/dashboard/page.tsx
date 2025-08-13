@@ -154,33 +154,19 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
-        <div className="container-width flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold gradient-text">AgentForce</span>
+      {/* Header bar below global nav */}
+      <div className="bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-white/40">
+        <div className="container-width flex h-14 items-center justify-between">
+          <h1 className="text-base md:text-lg font-semibold text-gray-800">Agent Command Center</h1>
+          <Link href="/dashboard/hire-agent">
+            <span>
+              <Button size="sm" className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#4527a4]/90 hover:to-[#6a4c93]/90">
+                <Plus className="w-4 h-4 mr-1"/> Hire Agent
+              </Button>
             </span>
           </Link>
-          <div className="flex items-center space-x-4">
-            <Link href="/dashboard/hire-agent">
-              <span>
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Hire Agent
-                </Button>
-              </span>
-            </Link>
-            <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
-          </div>
         </div>
-      </nav>
+      </div>
 
       <div className="section-padding py-8">
         <div className="container-width">
