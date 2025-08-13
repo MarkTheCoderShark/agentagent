@@ -3,10 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import Link from "next/link";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bot } from "lucide-react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -119,36 +120,43 @@ export default function RootLayout({
           {/* Header */}
           <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
             <div className="container-width flex h-14 items-center justify-between">
-              <Link href="/" className="flex items-center gap-2 font-bold">
-                <span className="flex items-center gap-2">
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#4527a4] text-white">AF</span>
-                  <span>AgentForce</span>
+              <Link href="/" className="flex items-center space-x-2">
+                <span className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold gradient-text">AgentForce</span>
                 </span>
               </Link>
 
-              <nav className="hidden md:flex items-center gap-2 text-sm text-[#444]">
-                <NavigationMenu viewport={false}>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <Link href="/#value-heading" passHref legacyBehavior>
-                        <NavigationMenuLink className="px-3 py-2"><span>Features</span></NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link href="/pricing" passHref legacyBehavior>
-                        <NavigationMenuLink className="px-3 py-2"><span>Pricing</span></NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link href="/#how-heading" passHref legacyBehavior>
-                        <NavigationMenuLink className="px-3 py-2"><span>How it Works</span></NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
-                <Separator orientation="vertical" className="mx-2 h-6" />
-                <Link href="/auth/signin" className="px-3 py-2 hover:underline"><span>Sign In</span></Link>
-                <Link href="/auth/signup" className="inline-flex items-center rounded-full bg-[#4527a4] px-4 py-1.5 text-white hover:opacity-90"><span>Get Started</span></Link>
+              <nav className="hidden md:flex items-center space-x-8">
+                <Link
+                  href="/features"
+                  className="text-gray-600 hover:text-purple-600 transition-colors"
+                >
+                  <span>Features</span>
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="text-gray-600 hover:text-purple-600 transition-colors"
+                >
+                  <span>Pricing</span>
+                </Link>
+                <Link
+                  href="/#how-heading"
+                  className="text-gray-600 hover:text-purple-600 transition-colors"
+                >
+                  <span>How it Works</span>
+                </Link>
+                <Button variant="outline" size="sm">
+                  <span>Sign In</span>
+                </Button>
+                <Button
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                >
+                  <span>Get Started</span>
+                </Button>
               </nav>
 
               <div className="md:hidden">
@@ -158,16 +166,18 @@ export default function RootLayout({
                   </SheetTrigger>
                   <SheetContent side="right" className="p-0">
                     <div className="p-4 flex items-center gap-2 font-bold">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#4527a4] text-white">AF</span>
-                      <span>AgentForce</span>
+                      <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                        <Bot className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-xl font-bold gradient-text">AgentForce</span>
                     </div>
                     <Separator />
                     <div className="p-2">
-                      <Link href="/#value-heading" className="block rounded-md px-3 py-2 text-[#444] hover:bg-black/5"><span>Features</span></Link>
+                      <Link href="/features" className="block rounded-md px-3 py-2 text-[#444] hover:bg-black/5"><span>Features</span></Link>
                       <Link href="/pricing" className="block rounded-md px-3 py-2 text-[#444] hover:bg-black/5"><span>Pricing</span></Link>
                       <Link href="/#how-heading" className="block rounded-md px-3 py-2 text-[#444] hover:bg-black/5"><span>How it Works</span></Link>
                       <Link href="/auth/signin" className="block rounded-md px-3 py-2 text-[#444] hover:bg-black/5"><span>Sign In</span></Link>
-                      <Link href="/auth/signup" className="block rounded-md px-3 py-2 mt-2 text-white bg-[#4527a4] text-center rounded-full"><span>Get Started</span></Link>
+                      <Link href="/auth/signup" className="block rounded-md px-3 py-2 mt-2 text-white bg-gradient-to-r from-purple-600 to-blue-600 text-center rounded-full"><span>Get Started</span></Link>
                     </div>
                   </SheetContent>
                 </Sheet>
