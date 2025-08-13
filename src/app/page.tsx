@@ -81,45 +81,68 @@ export default function HomePage() {
       </section>
 
       {/* Value Proposition */}
-      <section aria-labelledby="value-heading" className="py-16">
+      <section aria-labelledby="value-heading" className="py-20 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5] overflow-hidden">
         <div className="container-width">
-          <div className="mx-auto max-w-3xl text-center mb-10">
-            <h2 id="value-heading" className="text-3xl md:text-4xl font-bold text-[#222]">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 id="value-heading" className="text-3xl md:text-5xl font-bold text-[#222] mb-4">
               Everything you need to scale with AI—safely
             </h2>
-            <p className="text-[#555] mt-3">
+            <p className="text-[#555] mt-4 text-lg leading-relaxed">
               Purpose-built agents that automate repetitive work, integrate with your stack, and keep humans in control.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <Card className="shadow-sm">
-              <CardContent className="p-6">
-                <Bot className="h-6 w-6 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">Task Automation</h3>
-                <p className="mt-2 text-sm text-[#666]">Automate research, drafting, triage, and reporting. Free your team for higher‑value work.</p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-sm">
-              <CardContent className="p-6">
-                <MessageSquare className="h-6 w-6 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">Slack Integration</h3>
-                <p className="mt-2 text-sm text-[#666]">Deploy agents right inside Slack for on-demand help, notifications, and approvals.</p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-sm">
-              <CardContent className="p-6">
-                <ShieldCheck className="h-6 w-6 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">Human‑in‑the‑loop</h3>
-                <p className="mt-2 text-sm text-[#666]">Guardrails and approvals ensure safety, compliance, and full auditability.</p>
-              </CardContent>
-            </Card>
-            <Card className="shadow-sm">
-              <CardContent className="p-6">
-                <BarChart3 className="h-6 w-6 text-[#4527a4]" />
-                <h3 className="mt-4 font-semibold">Usage Analytics</h3>
-                <p className="mt-2 text-sm text-[#666]">Track adoption, outcomes, and savings with clear reporting for stakeholders.</p>
-              </CardContent>
-            </Card>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 perspective-1000">
+            <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <CardContent className="p-8 relative z-10">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Bot className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#222] mb-3">Task Automation</h3>
+                  <p className="text-[#666] leading-relaxed">Automate research, drafting, triage, and reporting. Free your team for higher‑value work.</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <CardContent className="p-8 relative z-10">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <MessageSquare className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#222] mb-3">Slack Integration</h3>
+                  <p className="text-[#666] leading-relaxed">Deploy agents right inside Slack for on-demand help, notifications, and approvals.</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <CardContent className="p-8 relative z-10">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <ShieldCheck className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#222] mb-3">Human‑in‑the‑loop</h3>
+                  <p className="text-[#666] leading-relaxed">Guardrails and approvals ensure safety, compliance, and full auditability.</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <CardContent className="p-8 relative z-10">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <BarChart3 className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#222] mb-3">Usage Analytics</h3>
+                  <p className="text-[#666] leading-relaxed">Track adoption, outcomes, and savings with clear reporting for stakeholders.</p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
