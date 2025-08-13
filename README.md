@@ -226,14 +226,20 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🔮 Roadmap
 
-- [ ] Authentication system
-- [ ] Agent creation wizard
-- [ ] Workflow builder interface
-- [ ] Integration marketplace
+- [x] Authentication system (NextAuth)
+- [x] Agent creation wizard (Hire Agent + Onboarding)
+- [x] Agent + Task APIs (create/list/update)
+- [x] LLM-backed demo execution and review loop
+- [ ] Background worker (queue) for task execution
+- [ ] Workflow templates (enable/run/schedule)
+- [ ] First integrations (Google OAuth, Gmail draft, Sheets append)
+- [ ] Billing (Stripe Checkout + webhooks + entitlements)
 - [ ] Real-time notifications
-- [ ] Mobile app
+- [ ] Analytics (dashboards from Task data)
 - [ ] API documentation
 - [ ] Admin panel
+
+See the detailed progress and priorities in [PROGRESS.md](./PROGRESS.md).
 
 ## 📞 Contact
 
