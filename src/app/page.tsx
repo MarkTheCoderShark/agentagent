@@ -151,7 +151,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full overflow-hidden relative z-20"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
+        <div className="w-full overflow-hidden relative z-30 -mt-1"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
       </section>
 
       {/* How It Works */}
