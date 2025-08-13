@@ -158,20 +158,24 @@ export default function DashboardPage() {
       <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
         <div className="container-width flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold gradient-text">AgentForce</span>
+            <span className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold gradient-text">AgentForce</span>
+            </span>
           </Link>
           <div className="flex items-center space-x-4">
             <Link href="/dashboard/hire-agent">
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Hire Agent
-              </Button>
+              <span>
+                <Button
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Hire Agent
+                </Button>
+              </span>
             </Link>
             <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
           </div>
@@ -255,14 +259,16 @@ export default function DashboardPage() {
                   Your AI Agents
                 </h2>
                 <Link href="/dashboard/hire-agent">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="text-purple-600 border-purple-200 hover:bg-purple-50"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Agent
-                  </Button>
+                  <span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-purple-600 border-purple-200 hover:bg-purple-50"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add Agent
+                    </Button>
+                  </span>
                 </Link>
               </div>
 
@@ -298,21 +304,20 @@ export default function DashboardPage() {
                           </div>
 
                           <Badge
-                            className={`${getStatusColor(agent.status)} border-0`}
+                            className={`${getStatusColor(
+                              agent.status
+                            )} border-0`}
                           >
                             {agent.status}
                           </Badge>
 
                           <div className="flex items-center space-x-2">
-                            {agent.status === "active" ? (
-                              <Button size="sm" variant="outline">
-                                <Pause className="w-4 h-4" />
-                              </Button>
-                            ) : (
-                              <Button size="sm" variant="outline">
-                                <Play className="w-4 h-4" />
-                              </Button>
-                            )}
+                            <Button size="sm" variant="outline">
+                              <Play className="w-4 h-4 mr-1" /> Start
+                            </Button>
+                            <Button size="sm" variant="outline">
+                              <Pause className="w-4 h-4 mr-1" /> Pause
+                            </Button>
                             <Button size="sm" variant="outline">
                               <Settings className="w-4 h-4" />
                             </Button>
@@ -328,98 +333,37 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Activity Feed */}
+            {/* Recent Activity */}
             <div>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Recent Activity
-                </h2>
-                <Button size="sm" variant="ghost">
-                  View All
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Recent Activity
+              </h2>
 
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-0">
-                  <div className="divide-y divide-gray-100">
+                  <div className="divide-y">
                     {recentTasks.map((task) => (
-                      <div key={task.id} className="p-4">
+                      <div key={task.id} className="p-4 flex items-start justify-between">
                         <div className="flex items-start space-x-3">
-                          <div
-                            className={`p-2 rounded-lg bg-gray-100 ${getTaskStatusColor(
-                              task.status
-                            )}`}
-                          >
+                          <div className="mt-1 text-purple-600">
                             {getTaskIcon(task.type)}
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 truncate">
+                          <div>
+                            <p className="text-sm text-gray-900">
+                              <span className="font-medium">{task.agent}</span>{" "}
                               {task.task}
                             </p>
-                            <div className="flex items-center space-x-2 mt-1">
-                              <span className="text-xs text-gray-500">
-                                by {task.agent}
-                              </span>
-                              <span className="text-xs text-gray-400">•</span>
-                              <span className="text-xs text-gray-500">
-                                {task.time}
-                              </span>
-                            </div>
-                            <div className="mt-2">
-                              <Badge
-                                variant="secondary"
-                                className={`text-xs ${
-                                  task.status === "completed"
-                                    ? "bg-green-100 text-green-800"
-                                    : task.status === "in_progress"
-                                    ? "bg-blue-100 text-blue-800"
-                                    : task.status === "needs_review"
-                                    ? "bg-orange-100 text-orange-800"
-                                    : "bg-gray-100 text-gray-800"
-                                }`}
-                              >
-                                {task.status.replace("_", " ")}
-                              </Badge>
-                            </div>
+                            <p className="text-xs text-gray-500 mt-1">
+                              {task.time}
+                            </p>
                           </div>
+                        </div>
+                        <div className={`text-xs font-medium ${getTaskStatusColor(task.status)}`}>
+                          {task.status}
                         </div>
                       </div>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-
-              {/* Quick Actions */}
-              <Card className="border-0 shadow-lg mt-6">
-                <CardHeader>
-                  <CardTitle className="text-lg">Quick Actions</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start"
-                    size="sm"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create Workflow
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start"
-                    size="sm"
-                  >
-                    <BarChart3 className="w-4 h-4 mr-2" />
-                    View Analytics
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start"
-                    size="sm"
-                  >
-                    <Settings className="w-4 h-4 mr-2" />
-                    Manage Integrations
-                  </Button>
                 </CardContent>
               </Card>
             </div>

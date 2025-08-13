@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<title>Dashboard - AgentForce AI Agent Employee Platform</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="css/font-awesome-all.css" rel="stylesheet">
+<link href="css/flaticon.css" rel="stylesheet">
+<link href="css/owl.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+
+</head>
+
+<!-- page wrapper -->
+<body class="boxed_wrapper">
+
+    <!-- preloader -->
+    <div class="preloader"></div>
+    <!-- preloader -->
+
+    <!-- main header -->
+    <header class="main-header home-11">
+        <div class="outer-container">
+            <div class="container">
+                <div class="main-box clearfix">
+                    <div class="logo-box pull-left">
+                        <figure class="logo"><a href="index.html" class="text-logo">AgentForce</a></figure>
+                    </div>
+                    <div class="menu-area pull-right clearfix">
+                        <!--Mobile Navigation Toggler-->
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="features.html">Features</a></li>
+                                    <li><a href="pricing.html">Pricing</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li class="current"><a href="dashboard.html">Dashboard</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="btn-box"><a href="#" class="theme-btn-two">Hire New Agent</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--sticky Header-->
+        <div class="sticky-header">
+            <div class="container clearfix">
+                <figure class="logo-box"><a href="index.html" class="text-logo-small">AgentForce</a></figure>
+                <div class="menu-area">
+                    <nav class="main-menu clearfix">
+                        <!--Keep This Empty / Menu will come through Javascript-->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- main-header end -->
+
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html" class="text-logo-mobile">AgentForce</a></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+            <div class="contact-info">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><a href="mailto:hello@agentforce.ai">hello@agentforce.ai</a></li>
+                    <li><a href="mailto:support@agentforce.ai">support@agentforce.ai</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <ul class="clearfix">
+                    <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                    <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                    <li><a href="#"><span class="fab fa-linkedin-in"></span></a></li>
+                    <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                    <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div><!-- End Mobile Menu -->
+
+    <!-- dashboard-section -->
+    <section class="dashboard-section" style="padding: 100px 0; background: #f8f9fa;">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3 col-md-12 col-sm-12 sidebar-column">
+                    <div class="sidebar">
+                        <div class="widget dashboard-widget">
+                            <h4 class="widget-title">Quick Actions</h4>
+                            <div class="widget-content">
+                                <ul class="list clearfix">
+                                    <li><a href="#" class="theme-btn-two"><i class="fas fa-plus"></i> Hire New Agent</a></li>
+                                    <li><a href="#" class="theme-btn"><i class="fas fa-cog"></i> Create Workflow</a></li>
+                                    <li><a href="#"><i class="fas fa-chart-bar"></i> View Analytics</a></li>
+                                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget dashboard-widget">
+                            <h4 class="widget-title">ROI Metrics</h4>
+                            <div class="widget-content">
+                                <div class="metric-box">
+                                    <h5>Time Saved This Week</h5>
+                                    <div class="metric-value">12h 45m</div>
+                                </div>
+                                <div class="metric-box">
+                                    <h5>Tasks Completed</h5>
+                                    <div class="metric-value">54</div>
+                                </div>
+                                <div class="metric-box">
+                                    <h5>Cost Savings</h5>
+                                    <div class="metric-value">$1,247</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="col-lg-9 col-md-12 col-sm-12 main-content">
+                    <!-- Agent Overview -->
+                    <div class="agent-overview">
+                        <div class="sec-title">
+                            <h2>Your AI Workforce</h2>
+                            <p>Manage your agents and monitor their performance</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 agent-card">
+                                <div class="inner-box">
+                                    <div class="agent-avatar">
+                                        <img src="images/resource/user-8.png" alt="Alex">
+                                    </div>
+                                    <h4>Alex - Marketing Assistant</h4>
+                                    <div class="status active">Active</div>
+                                    <div class="stats">
+                                        <div class="stat">
+                                            <span class="label">Tasks Today</span>
+                                            <span class="value">12</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="label">This Week</span>
+                                            <span class="value">47</span>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="#" class="btn-small">View Details</a>
+                                        <a href="#" class="btn-small">Pause</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 agent-card">
+                                <div class="inner-box">
+                                    <div class="agent-avatar">
+                                        <img src="images/resource/user-9.png" alt="Sarah">
+                                    </div>
+                                    <h4>Sarah - Customer Support</h4>
+                                    <div class="status active">Active</div>
+                                    <div class="stats">
+                                        <div class="stat">
+                                            <span class="label">Tasks Today</span>
+                                            <span class="value">8</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="label">This Week</span>
+                                            <span class="value">32</span>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="#" class="btn-small">View Details</a>
+                                        <a href="#" class="btn-small">Pause</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 agent-card">
+                                <div class="inner-box add-agent">
+                                    <div class="add-icon">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <h4>Hire New Agent</h4>
+                                    <p>Add another AI employee to your team</p>
+                                    <a href="#" class="theme-btn-two">Get Started</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Feed -->
+                    <div class="activity-feed">
+                        <div class="sec-title">
+                            <h3>Recent Activity</h3>
+                            <div class="filters">
+                                <select>
+                                    <option>All Agents</option>
+                                    <option>Alex</option>
+                                    <option>Sarah</option>
+                                </select>
+                                <select>
+                                    <option>All Status</option>
+                                    <option>Completed</option>
+                                    <option>In Progress</option>
+                                    <option>Needs Review</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item completed">
+                                <div class="activity-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h5>Replied to 3 customer inquiries</h5>
+                                    <p>Alex • 2 minutes ago</p>
+                                </div>
+                                <div class="activity-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+                            <div class="activity-item needs-review">
+                                <div class="activity-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h5>Generated weekly marketing report</h5>
+                                    <p>Alex • 15 minutes ago</p>
+                                </div>
+                                <div class="activity-status">
+                                    <span class="status-badge needs-review">Needs Review</span>
+                                    <div class="review-actions">
+                                        <a href="#" class="btn-approve">Approve</a>
+                                        <a href="#" class="btn-reject">Reject</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-item completed">
+                                <div class="activity-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h5>Scheduled 5 team meetings</h5>
+                                    <p>Sarah • 1 hour ago</p>
+                                </div>
+                                <div class="activity-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+                            <div class="activity-item in-progress">
+                                <div class="activity-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h5>Analyzing sales data for Q4</h5>
+                                    <p>Alex • 2 hours ago</p>
+                                </div>
+                                <div class="activity-status">
+                                    <span class="status-badge in-progress">In Progress</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suggestions -->
+                    <div class="suggestions">
+                        <div class="sec-title">
+                            <h3>Recommended Actions</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 suggestion-card">
+                                <div class="inner-box">
+                                    <div class="icon-box">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <h4>Add Workflow to Alex</h4>
+                                    <p>Automate social media posting to save 2 hours/week</p>
+                                    <a href="#" class="theme-btn">Enable</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 suggestion-card">
+                                <div class="inner-box">
+                                    <div class="icon-box">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <h4>Hire Data Analyst</h4>
+                                    <p>Add a specialized agent for data processing and reporting</p>
+                                    <a href="#" class="theme-btn">Hire Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- dashboard-section end -->
+
+    <!-- main-footer -->
+    <footer class="main-footer">
+        <div class="image-layer" style="background-image: url(images/icons/footer-bg.png);"></div>
+        <div class="container">
+            <div class="footer-top">
+                <div class="widget-section">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                            <div class="about-widget footer-widget">
+                                <figure class="footer-logo"><a href="index.html"><img src="images/footer-logo.png" alt="AgentForce"></a></figure>
+                                <div class="text">AgentForce is the leading platform for deploying AI agents as virtual employees. Transform your business with intelligent automation that scales.</div>
+                                <ul class="social-links">
+                                    <li><h6>Follow Us :</h6></li>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="links-widget footer-widget">
+                                <h4 class="widget-title">Support</h4>
+                                <div class="widget-content">
+                                    <ul class="list clearfix">
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="#">Help Center</a></li>
+                                        <li><a href="#">Documentation</a></li>
+                                        <li><a href="#">API Reference</a></li>
+                                        <li><a href="#">Status Page</a></li>
+                                        <li><a href="#">Professional Services</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+                            <div class="links-widget footer-widget">
+                                <h4 class="widget-title">Platform</h4>
+                                <div class="widget-content">
+                                    <ul class="list clearfix">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="features.html">Features</a></li>
+                                        <li><a href="pricing.html">Pricing</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="dashboard.html">Dashboard</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="contact-widget footer-widget">
+                                <h4 class="widget-title">Contact Info</h4>
+                                <div class="widget-content">
+                                    <ul class="list clearfix">
+                                        <li>
+                                            <i class="fas fa-envelope"></i>
+                                            <a href="mailto:hello@agentforce.ai">hello@agentforce.ai</a>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-envelope"></i>
+                                            <a href="mailto:support@agentforce.ai">support@agentforce.ai</a>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-clock"></i>
+                                            <span>24/7 Support Available</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">&copy; 2024 <a href="#">AgentForce</a>. All rights reserved</div>
+            </div>
+        </div>
+    </footer>
+    <!-- main-footer end -->
+
+<!--Scroll to top-->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <span class="fa fa-arrow-up"></span>
+</button>
+
+<!-- jequery plugins -->
+<script src="js/jquery.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/jquery.fancybox.js"></script>
+<script src="js/appear.js"></script>
+<script src="js/scrollbar.js"></script>
+<script src="js/jquery.paroller.min.js"></script>
+<script src="js/tilt.jquery.js"></script>
+
+<!-- main-js -->
+<script src="js/script.js"></script>
+
+<style>
+/* AgentForce Logo Styles */
+.text-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+.text-logo:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: scale(1.05);
+}
+
+.text-logo-small {
+    font-size: 22px;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.text-logo-mobile {
+    font-size: 24px;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+/* Logo box adjustments */
+.logo-box {
+    display: flex;
+    align-items: center;
+}
+
+.logo-box figure.logo {
+    margin: 0;
+}
+
+.nav-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-section {
+    background: #f8f9fa;
+}
+
+.sidebar {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dashboard-widget {
+    margin-bottom: 30px;
+}
+
+.dashboard-widget .widget-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.dashboard-widget .list li {
+    margin-bottom: 10px;
+}
+
+.dashboard-widget .list li a {
+    display: block;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dashboard-widget .list li a:hover {
+    background: #007bff;
+    color: white;
+}
+
+.metric-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.metric-box h5 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.agent-card {
+    margin-bottom: 30px;
+}
+
+.agent-card .inner-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.agent-card .inner-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.agent-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+}
+
+.agent-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agent-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat .label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+}
+
+.stat .value {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-small {
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-small:first-child {
+    background: #007bff;
+    color: white;
+}
+
+.btn-small:last-child {
+    background: #6c757d;
+    color: white;
+}
+
+.add-agent {
+    border: 2px dashed #ddd;
+    background: #f8f9fa;
+}
+
+.add-agent:hover {
+    border-color: #007bff;
+    background: white;
+}
+
+.add-icon {
+    font-size: 48px;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.activity-feed {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.activity-feed .sec-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.filters select {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: #007bff;
+}
+
+.activity-content h5 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.activity-content p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.activity-status {
+    margin-left: auto;
+    text-align: right;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-badge.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.in-progress {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.needs-review {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.review-actions {
+    margin-top: 10px;
+}
+
+.btn-approve, .btn-reject {
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.btn-approve {
+    background: #28a745;
+    color: white;
+}
+
+.btn-reject {
+    background: #dc3545;
+    color: white;
+}
+
+.suggestions {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.suggestion-card {
+    margin-bottom: 20px;
+}
+
+.suggestion-card .inner-box {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.suggestion-card .inner-box:hover {
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.suggestion-card .icon-box {
+    font-size: 36px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.suggestion-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.suggestion-card p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        margin-bottom: 30px;
+    }
+    
+    .activity-feed .sec-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filters {
+        margin-top: 15px;
+    }
+    
+    .filters select {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+}
+</style>
+
+</body><!-- End of .page_wrapper -->
+</html> 

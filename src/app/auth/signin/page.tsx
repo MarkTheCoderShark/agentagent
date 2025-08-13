@@ -57,10 +57,12 @@ export default function SignInPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Bot className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold gradient-text">AgentForce</span>
+            <span className="inline-flex items-center space-x-2">
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <Bot className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold gradient-text">AgentForce</span>
+            </span>
           </Link>
         </div>
 

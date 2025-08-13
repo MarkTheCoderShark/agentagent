@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<title>AgentForce - AI Agent Employee Platform</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="css/font-awesome-all.css" rel="stylesheet">
+<link href="css/flaticon.css" rel="stylesheet">
+<link href="css/owl.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+
+</head>
+
+<!-- page wrapper -->
+<body class="boxed_wrapper">
+
+    <!-- preloader -->
+    <div class="preloader"></div>
+    <!-- preloader -->
+
+    <!-- main header -->
+    <header class="main-header home-11">
+        <div class="outer-container">
+            <div class="container">
+                <div class="main-box clearfix">
+                    <div class="logo-box pull-left">
+                        <figure class="logo"><a href="index.html" class="text-logo">AgentForce</a></figure>
+                    </div>
+                    <div class="menu-area pull-right clearfix">
+                        <!--Mobile Navigation Toggler-->
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li class="current"><a href="index.html">Home</a></li>
+                                    <li><a href="features.html">Features</a></li>
+                                    <li><a href="pricing.html">Pricing</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="dashboard.html">Dashboard</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="btn-box"><a href="dashboard.html">Get Started</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--sticky Header-->
+        <div class="sticky-header">
+            <div class="container clearfix">
+                <figure class="logo-box"><a href="index.html" class="text-logo-small">AgentForce</a></figure>
+                <div class="menu-area">
+                    <nav class="main-menu clearfix">
+                        <!--Keep This Empty / Menu will come through Javascript-->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- main-header end -->
+
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html" class="text-logo-mobile">AgentForce</a></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+            <div class="contact-info">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><a href="mailto:hello@agentforce.ai">hello@agentforce.ai</a></li>
+                    <li><a href="mailto:support@agentforce.ai">support@agentforce.ai</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <ul class="clearfix">
+                    <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                    <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                    <li><a href="#"><span class="fab fa-linkedin-in"></span></a></li>
+                    <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                    <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div><!-- End Mobile Menu -->
+
+    <!-- banner-section -->
+    <section class="banner-style-11">
+        <div class="vector-image">
+            <figure class="image image-1 float-bob-y"><img src="images/icons/vactor-7.png" alt=""></figure>
+            <figure class="image image-2 float-bob-y"><img src="images/icons/vactor-8.png" alt=""></figure>
+        </div>
+        <div class="image-layer" style="background-image: url(images/icons/banner-bg-10.png);"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div class="content-box">
+                        <h1>Deploy AI Agents as Virtual Employees</h1>
+                        <div class="text">Transform your business with intelligent AI agents that work 24/7, never take breaks, and scale instantly. Our platform enables you to hire, train, and manage AI employees that integrate seamlessly with your existing workflows.</div>
+                        <div class="btn-box">
+                            <a href="pricing.html" class="btn-one">Start Free Trial</a>
+                            <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image video-btn" data-caption=""><i class="fas fa-play"></i>Watch Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div class="hero-dashboard">
+                        <div class="dashboard-mockup">
+                            <div class="dashboard-header">
+                                <div class="header-left">
+                                    <div class="logo-small">AgentForce</div>
+                                </div>
+                                <div class="header-right">
+                                    <div class="status-indicator online"></div>
+                                    <span>3 Agents Active</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-content">
+                                <div class="agent-cards">
+                                    <div class="agent-card">
+                                        <div class="agent-avatar">🤖</div>
+                                        <div class="agent-info">
+                                            <h4>Sarah - Customer Support</h4>
+                                            <p>Resolved 47 tickets today</p>
+                                            <div class="progress-bar">
+                                                <div class="progress" style="width: 85%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="agent-card">
+                                        <div class="agent-avatar">📊</div>
+                                        <div class="agent-info">
+                                            <h4>Alex - Data Analyst</h4>
+                                            <p>Generated 12 reports</p>
+                                            <div class="progress-bar">
+                                                <div class="progress" style="width: 92%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="agent-card">
+                                        <div class="agent-avatar">💼</div>
+                                        <div class="agent-info">
+                                            <h4>Mike - Sales Agent</h4>
+                                            <p>Closed 3 deals today</p>
+                                            <div class="progress-bar">
+                                                <div class="progress" style="width: 78%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="metrics-panel">
+                                    <div class="metric">
+                                        <div class="metric-value">$12,450</div>
+                                        <div class="metric-label">Revenue Generated</div>
+                                    </div>
+                                    <div class="metric">
+                                        <div class="metric-value">247</div>
+                                        <div class="metric-label">Tasks Completed</div>
+                                    </div>
+                                    <div class="metric">
+                                        <div class="metric-value">99.2%</div>
+                                        <div class="metric-label">Uptime</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner-section end -->
+
+    <!-- organization-section -->
+    <section class="organization-section centred">
+        <div class="container">
+            <div class="sec-title center">
+                <h2>Why Companies Choose AgentForce</h2>
+                <p>Deploy intelligent AI agents that work seamlessly<br />across your entire organization.</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 single-column">
+                    <div class="single-item wow flipInY" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="left-layer"></div>
+                            <div class="right-layer"></div>
+                            <div class="icon-box"><i class="flaticon-intersect"></i></div>
+                            <h4><a href="#">24/7 Availability</a></h4>
+                            <div class="text">Your AI agents never sleep, take breaks, or call in sick. They work around the clock to keep your business running smoothly.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 single-column">
+                    <div class="single-item wow flipInY" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="left-layer"></div>
+                            <div class="right-layer"></div>
+                            <div class="icon-box"><i class="flaticon-project"></i></div>
+                            <h4><a href="#">Instant Scalability</a></h4>
+                            <div class="text">Scale your workforce up or down instantly based on demand. No hiring, training, or layoffs required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 single-column">
+                    <div class="single-item wow flipInY" data-wow-delay="600ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="left-layer"></div>
+                            <div class="right-layer"></div>
+                            <div class="icon-box"><i class="flaticon-feature"></i></div>
+                            <h4><a href="#">Cost Efficiency</a></h4>
+                            <div class="text">Reduce operational costs by up to 80% while improving efficiency and accuracy across all business processes.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="more-btn"><a href="features.html" class="theme-btn-two">Learn More</a></div>
+        </div>
+    </section>
+    <!-- organization-section end -->
+
+    <!-- security-invisible -->
+    <section class="security-invisible">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div id="content_block_28">
+                        <div class="content-box wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="sec-title"><h2>Enterprise-grade security and compliance</h2></div>
+                            <div class="text">AgentForce provides enterprise-level security with SOC 2 Type II compliance, end-to-end encryption, and granular access controls. Your data and AI agents are protected with military-grade security protocols.</div>
+                            <div class="btn-box"><a href="features.html" class="theme-btn-two">Learn More</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div id="image_block_27">
+                        <div class="image-box js-tilt">
+                            <figure class="image clearfix wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="images/resource/laptop-4.png" alt=""></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- security-invisible end -->
+
+    <!-- feature-style-ten -->
+    <section class="feature-style-ten">
+        <div class="container">
+            <div class="sec-title center">
+                <h2>Powerful Features for Modern Businesses</h2>
+                <p>Everything you need to deploy and manage<br />AI agents at scale.</p>
+            </div>
+            <div class="inner-container">
+                <div class="inner-box">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                            <div id="content_block_29">
+                                <div class="content-box wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer wow slideInLeft" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-image: url(images/icons/pattern-9.png);"></div>
+                                    <h2>Intelligent Agent Creation</h2>
+                                    <div class="text">Create custom AI agents in minutes with our intuitive drag-and-drop interface. Define roles, responsibilities, and workflows without any coding required.</div>
+                                    <div class="btn-box"><a href="features.html" class="theme-btn">Learn More<i class="fas fa-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                            <div id="image_block_28">
+                                <div class="image-box">
+                                    <div class="anim-icons">
+                                        <div class="icon icon-1"><img src="images/icons/anim-icon-4.png" alt=""></div>
+                                        <div class="icon icon-2 rotate-me"><img src="images/icons/anim-icon-5.png" alt=""></div>
+                                        <div class="icon icon-3 rotate-me"><img src="images/icons/anim-icon-6.png" alt=""></div>
+                                    </div>
+                                    <figure class="image clearfix wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="images/resource/vactor-image-1.png" alt=""></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-box">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                            <div id="image_block_28">
+                                <div class="image-box">
+                                    <div class="anim-icons">
+                                        <div class="icon icon-1"><img src="images/icons/anim-icon-4.png" alt=""></div>
+                                        <div class="icon icon-2 rotate-me"><img src="images/icons/anim-icon-5.png" alt=""></div>
+                                        <div class="icon icon-3 rotate-me"><img src="images/icons/anim-icon-6.png" alt=""></div>
+                                    </div>
+                                    <figure class="image clearfix wow slideInLeft" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="images/resource/vactor-image-2.png" alt=""></figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                            <div id="content_block_29">
+                                <div class="content-box wow fadeInRight" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-image: url(images/icons/pattern-10.png);"></div>
+                                    <h2>Seamless Integrations</h2>
+                                    <div class="text">Connect your AI agents to 500+ business applications including CRM, ERP, marketing tools, and custom APIs. No complex setup required.</div>
+                                    <div class="btn-box"><a href="features.html" class="theme-btn">Learn More<i class="fas fa-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inner-box">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                            <div id="content_block_29">
+                                <div class="content-box wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                    <div class="bg-layer wow slideInLeft" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-image: url(images/icons/pattern-11.png);"></div>
+                                    <h2>Advanced Analytics & Monitoring</h2>
+                                    <div class="text">Track performance, productivity, and ROI in real-time. Get detailed insights into how your AI agents are performing and optimize accordingly.</div>
+                                    <div class="btn-box"><a href="features.html" class="theme-btn">Learn More<i class="fas fa-arrow-right"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                            <div id="image_block_28">
+                                <div class="image-box">
+                                    <div class="anim-icons">
+                                        <div class="icon icon-1"><img src="images/icons/anim-icon-4.png" alt=""></div>
+                                        <div class="icon icon-2 rotate-me"><img src="images/icons/anim-icon-5.png" alt=""></div>
+                                        <div class="icon icon-3 rotate-me"><img src="images/icons/anim-icon-6.png" alt=""></div>
+                                    </div>
+                                    <figure class="image clearfix wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="images/resource/vactor-image-3.png" alt=""></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- feature-style-ten end -->
+
+    <!-- clients-style-two -->
+    <section class="clients-style-two home-11">
+        <div class="container">
+            <div class="inner-container">
+                <div class="clients-carousel owl-carousel owl-theme">
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-1.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-2.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-3.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-4.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-1.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-2.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-3.png" alt=""></a></figure>
+                    <figure class="image-box"><a href="#"><img src="images/clients/client-4.png" alt=""></a></figure>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- clients-style-two end -->
+
+    <!-- software-product -->
+    <section class="software-product" style="background-image: url(images/background/softwere-product-bg.png);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div id="content_block_30">
+                        <div class="content-box">
+                            <div class="sec-title"><h2>Built for the future of work</h2></div>
+                            <div class="text">AgentForce is designed to help businesses thrive in the AI-first economy. Our platform combines cutting-edge AI technology with enterprise-grade security and scalability to deliver results that matter.</div>
+                            <div class="btn-box"><a href="about.html">Learn More</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div id="image_block_29">
+                        <div class="image-box wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <figure class="image clearfix float-bob-y"><img src="images/resource/pc-1.png" alt=""></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- software-product end -->
+
+    <!-- testimonial-style-ten -->
+    <section class="testimonial-style-ten">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-12 col-md-12 user-column">
+                    <div class="user-thumb">
+                        <div class="thumb-box">
+                            <div class="pattern-bg1" style="background-image: url(images/icons/thumb-bg.png);"></div>
+                            <div class="pattern-bg2" style="background-image: url(images/icons/map-shap-3.png);"></div>
+                            <figure class="thumb thumb-1"><img src="images/resource/user-8.png" alt=""></figure>
+                            <figure class="thumb thumb-2"><img src="images/resource/user-9.png" alt=""></figure>
+                            <figure class="thumb thumb-3"><img src="images/resource/user-10.png" alt=""></figure>
+                            <figure class="thumb thumb-4"><img src="images/resource/user-11.png" alt=""></figure>
+                            <figure class="thumb thumb-5"><img src="images/resource/user-12.png" alt=""></figure>
+                            <figure class="thumb thumb-6"><img src="images/resource/user-13.png" alt=""></figure>
+                            <figure class="thumb thumb-7"><img src="images/resource/user-14.png" alt=""></figure>
+                            <figure class="thumb thumb-8"><img src="images/resource/user-15.png" alt=""></figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-12 col-md-12 content-column">
+                    <div class="content-box">
+                        <div class="sec-title"><h2>What Our Customers Say</h2></div>
+                        <div class="testimonial-carousel-2 owl-carousel owl-theme">
+                            <div class="testimonial-content">
+                                <div class="inner-box">
+                                    <div class="text">"AgentForce transformed our customer service operations. Our AI agents handle 80% of inquiries automatically, reducing response times from hours to minutes."</div>
+                                    <div class="author-info">
+                                        <ul class="rating clearfix">
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                        </ul>
+                                        <h4 class="name">Sarah Johnson</h4>
+                                        <span class="designation">CTO, TechCorp Inc.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="inner-box">
+                                    <div class="text">"The ROI was immediate. We saved $50,000 in the first month alone by automating repetitive tasks that were taking our team 40 hours per week."</div>
+                                    <div class="author-info">
+                                        <ul class="rating clearfix">
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                        </ul>
+                                        <h4 class="name">Michael Chen</h4>
+                                        <span class="designation">Operations Director, GrowthStart</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="inner-box">
+                                    <div class="text">"Setup was incredibly easy. We had our first AI agent deployed and working within 30 minutes. The platform is intuitive and powerful."</div>
+                                    <div class="author-info">
+                                        <ul class="rating clearfix">
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                        </ul>
+                                        <h4 class="name">Emily Rodriguez</h4>
+                                        <span class="designation">VP of Technology, InnovateLab</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial-style-ten end -->
+
+    <!-- betterlook-section -->
+    <section class="betterlook-section">
+        <div class="pattern-bg1" style="background-image: url(images/icons/pattern-13.png);"></div>
+        <div class="pattern-bg2" style="background-image: url(images/icons/pattern-14.png);"></div>
+        <div class="anim-icons">
+            <div class="icon icon-1"></div>
+            <div class="icon icon-2"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div id="content_block_31">
+                        <div class="content-box">
+                            <div class="sec-title"><h2>Ready to Get Started?</h2></div>
+                            <div class="text">Join thousands of businesses already using AgentForce to automate their operations and scale their workforce.</div>
+                            <div class="btn-box"><a href="dashboard.html" class="theme-btn-two">Start Free Trial</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column paroller">
+                    <div id="image_block_30">
+                        <div class="image-box wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <figure class="image clearfix"><img src="images/resource/laptop-5.png" alt=""></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- betterlook-section end -->
+
+    <!-- subscribe-section -->
+    <section class="subscribe-section home-11">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div id="iamge_block_05">
+                        <div class="image-box wow slideInLeft animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <figure class="image float-bob-y"><img src="images/resource/subscribe-1.png" alt=""></figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div id="content_block_06">
+                        <div class="content-box">
+                            <div class="sec-title"><h2>Stay Updated</h2></div>
+                            <div class="text">Get the latest insights on AI automation, productivity tips, and platform updates delivered to your inbox.</div>
+                            <form action="#" method="post" class="subscribe-form">
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Enter Your Email" required="">
+                                    <button type="submit" class="theme-btn-two">Subscribe Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- subscribe-section end -->
+
+    <!-- main-footer -->
+    <footer class="main-footer">
+        <div class="image-layer" style="background-image: url(images/icons/footer-bg.png);"></div>
+        <div class="container">
+            <div class="footer-top">
+                <div class="widget-section">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                            <div class="about-widget footer-widget">
+                                <figure class="footer-logo"><a href="index.html"><img src="images/footer-logo.png" alt="AgentForce"></a></figure>
+                                <div class="text">AgentForce is the leading platform for deploying AI agents as virtual employees. Transform your business with intelligent automation that scales.</div>
+                                <ul class="social-links">
+                                    <li><h6>Follow Us :</h6></li>
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="links-widget footer-widget">
+                                <h4 class="widget-title">Support</h4>
+                                <div class="widget-content">
+                                    <ul class="list clearfix">
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="#">Help Center</a></li>
+                                        <li><a href="#">Documentation</a></li>
+                                        <li><a href="#">API Reference</a></li>
+                                        <li><a href="#">Status Page</a></li>
+                                        <li><a href="#">Professional Services</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+                            <div class="links-widget footer-widget">
+                                <h4 class="widget-title">Platform</h4>
+                                <div class="widget-content">
+                                    <ul class="list clearfix">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="features.html">Features</a></li>
+                                        <li><a href="pricing.html">Pricing</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="dashboard.html">Dashboard</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="contact-widget footer-widget">
+                                <h4 class="widget-title">Contact Info</h4>
+                                <div class="widget-content">
+                                    <ul class="list clearfix">
+                                        <li>
+                                            <i class="fas fa-envelope"></i>
+                                            <a href="mailto:hello@agentforce.ai">hello@agentforce.ai</a>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-envelope"></i>
+                                            <a href="mailto:support@agentforce.ai">support@agentforce.ai</a>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-clock"></i>
+                                            <span>24/7 Support Available</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">&copy; 2024 <a href="#">AgentForce</a>. All rights reserved</div>
+            </div>
+        </div>
+    </footer>
+    <!-- main-footer end -->
+
+<!--Scroll to top-->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <span class="fa fa-arrow-up"></span>
+</button>
+
+<!-- jequery plugins -->
+<script src="js/jquery.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/jquery.fancybox.js"></script>
+<script src="js/appear.js"></script>
+<script src="js/scrollbar.js"></script>
+<script src="js/jquery.paroller.min.js"></script>
+<script src="js/tilt.jquery.js"></script>
+
+<!-- main-js -->
+<script src="js/script.js"></script>
+
+<style>
+/* AgentForce Logo Styles */
+.text-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+.text-logo:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: scale(1.05);
+}
+
+.text-logo-small {
+    font-size: 22px;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.text-logo-mobile {
+    font-size: 24px;
+    font-weight: 700;
+    color: #007bff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+/* Logo box adjustments */
+.logo-box {
+    display: flex;
+    align-items: center;
+}
+
+.logo-box figure.logo {
+    margin: 0;
+}
+
+.nav-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Hero Dashboard Mockup Styles */
+.hero-dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.dashboard-mockup {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: all 0.3s ease;
+}
+
+.dashboard-mockup:hover {
+    transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) scale(1.02);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-header .logo-small {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.dashboard-content {
+    padding: 25px;
+    background: #f8fafc;
+}
+
+.agent-cards {
+    margin-bottom: 25px;
+}
+
+.agent-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.agent-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.agent-avatar {
+    font-size: 32px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+}
+
+.agent-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #1f2937;
+}
+
+.agent-info p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0 0 10px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.metrics-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.metric {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.metric:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-mockup {
+        transform: none;
+        max-width: 100%;
+    }
+    
+    .dashboard-mockup:hover {
+        transform: none;
+    }
+    
+    .metrics-panel {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .agent-card {
+        padding: 15px;
+    }
+    
+    .agent-avatar {
+        font-size: 24px;
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+
+</body><!-- End of .page_wrapper -->
+</html> 

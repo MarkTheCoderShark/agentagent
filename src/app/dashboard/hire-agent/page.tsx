@@ -118,8 +118,10 @@ export default function HireAgentPage() {
       <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
         <div className="container-width flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center space-x-2">
-            <ArrowLeft className="w-5 h-5 text-gray-600" />
-            <span className="text-gray-600">Back to Dashboard</span>
+            <span className="flex items-center space-x-2">
+              <ArrowLeft className="w-5 h-5 text-gray-600" />
+              <span className="text-gray-600">Back to Dashboard</span>
+            </span>
           </Link>
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">

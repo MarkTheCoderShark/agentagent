@@ -1,0 +1,12 @@
+{
+  "name": "AgentForce",
+  "short_name": "AgentForce",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4527a4",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "256x256", "type": "image/x-icon" },
+    { "src": "/icon.svg", "sizes": "256x256", "type": "image/svg+xml" }
+  ]
+} 

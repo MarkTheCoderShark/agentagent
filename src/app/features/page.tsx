@@ -34,29 +34,31 @@ export default function FeaturesPage() {
       <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
         <div className="container-width flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold gradient-text">AgentForce</span>
+            <span className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold gradient-text">AgentForce</span>
+            </span>
           </Link>
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/#features"
               className="text-purple-600 font-medium"
             >
-              Features
+              <span>Features</span>
             </Link>
             <Link
               href="/#pricing"
               className="text-gray-600 hover:text-purple-600 transition-colors"
             >
-              Pricing
+              <span>Pricing</span>
             </Link>
             <Link
               href="/#how-it-works"
               className="text-gray-600 hover:text-purple-600 transition-colors"
             >
-              How it Works
+              <span>How it Works</span>
             </Link>
             <Button variant="outline" size="sm">
               Sign In
@@ -433,10 +435,12 @@ export default function FeaturesPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <Link href="/" className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">AgentForce</span>
+                <span className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold">AgentForce</span>
+                </span>
               </Link>
               <p className="text-gray-400">
                 The future of work is here. Scale your business with AI agents.
@@ -448,22 +452,22 @@ export default function FeaturesPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Features
+                    <span>Features</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Pricing
+                    <span>Pricing</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Integrations
+                    <span>Integrations</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    API
+                    <span>API</span>
                   </Link>
                 </li>
               </ul>
@@ -474,22 +478,22 @@ export default function FeaturesPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    About
+                    <span>About</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Blog
+                    <span>Blog</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Careers
+                    <span>Careers</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Contact
+                    <span>Contact</span>
                   </Link>
                 </li>
               </ul>
@@ -500,22 +504,22 @@ export default function FeaturesPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Help Center
+                    <span>Help Center</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Documentation
+                    <span>Documentation</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Status
+                    <span>Status</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
-                    Security
+                    <span>Security</span>
                   </Link>
                 </li>
               </ul>
