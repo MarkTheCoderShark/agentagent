@@ -125,31 +125,29 @@ export default function HomePage() {
       </section>
 
       {/* Product Section */}
-      <section className="py-16 bg-[#fafafa] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <img src="/images/icons/device-bg.png" alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="container-width grid gap-10 lg:grid-cols-2 items-center relative z-10">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white">
+        <div className="container-width py-16 grid gap-10 lg:grid-cols-2 items-center relative z-10">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#222]">Agents that work where your team works</h2>
-            <p className="mt-3 text-[#555]">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
-            <ul className="mt-6 space-y-3 text-sm text-[#444]">
-              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-[#4527a4]" /> Guided workflows and playbooks</li>
-              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-[#4527a4]" /> Role-based permissions and guardrails</li>
-              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-[#4527a4]" /> Real-time analytics and savings</li>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Agents that work where your team works</h2>
+            <p className="mt-3 text-white/90">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
+            <ul className="mt-6 space-y-3 text-sm text-white/80">
+              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Guided workflows and playbooks</li>
+              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Role-based permissions and guardrails</li>
+              <li className="flex items-start gap-3"><Check className="mt-1 h-4 w-4 text-white" /> Real-time analytics and savings</li>
             </ul>
             <div className="mt-6">
               <Link href="/auth/signup">
                 <span>
-                  <Button>Start Free</Button>
+                  <Button className="bg-white text-[#4527a4] hover:bg-white/90">Start Free</Button>
                 </span>
               </Link>
             </div>
           </div>
           <div className="relative">
-            <div className="w-full h-64 lg:h-80 bg-gradient-to-br from-[#4527a4]/20 to-[#6a4c93]/20 rounded-xl"></div>
+            <img src="/images/icons/device-bg.png" alt="Product UI" className="w-full rounded-xl shadow-lg opacity-80" />
           </div>
         </div>
+        <div className="w-full overflow-hidden"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
       </section>
 
       {/* How It Works */}
