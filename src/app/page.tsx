@@ -125,9 +125,15 @@ export default function HomePage() {
       </section>
 
       {/* Product Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white">
-        <div className="container-width py-16 grid gap-10 lg:grid-cols-2 items-center relative z-10">
-          <div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white" style={{
+        backgroundImage: 'url(/images/icons/device-bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/80 via-[#6a4c93]/80 to-[#8b5fbf]/80"></div>
+        <div className="container-width py-16 relative z-10">
+          <div className="max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-bold text-white">Agents that work where your team works</h2>
             <p className="mt-3 text-white/90">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
             <ul className="mt-6 space-y-3 text-sm text-white/80">
@@ -142,9 +148,6 @@ export default function HomePage() {
                 </span>
               </Link>
             </div>
-          </div>
-          <div className="relative">
-            <img src="/images/icons/device-bg.png" alt="Product UI" className="w-full rounded-xl shadow-lg opacity-80" />
           </div>
         </div>
         <div className="w-full overflow-hidden"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
