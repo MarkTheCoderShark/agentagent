@@ -131,9 +131,9 @@ export default function HomePage() {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div className="w-full overflow-hidden rotate-180"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/80 via-[#6a4c93]/80 to-[#8b5fbf]/80"></div>
-        <div className="container-width py-16 relative z-10">
+        <div className="w-full overflow-hidden rotate-180 relative z-20"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/70 via-[#6a4c93]/70 to-[#8b5fbf]/70 z-10"></div>
+        <div className="container-width py-16 relative z-30">
           <div className="max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-bold text-white">Agents that work where your team works</h2>
             <p className="mt-3 text-white/90">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
@@ -151,7 +151,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full overflow-hidden"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
+        <div className="w-full overflow-hidden relative z-20"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
       </section>
 
       {/* How It Works */}
