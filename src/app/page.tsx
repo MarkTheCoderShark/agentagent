@@ -69,7 +69,7 @@ export default function HomePage() {
               </Link>
               <Link href="/auth/signup">
                 <span>
-                  <Button size="lg" variant="outline" className="px-6 border-white text-white hover:bg-white hover:text-[#4527a4]">
+                  <Button size="lg" variant="outline" className="px-6 border-white text-white hover:bg-[#4527a4] hover:text-white">
                     Start Free
                   </Button>
                 </span>

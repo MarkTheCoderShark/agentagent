@@ -421,7 +421,7 @@ export default function FeaturesPage() {
             <Button
               size="lg"
               variant="outline"
-              className="px-8 py-4 text-lg border-white text-white hover:bg-white hover:text-purple-600"
+              className="px-8 py-4 text-lg border-white text-white hover:bg-[#4527a4] hover:text-white"
             >
               Schedule Demo
             </Button>

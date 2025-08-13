@@ -159,7 +159,7 @@ export default function RootLayout({
                     <Button 
                       variant="outline" 
                       size="sm"
-                      className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 backdrop-blur-sm font-medium px-6"
+                      className="border-white/30 text-white hover:bg-[#4527a4] hover:border-[#4527a4] backdrop-blur-sm font-medium px-6"
                     >
                       Sign In
                     </Button>
