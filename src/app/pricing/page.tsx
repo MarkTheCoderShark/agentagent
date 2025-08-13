@@ -22,77 +22,40 @@ import Link from "next/link";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
-        <div className="container-width flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
+    <div className="bg-white">
+      {/* Hero */}
+      <section
+        aria-labelledby="pricing-heading"
+        className="relative -mt-16 overflow-hidden bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf] text-white"
+      >
+        <div className="container-width pt-20 md:pt-24 pb-16">
+          <div className="mx-auto max-w-5xl text-center">
+            <h1 id="pricing-heading" className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+              Simple, Transparent{" "}
+              <span className="gradient-text">Pricing</span>
+            </h1>
+            <p className="mt-4 text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+              Pay per agent, scale as you grow. No hidden fees, no long-term contracts. Start free and upgrade when you're ready.
+            </p>
+
+            {/* Billing Toggle */}
+            <div className="flex items-center justify-center mb-12">
+              <span className="text-white/90 mr-3">Monthly</span>
+              <div className="relative">
+                <input type="checkbox" className="sr-only" />
+                <div className="w-14 h-8 bg-white/20 rounded-full shadow-inner"></div>
+                <div className="absolute w-6 h-6 bg-white rounded-full shadow left-1 top-1 transition-transform"></div>
               </div>
-              <span className="text-xl font-bold gradient-text">AgentForce</span>
-            </span>
-          </Link>
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/features"
-              className="text-gray-600 hover:text-purple-600 transition-colors"
-            >
-              <span>Features</span>
-            </Link>
-            <Link
-              href="/pricing"
-              className="text-purple-600 font-medium"
-            >
-              <span>Pricing</span>
-            </Link>
-            <Link
-              href="/#how-it-works"
-              className="text-gray-600 hover:text-purple-600 transition-colors"
-            >
-              <span>How it Works</span>
-            </Link>
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-            >
-              Get Started
-            </Button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="section-padding py-20">
-        <div className="container-width text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Simple, Transparent{" "}
-            <span className="gradient-text">Pricing</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Pay per agent, scale as you grow. No hidden fees, no long-term contracts. Start free and upgrade when you're ready.
-          </p>
-
-          {/* Billing Toggle */}
-          <div className="flex items-center justify-center mb-12">
-            <span className="text-gray-600 mr-3">Monthly</span>
-            <div className="relative">
-              <input type="checkbox" className="sr-only" />
-              <div className="w-14 h-8 bg-gray-200 rounded-full shadow-inner"></div>
-              <div className="absolute w-6 h-6 bg-white rounded-full shadow left-1 top-1 transition-transform"></div>
+              <span className="text-white/90 ml-3">Annual</span>
+              <Badge variant="secondary" className="ml-2">Save 20%</Badge>
             </div>
-            <span className="text-gray-600 ml-3">Annual</span>
-            <Badge variant="secondary" className="ml-2">Save 20%</Badge>
           </div>
         </div>
+        <div className="w-full overflow-hidden -mb-1"><svg className="relative block w-full h-24" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 C200,80 400,0 600,60 C800,120 1000,40 1200,100 L1200,120 L0,120 Z" fill="#ffffff"/></svg></div>
       </section>
 
       {/* Pricing Cards */}
-      <section className="section-padding pb-20">
+      <section className="py-20 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5]">
         <div className="container-width">
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Starter Plan */}
@@ -270,7 +233,7 @@ export default function PricingPage() {
       </section>
 
       {/* Add-ons Section */}
-      <section className="section-padding py-20 bg-white/50">
+      <section className="py-20 bg-white">
         <div className="container-width">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -330,7 +293,7 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding py-20">
+      <section className="py-20 bg-gradient-to-br from-[#fafafa] via-white to-[#f5f5f5]">
         <div className="container-width">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -398,7 +361,7 @@ export default function PricingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding py-20 bg-gradient-to-r from-purple-600 to-blue-600">
+      <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-600">
         <div className="container-width text-center text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to hire your first AI employee?
@@ -425,130 +388,6 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="section-padding py-16 bg-gray-900 text-white">
-        <div className="container-width">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <Link href="/" className="flex items-center space-x-2 mb-4">
-                <span className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="text-xl font-bold">AgentForce</span>
-                </span>
-              </Link>
-              <p className="text-gray-400">
-                The future of work is here. Scale your business with AI agents.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/features" className="hover:text-white transition-colors">
-                    <span>Features</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="hover:text-white transition-colors">
-                    <span>Pricing</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Integrations</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>API</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>About</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Blog</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Careers</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Contact</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Help Center</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Documentation</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Status</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    <span>Security</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400">
-              © 2024 AgentForce. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Privacy
-              </Link>
-              <Link
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Terms
-              </Link>
-              <Link
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Cookies
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
