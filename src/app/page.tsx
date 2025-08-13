@@ -66,12 +66,31 @@ export default function HomePage() {
       </nav>
 
       {/* Banner Section - Appway Style */}
-      <section className="banner-style-11 centred sec-pad section-padding relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50"></div>
-        <div className="absolute top-20 left-10 w-20 h-20 bg-purple-200 rounded-full opacity-30 animate-float-bob-y"></div>
-        <div className="absolute bottom-20 right-10 w-16 h-16 bg-blue-200 rounded-full opacity-30 animate-float-bob-y" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-indigo-200 rounded-full opacity-20 animate-rotate-me"></div>
+      <section className="banner-style-11 centred sec-pad section-padding relative overflow-hidden pb-0">
+        {/* Rich Purple Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf]"></div>
+        
+        {/* Geometric Pattern Overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-32 h-32 border-2 border-white rounded-full"></div>
+          <div className="absolute top-40 right-32 w-20 h-20 border border-white transform rotate-45"></div>
+          <div className="absolute bottom-32 left-32 w-24 h-24 border border-white rounded-lg transform rotate-12"></div>
+          <div className="absolute top-60 left-1/2 w-16 h-16 border border-white rounded-full"></div>
+        </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float-bob-y backdrop-blur-sm"></div>
+        <div className="absolute bottom-20 right-10 w-16 h-16 bg-white/15 rounded-full animate-float-bob-y backdrop-blur-sm" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-white/10 rounded-full animate-rotate-me backdrop-blur-sm"></div>
+        
+        {/* Wave Divider Bottom */}
+        <div className="wave-divider bottom-0">
+          <svg className="h-32 transform rotate-180" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="#ffffff" opacity="0.25"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="#ffffff" opacity="0.5"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#ffffff"></path>
+          </svg>
+        </div>
         
         <div className="container-width text-center relative z-10">
           <div className="animate-fade-in">
@@ -82,11 +101,11 @@ export default function HomePage() {
               <Sparkles className="w-4 h-4 mr-2" />
               Hire Your First AI Employee in 60 Seconds
             </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#222222] mb-6 text-balance">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-balance">
               Scale Your Business with{" "}
-              <span className="text-[#4527a4]">AI Agents</span>
+              <span className="text-yellow-300">AI Agents</span>
             </h1>
-            <p className="text-xl md:text-2xl text-[#777777] mb-8 max-w-3xl mx-auto text-balance">
+            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto text-balance">
               Deploy AI agents as virtual employees. Available 24/7, never need
               breaks, and integrate directly with your existing tools and
               workflows.
@@ -107,7 +126,7 @@ export default function HomePage() {
       </section>
 
       {/* Organization Section - Appway Style */}
-      <section className="organization-section centred sec-pad section-padding">
+      <section className="organization-section centred sec-pad section-padding pt-20">
         <div className="container-width">
           <div className="sec-title center mb-16">
             <h2>Why Organizations Love AgentForce</h2>
@@ -256,17 +275,19 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="image-column">
-                  <div className="image-box">
+                  <div className="image-box relative">
                     <div className="anim-icons">
-                      <div className="icon icon-1 absolute top-4 right-4 w-8 h-8 bg-purple-200 rounded-full animate-float-bob-y"></div>
-                      <div className="icon icon-2 absolute bottom-4 left-4 w-6 h-6 bg-blue-200 rounded-full animate-rotate-me"></div>
-                      <div className="icon icon-3 absolute top-1/2 right-8 w-4 h-4 bg-green-200 rounded-full animate-rotate-me" style={{animationDelay: '1s'}}></div>
+                      <div className="icon icon-1 absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-sm z-10"></div>
+                      <div className="icon icon-2 absolute -bottom-2 -left-2 w-6 h-6 bg-red-500 transform rotate-45 z-10"></div>
+                      <div className="icon icon-3 absolute top-1/2 -right-4 w-4 h-4 bg-green-500 rounded-full z-10"></div>
                     </div>
-                    <figure className="image clearfix wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
-                      <div className="w-full h-80 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
-                        <Target className="w-32 h-32 text-[#4527a4] opacity-30" />
-                      </div>
-                    </figure>
+                    <AnimatedSection animation="slideInRight" delay={0}>
+                      <figure className="image clearfix">
+                        <div className="w-full h-80 bg-gray-200 rounded-2xl flex items-center justify-center border-2 border-gray-300">
+                          <span className="text-gray-500 text-2xl font-medium">600 × 300</span>
+                        </div>
+                      </figure>
+                    </AnimatedSection>
                   </div>
                 </div>
               </div>
@@ -276,17 +297,19 @@ export default function HomePage() {
             <div className="inner-box">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="image-column lg:order-1">
-                  <div className="image-box">
+                  <div className="image-box relative">
                     <div className="anim-icons">
-                      <div className="icon icon-1 absolute top-4 right-4 w-8 h-8 bg-purple-200 rounded-full animate-float-bob-y"></div>
-                      <div className="icon icon-2 absolute bottom-4 left-4 w-6 h-6 bg-blue-200 rounded-full animate-rotate-me"></div>
-                      <div className="icon icon-3 absolute top-1/2 right-8 w-4 h-4 bg-green-200 rounded-full animate-rotate-me" style={{animationDelay: '1s'}}></div>
+                      <div className="icon icon-1 absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-sm z-10"></div>
+                      <div className="icon icon-2 absolute -bottom-2 -left-2 w-6 h-6 bg-purple-600 transform rotate-45 z-10"></div>
+                      <div className="icon icon-3 absolute top-1/2 -right-4 w-4 h-4 bg-blue-500 rounded-full z-10"></div>
                     </div>
-                    <figure className="image clearfix wow slideInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
-                      <div className="w-full h-80 bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl flex items-center justify-center">
-                        <Shield className="w-32 h-32 text-[#4527a4] opacity-30" />
-                      </div>
-                    </figure>
+                    <AnimatedSection animation="slideInLeft" delay={0}>
+                      <figure className="image clearfix">
+                        <div className="w-full h-80 bg-gray-200 rounded-2xl flex items-center justify-center border-2 border-gray-300">
+                          <span className="text-gray-500 text-2xl font-medium">523 × 345</span>
+                        </div>
+                      </figure>
+                    </AnimatedSection>
                   </div>
                 </div>
                 <div className="content-column lg:order-2">
@@ -334,17 +357,19 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="image-column">
-                  <div className="image-box">
+                  <div className="image-box relative">
                     <div className="anim-icons">
-                      <div className="icon icon-1 absolute top-4 right-4 w-8 h-8 bg-purple-200 rounded-full animate-float-bob-y"></div>
-                      <div className="icon icon-2 absolute bottom-4 left-4 w-6 h-6 bg-blue-200 rounded-full animate-rotate-me"></div>
-                      <div className="icon icon-3 absolute top-1/2 right-8 w-4 h-4 bg-green-200 rounded-full animate-rotate-me" style={{animationDelay: '1s'}}></div>
+                      <div className="icon icon-1 absolute -top-2 -right-2 w-8 h-8 bg-orange-400 rounded-sm z-10"></div>
+                      <div className="icon icon-2 absolute -bottom-2 -left-2 w-6 h-6 bg-red-500 transform rotate-45 z-10"></div>
+                      <div className="icon icon-3 absolute top-1/2 -right-4 w-4 h-4 bg-green-500 rounded-full z-10"></div>
                     </div>
-                    <figure className="image clearfix wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
-                      <div className="w-full h-80 bg-gradient-to-br from-orange-100 to-purple-100 rounded-2xl flex items-center justify-center">
-                        <Users className="w-32 h-32 text-[#4527a4] opacity-30" />
-                      </div>
-                    </figure>
+                    <AnimatedSection animation="slideInRight" delay={0}>
+                      <figure className="image clearfix">
+                        <div className="w-full h-80 bg-gray-200 rounded-2xl flex items-center justify-center border-2 border-gray-300">
+                          <span className="text-gray-500 text-2xl font-medium">600 × 300</span>
+                        </div>
+                      </figure>
+                    </AnimatedSection>
                   </div>
                 </div>
               </div>
@@ -373,20 +398,59 @@ export default function HomePage() {
       </section>
 
       {/* Software Product Section - Appway Style */}
-      <section className="software-product sec-pad section-padding" style={{backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}}>
-        <div className="container-width">
+      <section className="software-product sec-pad section-padding relative overflow-hidden">
+        {/* Purple Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4] via-[#6a4c93] to-[#8b5fbf]"></div>
+        
+        {/* Top Wave Divider */}
+        <div className="wave-divider top-0">
+          <svg className="h-32" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="#ffffff" opacity="0.25"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="#ffffff" opacity="0.5"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#ffffff"></path>
+          </svg>
+        </div>
+        
+        {/* Company Logo Placeholders Top */}
+        <div className="absolute top-12 left-0 w-full z-10">
+          <div className="container-width">
+            <div className="grid grid-cols-4 gap-4 opacity-20">
+              <div className="bg-white/10 h-12 rounded flex items-center justify-center">
+                <span className="text-white text-xs">265 × 40</span>
+              </div>
+              <div className="bg-white/10 h-12 rounded flex items-center justify-center">
+                <span className="text-white text-xs">265 × 40</span>
+              </div>
+              <div className="bg-white/10 h-12 rounded flex items-center justify-center">
+                <span className="text-white text-xs">265 × 40</span>
+              </div>
+              <div className="bg-white/10 h-12 rounded flex items-center justify-center">
+                <span className="text-white text-xs">265 × 40</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Geometric Patterns */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-32 right-20 w-40 h-40 border border-white rounded-full"></div>
+          <div className="absolute bottom-20 left-20 w-24 h-24 border border-white transform rotate-45"></div>
+          <div className="absolute top-1/2 left-1/2 w-16 h-16 border border-white rounded-lg transform rotate-12"></div>
+        </div>
+        
+        <div className="container-width relative z-10 pt-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="content-column">
               <div className="content-box text-white">
                 <div className="sec-title mb-6">
-                  <h2 className="text-white">We love building meaningful and useful AI software products</h2>
+                  <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">We love building meaningful and useful software products</h2>
                 </div>
-                <div className="text-white opacity-90 mb-8 text-lg">
+                <div className="text-white/90 mb-8 text-lg leading-relaxed">
                   AgentForce is designed to make AI accessible to every business. Our platform combines cutting-edge AI technology with intuitive design to create powerful, scalable solutions that grow with your business.
                 </div>
                 <div className="btn-box">
                   <Link href="#features">
-                    <Button className="theme-btn-two bg-white text-[#4527a4] hover:bg-gray-100">
+                    <Button className="bg-white text-[#4527a4] hover:bg-gray-100 px-8 py-3 rounded-full font-medium">
                       Learn More
                     </Button>
                   </Link>
@@ -394,13 +458,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="image-column">
-              <div className="image-box wow slideInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
+              <AnimatedSection animation="slideInRight" delay={0}>
                 <figure className="image clearfix animate-float-bob-y">
-                  <div className="w-full h-80 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                    <Bot className="w-32 h-32 text-white opacity-70" />
+                  <div className="w-full h-80 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+                    <span className="text-white/60 text-2xl">575 × 620</span>
                   </div>
                 </figure>
-              </div>
+              </AnimatedSection>
             </div>
           </div>
         </div>
@@ -489,6 +553,42 @@ export default function HomePage() {
                   </CardContent>
                 </Card>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="sec-pad section-padding bg-white">
+        <div className="container-width">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="image-column">
+              <AnimatedSection animation="fadeInLeft" delay={0}>
+                <div className="w-full h-96 bg-gray-200 rounded-2xl flex items-center justify-center border-2 border-gray-300">
+                  <span className="text-gray-500 text-2xl font-medium">475 × 544</span>
+                </div>
+              </AnimatedSection>
+            </div>
+            <div className="content-column">
+              <AnimatedSection animation="fadeInRight" delay={200}>
+                <div className="content-box">
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#222222] mb-6">Subscribe our Newsletter</h2>
+                  <p className="text-[#777777] mb-8 text-lg">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit donec tempus 
+                    pellentesque dui vel tristique purus justo
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <input 
+                      type="email" 
+                      placeholder="Enter Your Email" 
+                      className="input-appway flex-1"
+                    />
+                    <Button className="theme-btn-two px-8 py-3">
+                      Subscribe Now
+                    </Button>
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
           </div>
         </div>
