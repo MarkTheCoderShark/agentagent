@@ -40,6 +40,22 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Auto-create welcome task
+    await prisma.task.create({
+      data: {
+        title: `Welcome task for ${agent.name}`,
+        description: `Introduce yourself and confirm setup for the ${agent.role} role.`,
+        type: "setup",
+        status: "completed",
+        userId: session.user.id,
+        agentId: agent.id,
+        input: { onboarding: true },
+        output: { message: `Hi, I'm ${agent.name}, your ${agent.role}. I'm ready to help!` },
+        startedAt: new Date(),
+        completedAt: new Date(),
+      },
+    });
+
     return NextResponse.json(agent, { status: 201 });
   } catch (_error) {
     // Error creating agent

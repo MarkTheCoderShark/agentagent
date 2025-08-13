@@ -13,6 +13,9 @@ export async function GET(_request: NextRequest) {
 			where: { userId: session.user.id },
 			orderBy: { createdAt: "desc" },
 			take: 25,
+			include: {
+				agent: { select: { name: true } },
+			},
 		});
 		return NextResponse.json(tasks);
 	} catch (_err) {
@@ -44,6 +47,7 @@ export async function POST(request: NextRequest) {
 				startedAt: null,
 				completedAt: null,
 			},
+			include: { agent: { select: { name: true } } },
 		});
 		return NextResponse.json(task, { status: 201 });
 	} catch (_err) {
