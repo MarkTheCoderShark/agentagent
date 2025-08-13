@@ -95,12 +95,12 @@ export default function HomePage() {
             <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <CardContent className="p-8 relative z-10 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
                     <Bot className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#222] mb-3">Task Automation</h3>
-                  <p className="text-[#666] leading-relaxed">Automate research, drafting, triage, and reporting. Free your team for higher‑value work.</p>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Task Automation</h3>
+                  <p className="text-[#666] leading-relaxed text-sm">Automate research, drafting, triage, and reporting. Free your team for higher‑value work.</p>
                 </CardContent>
               </Card>
             </div>
@@ -108,12 +108,12 @@ export default function HomePage() {
             <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <CardContent className="p-8 relative z-10 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
                     <MessageSquare className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#222] mb-3">Slack Integration</h3>
-                  <p className="text-[#666] leading-relaxed">Deploy agents right inside Slack for on-demand help, notifications, and approvals.</p>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Slack Integration</h3>
+                  <p className="text-[#666] leading-relaxed text-sm">Deploy agents right inside Slack for on-demand help, notifications, and approvals.</p>
                 </CardContent>
               </Card>
             </div>
@@ -121,12 +121,12 @@ export default function HomePage() {
             <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
               <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <CardContent className="p-8 relative z-10 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
                     <ShieldCheck className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#222] mb-3">Human‑in‑the‑loop</h3>
-                  <p className="text-[#666] leading-relaxed">Guardrails and approvals ensure safety, compliance, and full auditability.</p>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Human‑in‑the‑loop</h3>
+                  <p className="text-[#666] leading-relaxed text-sm">Guardrails and approvals ensure safety, compliance, and full auditability.</p>
                 </CardContent>
               </Card>
             </div>
@@ -134,12 +134,12 @@ export default function HomePage() {
             <div className="group card-3d transform-style-preserve-3d transition-all duration-700 hover:scale-105 hover:rotate-x-5 hover:rotate-y-5 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <Card className="h-full bg-gradient-to-br from-white to-[#fafafa] shadow-xl hover:shadow-2xl border-0 rounded-2xl overflow-hidden relative transform transition-all duration-500 hover:-translate-y-2">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#4527a4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <CardContent className="p-8 relative z-10 text-center">
+                  <div className="bg-gradient-to-br from-[#4527a4] to-[#6a4c93] p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto">
                     <BarChart3 className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#222] mb-3">Usage Analytics</h3>
-                  <p className="text-[#666] leading-relaxed">Track adoption, outcomes, and savings with clear reporting for stakeholders.</p>
+                  <h3 className="text-2xl font-bold text-[#222] mb-4">Usage Analytics</h3>
+                  <p className="text-[#666] leading-relaxed text-sm">Track adoption, outcomes, and savings with clear reporting for stakeholders.</p>
                 </CardContent>
               </Card>
             </div>
