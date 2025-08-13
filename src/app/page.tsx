@@ -188,31 +188,37 @@ export default function HomePage() {
       </section>
 
       {/* Integrations */}
-      <section className="py-16 bg-[#fafafa]">
+      <section className="py-16 bg-gradient-to-br from-[#fafafa] to-[#f5f5f5]">
         <div className="container-width">
-          <div className="mx-auto max-w-3xl text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#222]">Connect your stack</h2>
-            <p className="text-[#555] mt-3">Plug into tools your teams use daily.</p>
+          <div className="mx-auto max-w-3xl text-center mb-12">
+            <div className="flex items-center justify-center mb-4">
+              <Plug className="h-6 w-6 text-[#4527a4] mr-2" />
+              <h2 className="text-2xl md:text-3xl font-bold text-[#222]">Connect your stack</h2>
+            </div>
+            <p className="text-[#555] mt-3 text-lg">Plug into tools your teams use daily.</p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center justify-items-center">
-            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
-              <span className="text-sm font-medium text-[#333]">Slack</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Slack</span>
             </div>
-            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
-              <span className="text-sm font-medium text-[#333]">HubSpot</span>
+            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">HubSpot</span>
             </div>
-            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
-              <span className="text-sm font-medium text-[#333]">Notion</span>
+            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Notion</span>
             </div>
-            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
-              <span className="text-sm font-medium text-[#333]">Salesforce</span>
+            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Salesforce</span>
             </div>
-            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
-              <span className="text-sm font-medium text-[#333]">Google Workspace</span>
+            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Google Workspace</span>
             </div>
-            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
-              <span className="text-sm font-medium text-[#333]">Microsoft Teams</span>
+            <div className="group flex items-center justify-center h-14 px-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:border-[#4527a4]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <span className="text-sm font-semibold text-[#333] group-hover:text-[#4527a4] transition-colors duration-300">Microsoft Teams</span>
             </div>
+          </div>
+          <div className="text-center mt-8">
+            <p className="text-sm text-[#666]">+ 50 more integrations</p>
           </div>
         </div>
       </section>
