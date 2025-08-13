@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +24,54 @@ import {
 import Link from "next/link";
 
 export default function PricingPage() {
+  const [isAnnual, setIsAnnual] = useState(false);
+  
+  // Pricing data
+  const pricingData = {
+    starter: {
+      monthly: 49,
+      annual: 42, // 15% off
+      features: [
+        "1,000 tasks per month per agent",
+        "3 core integrations (Gmail, Slack, Google Sheets)",
+        "Basic workflow templates",
+        "Email support",
+        "Basic analytics dashboard",
+      ],
+      excluded: [
+        "Multi-agent collaboration",
+        "Advanced workflows",
+      ]
+    },
+    pro: {
+      monthly: 99,
+      annual: 84, // 15% off
+      features: [
+        "5,000 tasks per month per agent",
+        "10 integrations + API access",
+        "Advanced workflow builder",
+        "Priority support (24/7 chat)",
+        "Advanced analytics & ROI tracking",
+        "Multi-agent collaboration",
+        "Custom agent training",
+      ],
+      excluded: []
+    },
+    enterprise: {
+      monthly: 199,
+      annual: 169, // 15% off
+      features: [
+        "Unlimited tasks per agent",
+        "All integrations + custom connectors",
+        "Enterprise workflow engine",
+        "Dedicated success manager",
+        "Advanced security & compliance",
+        "Custom onboarding & training",
+        "SLA guarantees",
+      ],
+      excluded: []
+    }
+  };
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -40,14 +91,19 @@ export default function PricingPage() {
 
             {/* Billing Toggle */}
             <div className="flex items-center justify-center mb-12">
-              <span className="text-white/90 mr-3">Monthly</span>
-              <div className="relative">
-                <input type="checkbox" className="sr-only" />
-                <div className="w-14 h-8 bg-white/20 rounded-full shadow-inner"></div>
-                <div className="absolute w-6 h-6 bg-white rounded-full shadow left-1 top-1 transition-transform"></div>
-              </div>
-              <span className="text-white/90 ml-3">Annual</span>
-              <Badge variant="secondary" className="ml-2">Save 20%</Badge>
+              <span className={`mr-3 transition-colors ${!isAnnual ? 'text-white' : 'text-white/60'}`}>Monthly</span>
+              <button
+                onClick={() => setIsAnnual(!isAnnual)}
+                className="relative w-14 h-8 bg-white/20 rounded-full shadow-inner transition-colors hover:bg-white/30"
+              >
+                <div 
+                  className={`absolute w-6 h-6 bg-white rounded-full shadow transition-transform duration-300 ${
+                    isAnnual ? 'translate-x-6' : 'translate-x-1'
+                  } top-1`}
+                />
+              </button>
+              <span className={`ml-3 transition-colors ${isAnnual ? 'text-white' : 'text-white/60'}`}>Annual</span>
+              <Badge variant="secondary" className="ml-2">Save 15%</Badge>
             </div>
           </div>
         </div>
@@ -66,43 +122,30 @@ export default function PricingPage() {
                   Perfect for small teams and individuals
                 </CardDescription>
                 <div className="text-5xl font-bold text-gray-900 mb-2">
-                  $49
+                  ${isAnnual ? pricingData.starter.annual : pricingData.starter.monthly}
                   <span className="text-lg font-normal text-gray-500">
-                    /agent/month
+                    /agent/{isAnnual ? 'month' : 'month'}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500">Billed monthly</p>
+                <p className="text-sm text-gray-500">
+                  Billed {isAnnual ? 'annually' : 'monthly'}
+                  {isAnnual && <span className="text-green-600 font-medium"> • Save 15%</span>}
+                </p>
               </CardHeader>
               <CardContent className="pt-0">
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>1,000 tasks per month per agent</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>3 core integrations (Gmail, Slack, Google Sheets)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Basic workflow templates</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Email support</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Basic analytics dashboard</span>
-                  </li>
-                  <li className="flex items-start">
-                    <X className="w-5 h-5 text-gray-300 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-400">Multi-agent collaboration</span>
-                  </li>
-                  <li className="flex items-start">
-                    <X className="w-5 h-5 text-gray-300 mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-400">Advanced workflows</span>
-                  </li>
+                  {pricingData.starter.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                  {pricingData.starter.excluded.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <X className="w-5 h-5 text-gray-300 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-400">{feature}</span>
+                    </li>
+                  ))}
                 </ul>
                 <Button className="w-full" variant="outline" size="lg">
                   Start Free Trial
@@ -127,43 +170,24 @@ export default function PricingPage() {
                   For growing businesses and teams
                 </CardDescription>
                 <div className="text-5xl font-bold text-gray-900 mb-2">
-                  $99
+                  ${isAnnual ? pricingData.pro.annual : pricingData.pro.monthly}
                   <span className="text-lg font-normal text-gray-500">
-                    /agent/month
+                    /agent/{isAnnual ? 'month' : 'month'}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500">Billed monthly</p>
+                <p className="text-sm text-gray-500">
+                  Billed {isAnnual ? 'annually' : 'monthly'}
+                  {isAnnual && <span className="text-green-600 font-medium"> • Save 15%</span>}
+                </p>
               </CardHeader>
               <CardContent className="pt-0">
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>5,000 tasks per month per agent</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>10 integrations + API access</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Advanced workflow builder</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Priority support (24/7 chat)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Advanced analytics & ROI tracking</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Multi-agent collaboration</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Custom agent training</span>
-                  </li>
+                  {pricingData.pro.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
                 </ul>
                 <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700" size="lg">
                   Start Free Trial
@@ -182,43 +206,24 @@ export default function PricingPage() {
                   For large organizations with advanced needs
                 </CardDescription>
                 <div className="text-5xl font-bold text-gray-900 mb-2">
-                  $199
+                  ${isAnnual ? pricingData.enterprise.annual : pricingData.enterprise.monthly}
                   <span className="text-lg font-normal text-gray-500">
-                    /agent/month
+                    /agent/{isAnnual ? 'month' : 'month'}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500">Billed monthly</p>
+                <p className="text-sm text-gray-500">
+                  Billed {isAnnual ? 'annually' : 'monthly'}
+                  {isAnnual && <span className="text-green-600 font-medium"> • Save 15%</span>}
+                </p>
               </CardHeader>
               <CardContent className="pt-0">
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Unlimited tasks per agent</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>All integrations + custom connectors</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Enterprise workflow engine</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Dedicated success manager</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Advanced security & compliance</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>Custom onboarding & training</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                    <span>SLA guarantees</span>
-                  </li>
+                  {pricingData.enterprise.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
                 </ul>
                 <Button className="w-full" variant="outline" size="lg">
                   Contact Sales
