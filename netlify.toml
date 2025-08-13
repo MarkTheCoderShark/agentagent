@@ -14,6 +14,9 @@
   
   # Force fresh Prisma Client generation
   PRISMA_CLIENT_ENGINE_TYPE = "library"
+  
+  # Ensure Tailwind CSS is available during build
+  NPM_FLAGS = "--include=dev"
 
 # Disable dependency caching to ensure fresh builds
 [build.processing]

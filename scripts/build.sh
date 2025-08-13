@@ -9,9 +9,9 @@ echo "🚀 Starting build process..."
 echo "🧹 Clearing Prisma cache..."
 rm -rf node_modules/.prisma
 
-# Install dependencies fresh
+# Install dependencies fresh (including dev dependencies for build)
 echo "📦 Installing dependencies..."
-npm ci
+npm ci --include=dev
 
 # Generate Prisma Client
 echo "🔧 Generating Prisma Client..."
