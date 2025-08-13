@@ -114,34 +114,19 @@ export default function HireAgentPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="section-padding py-4 border-b border-white/20 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
-        <div className="container-width flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center space-x-2">
-            <span className="flex items-center space-x-2">
-              <ArrowLeft className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-600">Back to Dashboard</span>
-            </span>
-          </Link>
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold gradient-text">AgentForce</span>
-          </div>
-        </div>
-      </nav>
-
       <div className="section-padding py-8">
         <div className="container-width max-w-4xl mx-auto">
+          {/* Back link */}
+          <div className="mb-4">
+            <Link href="/dashboard" className="inline-flex items-center text-sm text-gray-600 hover:text-gray-800">
+              <ArrowLeft className="w-4 h-4 mr-2"/> Back to Dashboard
+            </Link>
+          </div>
+
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Hire Your AI Employee
-            </h1>
-            <p className="text-xl text-gray-600">
-              Choose a role and customize your agent in minutes
-            </p>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Hire Your AI Employee</h1>
+            <p className="text-xl text-gray-600">Choose a role and customize your agent in minutes</p>
           </div>
 
           {/* Progress Steps */}

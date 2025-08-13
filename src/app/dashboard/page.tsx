@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,84 +30,27 @@ import {
 import Link from "next/link";
 
 export default function DashboardPage() {
-  const [agents] = useState([
-    {
-      id: 1,
-      name: "Alex",
-      role: "Marketing Assistant",
-      status: "active",
-      tasksToday: 23,
-      tasksWeek: 156,
-      avatar: "🤖",
-      lastActive: "2 minutes ago",
-      efficiency: 94,
-    },
-    {
-      id: 2,
-      name: "Sarah",
-      role: "Customer Support",
-      status: "active",
-      tasksToday: 41,
-      tasksWeek: 287,
-      avatar: "👩‍💼",
-      lastActive: "5 minutes ago",
-      efficiency: 98,
-    },
-    {
-      id: 3,
-      name: "Marcus",
-      role: "Data Analyst",
-      status: "paused",
-      tasksToday: 12,
-      tasksWeek: 89,
-      avatar: "📊",
-      lastActive: "1 hour ago",
-      efficiency: 91,
-    },
-  ]);
+  const [agents, setAgents] = useState<any[]>([]);
+  const [recentTasks, setRecentTasks] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const [recentTasks] = useState([
-    {
-      id: 1,
-      agent: "Alex",
-      task: "Created social media post for product launch",
-      status: "completed",
-      time: "2 minutes ago",
-      type: "content",
-    },
-    {
-      id: 2,
-      agent: "Sarah",
-      task: "Responded to customer inquiry about pricing",
-      status: "completed",
-      time: "5 minutes ago",
-      type: "support",
-    },
-    {
-      id: 3,
-      agent: "Alex",
-      task: "Generated weekly newsletter content",
-      status: "in_progress",
-      time: "8 minutes ago",
-      type: "content",
-    },
-    {
-      id: 4,
-      agent: "Marcus",
-      task: "Analyzed sales data for Q4 report",
-      status: "needs_review",
-      time: "15 minutes ago",
-      type: "analysis",
-    },
-    {
-      id: 5,
-      agent: "Sarah",
-      task: "Updated customer database with new leads",
-      status: "completed",
-      time: "22 minutes ago",
-      type: "data",
-    },
-  ]);
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      try {
+        const [agentsRes, tasksRes] = await Promise.all([
+          fetch("/api/agents"),
+          fetch("/api/tasks"),
+        ]);
+        if (!mounted) return;
+        if (agentsRes.ok) setAgents(await agentsRes.json());
+        if (tasksRes.ok) setRecentTasks(await tasksRes.json());
+      } catch {}
+      finally { if (mounted) setLoading(false); }
+    }
+    load();
+    return () => { mounted = false }
+  }, []);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -328,7 +271,10 @@ export default function DashboardPage() {
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-0">
                   <div className="divide-y">
-                    {recentTasks.map((task) => (
+                    {recentTasks.length === 0 && (
+                      <div className="p-6 text-sm text-gray-500">{loading ? 'Loading...' : 'No recent tasks yet.'}</div>
+                    )}
+                    {recentTasks.map((task: any) => (
                       <div key={task.id} className="p-4 flex items-start justify-between">
                         <div className="flex items-start space-x-3">
                           <div className="mt-1 text-purple-600">
@@ -336,11 +282,11 @@ export default function DashboardPage() {
                           </div>
                           <div>
                             <p className="text-sm text-gray-900">
-                              <span className="font-medium">{task.agent}</span>{" "}
-                              {task.task}
+                              <span className="font-medium">{task.agent?.name ?? 'Agent'}</span>{' '}
+                              {task.title}
                             </p>
                             <p className="text-xs text-gray-500 mt-1">
-                              {task.time}
+                              {new Date(task.createdAt ?? Date.now()).toLocaleString()}
                             </p>
                           </div>
                         </div>
