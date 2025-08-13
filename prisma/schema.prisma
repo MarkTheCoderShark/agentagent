@@ -11,6 +11,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  schemas  = ["public"]
 }
 
 model Account {
@@ -30,6 +31,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@schema("public")
 }
 
 model Session {
@@ -38,6 +40,7 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@schema("public")
 }
 
 model User {
@@ -64,6 +67,7 @@ model User {
   integrations Integration[]
 
   @@map("users")
+  @@schema("public")
 }
 
 model Agent {
@@ -96,6 +100,7 @@ model Agent {
   updatedAt DateTime @updatedAt
 
   @@map("agents")
+  @@schema("public")
 }
 
 model Workflow {
@@ -124,6 +129,7 @@ model Workflow {
   updatedAt DateTime @updatedAt
 
   @@map("workflows")
+  @@schema("public")
 }
 
 model Task {
@@ -155,6 +161,7 @@ model Task {
   updatedAt DateTime @updatedAt
 
   @@map("tasks")
+  @@schema("public")
 }
 
 model Integration {
@@ -175,6 +182,7 @@ model Integration {
   updatedAt DateTime @updatedAt
 
   @@map("integrations")
+  @@schema("public")
 }
 
 model VerificationToken {
@@ -183,4 +191,5 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@schema("public")
 }

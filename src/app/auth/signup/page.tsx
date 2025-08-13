@@ -56,16 +56,15 @@ export default function SignUpPage() {
         throw new Error(data.message || "Something went wrong");
       }
 
-      // Sign in the user after successful signup
-      await signIn("credentials", {
-        email: formData.email,
-        password: formData.password,
-        redirect: false,
-      });
-
-      router.push("/onboarding");
-    } catch (_error) {
-      setError("An error occurred");
+      // Redirect to signin page after successful signup
+      router.push("/auth/signin?message=Account created successfully! Please sign in.");
+    } catch (error) {
+      console.error("Signup error:", error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An error occurred");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -75,7 +74,8 @@ export default function SignUpPage() {
     setIsLoading(true);
     try {
       await signIn("google", { callbackUrl: "/onboarding" });
-    } catch (_error) {
+    } catch (error) {
+      console.error("Google signup error:", error);
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }
@@ -223,8 +223,8 @@ export default function SignUpPage() {
             <Button
               variant="outline"
               onClick={handleGoogleSignUp}
-              disabled={isLoading}
-              className="w-full"
+              disabled={true}
+              className="w-full opacity-50 cursor-not-allowed"
             >
               <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
                 <path
@@ -244,7 +244,7 @@ export default function SignUpPage() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              Google
+              Google (Coming Soon)
             </Button>
 
             <div className="text-center text-sm text-gray-600">
