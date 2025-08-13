@@ -59,7 +59,6 @@ export default function SignUpPage() {
       // Redirect to signin page after successful signup
       router.push("/auth/signin?message=Account created successfully! Please sign in.");
     } catch (error) {
-      console.error("Signup error:", error);
       if (error instanceof Error) {
         setError(error.message);
       } else {
@@ -75,7 +74,6 @@ export default function SignUpPage() {
     try {
       await signIn("google", { callbackUrl: "/onboarding" });
     } catch (error) {
-      console.error("Google signup error:", error);
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }

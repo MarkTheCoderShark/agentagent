@@ -4,7 +4,6 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-	CardContent,
 } from "@/components/ui/card";
 import {
 	Bot,

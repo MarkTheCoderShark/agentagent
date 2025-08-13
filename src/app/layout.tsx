@@ -3,10 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import { Bot } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 

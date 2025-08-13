@@ -4,9 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { AnimatedHeadline } from "@/components/ui/animated-headline";
 import {
   Bot,
@@ -18,26 +15,25 @@ import {
   ArrowRight,
   CheckCircle2,
   Plug,
-  LineChart,
   Check,
 } from "lucide-react";
 import { useState } from "react";
 
 export default function HomePage() {
-  const [ctaStatus, setCtaStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [_ctaStatus, _setCtaStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  async function onQuickDemoSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function _onQuickDemoSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setCtaStatus("loading");
+    _setCtaStatus("loading");
     const fd = new FormData(e.currentTarget);
     const payload = Object.fromEntries(fd.entries());
     try {
       const res = await fetch("/api/demo", { method: "POST", body: JSON.stringify(payload) });
       if (!res.ok) throw new Error("bad");
-      setCtaStatus("success");
+      _setCtaStatus("success");
       (e.currentTarget as HTMLFormElement).reset();
     } catch (_) {
-      setCtaStatus("error");
+      _setCtaStatus("error");
     }
   }
 

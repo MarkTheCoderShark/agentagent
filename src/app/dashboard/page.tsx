@@ -8,13 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Bot,
   Plus,
   Play,
-  Pause,
-  Settings,
   BarChart3,
   Clock,
   CheckCircle,
@@ -24,8 +21,6 @@ import {
   Activity,
   MessageSquare,
   FileText,
-  ArrowRight,
-  MoreVertical,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -98,7 +93,7 @@ export default function DashboardPage() {
     return () => { mounted = false }
   }, []);
 
-  const getStatusColor = (status: string) => {
+  const _getStatusColor = (status: string) => {
     switch (status) {
       case "active":
         return "bg-green-100 text-green-800";
@@ -295,7 +290,7 @@ export default function DashboardPage() {
                     {recentTasks.length === 0 && (
                       <div className="p-6 text-sm text-gray-500">{loading ? 'Loading...' : 'No recent tasks yet.'}</div>
                     )}
-                    {recentTasks.map((task: any) => (
+                    {recentTasks.map((task) => (
                         <div key={task.id} className="p-4 space-y-2">
                           <div className="flex items-start justify-between">
                             <div className="flex items-start space-x-3">

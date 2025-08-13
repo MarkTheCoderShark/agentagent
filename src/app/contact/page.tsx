@@ -18,7 +18,7 @@ export default function ContactPage() {
 			const res = await fetch("/api/demo", { method: "POST", body: JSON.stringify(payload) })
 			if (!res.ok) throw new Error("bad")
 			setStatus("success")
-		} catch (e) {
+		} catch (_e) {
 			setStatus("error")
 		}
 	}

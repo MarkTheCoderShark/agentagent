@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 		}
 		// Simulate persistence or MCP call here
 		return NextResponse.json({ ok: true })
-	} catch (err) {
+	} catch (_err) {
 		return NextResponse.json({ ok: false }, { status: 400 })
 	}
 } 
