@@ -68,7 +68,7 @@ export function SiteHeader() {
               <span>Pricing</span>
             </Link>
             <Link
-              href="/#how-heading"
+              href="/how-it-works"
               className={cn(
                 "px-6 py-3 font-medium rounded-xl transition-all duration-300",
                 scrolled
@@ -135,7 +135,7 @@ export function SiteHeader() {
                   <Link href="/pricing" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium">
                     <span>Pricing</span>
                   </Link>
-                  <Link href="/#how-heading" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium">
+                  <Link href="/how-it-works" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium">
                     <span>How it Works</span>
                   </Link>
                   <div className="grid grid-cols-2 gap-3 pt-4">
