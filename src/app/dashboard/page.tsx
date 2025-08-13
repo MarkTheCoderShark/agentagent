@@ -33,6 +33,7 @@ export default function DashboardPage() {
   const [agents, setAgents] = useState<any[]>([]);
   const [recentTasks, setRecentTasks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [assignText, setAssignText] = useState<Record<string, string>>({});
 
   async function runDemoTask(agentId: string, agentName: string) {
     await fetch('/api/tasks', {
@@ -46,6 +47,35 @@ export default function DashboardPage() {
       }),
     });
     // refresh tasks
+    const res = await fetch('/api/tasks');
+    if (res.ok) setRecentTasks(await res.json());
+  }
+
+  async function assignTask(agentId: string, agentName: string) {
+    const description = assignText[agentId]?.trim();
+    if (!description) return;
+    await fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: `Task for ${agentName}`,
+        description,
+        type: 'content',
+        agentId,
+        execute: true,
+      }),
+    });
+    setAssignText(prev => ({ ...prev, [agentId]: '' }));
+    const res = await fetch('/api/tasks');
+    if (res.ok) setRecentTasks(await res.json());
+  }
+
+  async function updateTaskStatus(id: string, status: string) {
+    await fetch(`/api/tasks/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    });
     const res = await fetch('/api/tasks');
     if (res.ok) setRecentTasks(await res.json());
   }
@@ -220,48 +250,32 @@ export default function DashboardPage() {
               <div className="space-y-4">
                 {agents.map((agent) => (
                   <Card key={agent.id} className="border-0 shadow-lg hover-lift">
-                    <CardContent className="p-6">
+                    <CardContent className="p-6 space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                           <div className="text-3xl">{agent.avatar ?? '🤖'}</div>
                           <div>
-                            <h3 className="font-semibold text-gray-900">
-                              {agent.name}
-                            </h3>
+                            <h3 className="font-semibold text-gray-900">{agent.name}</h3>
                             <p className="text-sm text-gray-600">{agent.role}</p>
-                            <p className="text-xs text-gray-500">
-                              Last active: {agent.lastActive}
-                            </p>
                           </div>
                         </div>
-
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-sm font-medium text-gray-900">
-                              {agent.tasksToday} tasks today
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              {agent.tasksWeek} this week
-                            </div>
-                            <div className="text-xs text-green-600">
-                              {agent.efficiency}% efficiency
-                            </div>
-                          </div>
-
-                          <Badge
-                            className={`${getStatusColor(
-                              agent.status
-                            )} border-0`}
-                          >
-                            {agent.status}
-                          </Badge>
-
-                          <div className="flex items-center space-x-2">
-                            <Button size="sm" variant="outline" onClick={() => runDemoTask(agent.id, agent.name)}>
-                              <Play className="w-4 h-4 mr-1" /> Run Demo Task
-                            </Button>
-                          </div>
+                        <div className="flex items-center space-x-2">
+                          <Button size="sm" variant="outline" onClick={() => runDemoTask(agent.id, agent.name)}>
+                            <Play className="w-4 h-4 mr-1" /> Run Demo Task
+                          </Button>
                         </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <input
+                          value={assignText[agent.id] || ''}
+                          onChange={(e) => setAssignText(prev => ({ ...prev, [agent.id]: e.target.value }))}
+                          placeholder={`Ask ${agent.name} to do something...`}
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        />
+                        <Button onClick={() => assignTask(agent.id, agent.name)} disabled={!assignText[agent.id]?.trim()}>
+                          Assign
+                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -282,26 +296,37 @@ export default function DashboardPage() {
                       <div className="p-6 text-sm text-gray-500">{loading ? 'Loading...' : 'No recent tasks yet.'}</div>
                     )}
                     {recentTasks.map((task: any) => (
-                      <div key={task.id} className="p-4 flex items-start justify-between">
-                        <div className="flex items-start space-x-3">
-                          <div className="mt-1 text-purple-600">
-                            {getTaskIcon(task.type)}
+                        <div key={task.id} className="p-4 space-y-2">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start space-x-3">
+                              <div className="mt-1 text-purple-600">
+                                {getTaskIcon(task.type)}
+                              </div>
+                              <div>
+                                <p className="text-sm text-gray-900">
+                                  <span className="font-medium">{task.agent?.name ?? 'Agent'}</span>{' '}
+                                  {task.title}
+                                </p>
+                                <p className="text-xs text-gray-500 mt-1">
+                                  {new Date(task.createdAt ?? Date.now()).toLocaleString()}
+                                </p>
+                                {task.output?.text && (
+                                  <pre className="mt-2 text-xs bg-gray-50 p-2 rounded border border-gray-100 whitespace-pre-wrap">{task.output.text}</pre>
+                                )}
+                              </div>
+                            </div>
+                            <div className={`text-xs font-medium ${getTaskStatusColor(task.status)}`}>
+                              {task.status}
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-sm text-gray-900">
-                              <span className="font-medium">{task.agent?.name ?? 'Agent'}</span>{' '}
-                              {task.title}
-                            </p>
-                            <p className="text-xs text-gray-500 mt-1">
-                              {new Date(task.createdAt ?? Date.now()).toLocaleString()}
-                            </p>
-                          </div>
+                          {task.status === 'needs_review' && (
+                            <div className="flex items-center gap-2 pt-1">
+                              <Button size="sm" variant="outline" onClick={() => updateTaskStatus(task.id, 'approved')}>Approve</Button>
+                              <Button size="sm" variant="outline" onClick={() => updateTaskStatus(task.id, 'rejected')}>Reject</Button>
+                            </div>
+                          )}
                         </div>
-                        <div className={`text-xs font-medium ${getTaskStatusColor(task.status)}`}>
-                          {task.status}
-                        </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </CardContent>
               </Card>
