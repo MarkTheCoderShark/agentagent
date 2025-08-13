@@ -125,8 +125,11 @@ export default function HomePage() {
       </section>
 
       {/* Product Section */}
-      <section className="py-16 bg-[#fafafa]">
-        <div className="container-width grid gap-10 lg:grid-cols-2 items-center">
+      <section className="py-16 bg-[#fafafa] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img src="/images/icons/device-bg.png" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="container-width grid gap-10 lg:grid-cols-2 items-center relative z-10">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#222]">Agents that work where your team works</h2>
             <p className="mt-3 text-[#555]">From Slack to your CRM, agents collaborate in your existing tools. Keep humans in the loop with approvals and audit trails.</p>
@@ -144,7 +147,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="relative">
-            <img src="/images/icons/device-bg.png" alt="Product UI" className="w-full rounded-xl shadow-lg" />
+            <div className="w-full h-64 lg:h-80 bg-gradient-to-br from-[#4527a4]/20 to-[#6a4c93]/20 rounded-xl"></div>
           </div>
         </div>
       </section>
