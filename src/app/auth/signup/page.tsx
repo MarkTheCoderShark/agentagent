@@ -58,12 +58,8 @@ export default function SignUpPage() {
 
       // Redirect to signin page after successful signup
       router.push("/auth/signin?message=Account created successfully! Please sign in.");
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An error occurred");
-      }
+    } catch (_error) {
+      setError("An error occurred");
     } finally {
       setIsLoading(false);
     }

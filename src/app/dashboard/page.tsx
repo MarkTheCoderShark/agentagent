@@ -24,9 +24,26 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+interface Agent {
+  id: string;
+  name: string;
+  role: string;
+  avatar?: string;
+}
+
+interface Task {
+  id: string;
+  title: string;
+  status: string;
+  type: string;
+  createdAt: string;
+  agent?: { name: string };
+  output?: { text: string };
+}
+
 export default function DashboardPage() {
-  const [agents, setAgents] = useState<any[]>([]);
-  const [recentTasks, setRecentTasks] = useState<any[]>([]);
+  const [agents, setAgents] = useState<Agent[]>([]);
+  const [recentTasks, setRecentTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [assignText, setAssignText] = useState<Record<string, string>>({});
 
