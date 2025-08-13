@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Bot,
   CheckCircle,
   ArrowRight,
   Star,
@@ -21,7 +20,6 @@ import {
   X,
   Plus,
 } from "lucide-react";
-import Link from "next/link";
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false);

@@ -40,8 +40,6 @@ export default function SignUpPage() {
     }
 
     try {
-      console.log("Attempting signup with:", { name: formData.name, email: formData.email });
-      
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -54,25 +52,20 @@ export default function SignUpPage() {
         }),
       });
 
-      console.log("Signup response status:", response.status);
       const data = await response.json();
-      console.log("Signup response data:", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       }
 
-      console.log("Signup successful, redirecting...");
       // Redirect to signin page after successful signup
       try {
         router.push("/auth/signin?message=Account created successfully! Please sign in.");
       } catch (routerError) {
-        console.error("Router error:", routerError);
         // Fallback: show success message and manual redirect
         setSuccess("Account created successfully! Please go to the signin page.");
       }
     } catch (error) {
-      console.error("Signup error:", error);
       if (error instanceof Error) {
         setError(error.message);
       } else {
@@ -87,7 +80,7 @@ export default function SignUpPage() {
     setIsLoading(true);
     try {
       await signIn("google", { callbackUrl: "/onboarding" });
-    } catch (error) {
+    } catch (_error) {
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }
