@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Bot } from "lucide-react";
+import { SiteHeader } from "@/components/site-header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -118,105 +119,10 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <div className="flex min-h-screen flex-col">
           {/* Header */}
-          <header className="sticky top-0 z-40 bg-transparent backdrop-blur-sm">
-            <div className="container-width flex h-16 items-center justify-between">
-              {/* Logo and Brand Name - Left */}
-              <Link href="/" className="flex items-center space-x-3 group">
-                <div className="w-10 h-10 bg-gradient-to-r from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                  <Bot className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold text-white drop-shadow-lg group-hover:text-white/90 transition-colors duration-300">
-                  AgentForce
-                </span>
-              </Link>
-
-              {/* Navigation Links - Middle */}
-              <nav className="hidden lg:flex items-center space-x-1">
-                <Link
-                  href="/features"
-                  className="px-6 py-3 text-white/90 hover:text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                >
-                  <span>Features</span>
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="px-6 py-3 text-white/90 hover:text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                >
-                  <span>Pricing</span>
-                </Link>
-                <Link
-                  href="/#how-heading"
-                  className="px-6 py-3 text-white/90 hover:text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                >
-                  <span>How it Works</span>
-                </Link>
-              </nav>
-
-              {/* Action Buttons - Right */}
-              <div className="hidden lg:flex items-center space-x-3">
-                <Link href="/auth/signin">
-                  <span>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="border-white/30 text-white hover:bg-[#4527a4] hover:border-[#4527a4] backdrop-blur-sm font-medium px-6"
-                    >
-                      Sign In
-                    </Button>
-                  </span>
-                </Link>
-                <Link href="/auth/signup">
-                  <span>
-                    <Button
-                      size="sm"
-                      className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#4527a4]/90 hover:to-[#6a4c93]/90 text-white font-medium px-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                      Get Started
-                    </Button>
-                  </span>
-                </Link>
-              </div>
-
-              {/* Mobile Menu */}
-              <div className="lg:hidden">
-                <Sheet>
-                  <SheetTrigger className="inline-flex items-center justify-center rounded-xl p-2 hover:bg-white/10 transition-all duration-300">
-                    <Menu className="h-6 w-6 text-white" />
-                  </SheetTrigger>
-                  <SheetContent side="right" className="p-0 bg-white/95 backdrop-blur-md">
-                    <div className="p-6 flex items-center gap-3 font-bold border-b border-gray-200">
-                      <div className="w-10 h-10 bg-gradient-to-r from-[#4527a4] to-[#6a4c93] rounded-xl flex items-center justify-center">
-                        <Bot className="w-6 h-6 text-white" />
-                      </div>
-                      <span className="text-2xl font-bold gradient-text">AgentForce</span>
-                    </div>
-                    <div className="p-4 space-y-2">
-                      <Link href="/features" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium">
-                        <span>Features</span>
-                      </Link>
-                      <Link href="/pricing" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium">
-                        <span>Pricing</span>
-                      </Link>
-                      <Link href="/#how-heading" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium">
-                        <span>How it Works</span>
-                      </Link>
-                      <div className="pt-4 space-y-3">
-                        <Link href="/auth/signin" className="block rounded-xl px-4 py-3 text-gray-700 hover:bg-gray-100 transition-all duration-300 font-medium border border-gray-200">
-                          <span>Sign In</span>
-                        </Link>
-                        <Link href="/auth/signup" className="block rounded-xl px-4 py-3 text-white bg-gradient-to-r from-[#4527a4] to-[#6a4c93] text-center font-medium shadow-lg">
-                          <span>Get Started</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </div>
-          </header>
-
+          <SiteHeader />
+          {/* Main */}
           <main className="flex-1">{children}</main>
-
+          {/* Footer placeholder: keep existing footer below */}
           {/* Footer */}
           <footer className="bg-gradient-to-br from-gray-50 to-gray-100 border-t">
             <div className="container-width py-16">
