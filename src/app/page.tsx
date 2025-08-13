@@ -388,32 +388,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t py-12">
-        <div className="container-width grid gap-8 md:grid-cols-3 text-sm text-[#666]">
-          <div>
-            <p className="font-semibold text-[#222]">AgentForce</p>
-            <p className="mt-2">AI Agent Employee platform for modern teams.</p>
-          </div>
-          <div>
-            <p className="font-semibold text-[#222]">Company</p>
-            <ul className="mt-2 space-y-2">
-              <li><Link className="hover:underline" href="/about"><span>About</span></Link></li>
-              <li><Link className="hover:underline" href="/pricing"><span>Pricing</span></Link></li>
-              <li><Link className="hover:underline" href="/contact"><span>Contact</span></Link></li>
-              <li><a className="hover:underline" href="#">Privacy</a></li>
-            </ul>
-          </div>
-          <div>
-            <p className="font-semibold text-[#222]">Follow</p>
-            <ul className="mt-2 space-y-2">
-              <li><a className="hover:underline" href="#">Twitter</a></li>
-              <li><a className="hover:underline" href="#">LinkedIn</a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

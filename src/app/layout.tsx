@@ -188,27 +188,81 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
 
           {/* Footer */}
-          <footer className="border-t py-12 bg-white">
-            <div className="container-width grid gap-8 md:grid-cols-3 text-sm text-[#666]">
-              <div>
-                <p className="font-semibold text-[#222]">AgentForce</p>
-                <p className="mt-2">AI Agent Employee platform for modern teams.</p>
+          <footer className="bg-gradient-to-br from-gray-50 to-gray-100 border-t">
+            <div className="container-width py-16">
+              <div className="grid gap-12 lg:grid-cols-4 md:grid-cols-2">
+                {/* Brand Section */}
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                      <Bot className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="text-xl font-bold gradient-text">AgentForce</span>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed">
+                    Deploy AI agents as virtual employees. Scale your business with intelligent automation that works 24/7.
+                  </p>
+                  <div className="flex space-x-4">
+                    <a href="#" className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                      <span className="text-gray-600 hover:text-purple-600 transition-colors">𝕏</span>
+                    </a>
+                    <a href="#" className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                      <span className="text-gray-600 hover:text-purple-600 transition-colors">in</span>
+                    </a>
+                    <a href="#" className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                      <span className="text-gray-600 hover:text-purple-600 transition-colors">📧</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Product Section */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-gray-900 text-lg">Product</h3>
+                  <ul className="space-y-3">
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/features"><span>Features</span></Link></li>
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/pricing"><span>Pricing</span></Link></li>
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/dashboard"><span>Dashboard</span></Link></li>
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/integrations"><span>Integrations</span></Link></li>
+                  </ul>
+                </div>
+
+                {/* Company Section */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-gray-900 text-lg">Company</h3>
+                  <ul className="space-y-3">
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/about"><span>About Us</span></Link></li>
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/contact"><span>Contact</span></Link></li>
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/careers"><span>Careers</span></Link></li>
+                    <li><Link className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="/blog"><span>Blog</span></Link></li>
+                  </ul>
+                </div>
+
+                {/* Legal Section */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-gray-900 text-lg">Legal</h3>
+                  <ul className="space-y-3">
+                    <li><a className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="#">Privacy Policy</a></li>
+                    <li><a className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="#">Terms of Service</a></li>
+                    <li><a className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="#">Security</a></li>
+                    <li><a className="text-gray-600 hover:text-purple-600 transition-colors duration-300" href="#">GDPR</a></li>
+                  </ul>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-[#222]">Company</p>
-                <ul className="mt-2 space-y-2">
-                  <li><Link className="hover:underline" href="/about"><span>About</span></Link></li>
-                  <li><Link className="hover:underline" href="/pricing"><span>Pricing</span></Link></li>
-                  <li><Link className="hover:underline" href="/contact"><span>Contact</span></Link></li>
-                  <li><a className="hover:underline" href="#">Privacy</a></li>
-                </ul>
-              </div>
-              <div>
-                <p className="font-semibold text-[#222]">Follow</p>
-                <ul className="mt-2 space-y-2">
-                  <li><a className="hover:underline" href="#">Twitter</a></li>
-                  <li><a className="hover:underline" href="#">LinkedIn</a></li>
-                </ul>
+              
+              {/* Footer Bottom */}
+              <div className="mt-12 pt-8 border-t border-gray-200">
+                <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                  <div className="text-gray-500 text-sm">
+                    © 2024 AgentForce. All rights reserved.
+                  </div>
+                  <div className="flex items-center space-x-6 text-sm text-gray-500">
+                    <span>Made with ❤️ for modern teams</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span>All systems operational</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </footer>
