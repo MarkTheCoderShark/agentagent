@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,440 +7,539 @@
 /* Appway-inspired Design System */
 
 :root {
-  --primary: 69 39 164; /* #4527a4 - Appway primary purple */
-  --primary-foreground: 255 255 255;
-  --secondary: 119 119 119; /* #777777 - Appway text color */
-  --secondary-foreground: 34 34 34; /* #222222 - Appway heading color */
-  --muted: 189 189 189; /* #bdbdbd - Appway border color */
-  --muted-foreground: 119 119 119;
-  --accent: 69 39 164;
-  --accent-foreground: 255 255 255;
-  --destructive: 239 68 68;
-  --destructive-foreground: 255 255 255;
-  --border: 189 189 189;
-  --input: 189 189 189;
-  --ring: 69 39 164;
-  --background: 255 255 255;
-  --foreground: 34 34 34;
-  --card: 255 255 255;
-  --card-foreground: 34 34 34;
-  --popover: 255 255 255;
-  --popover-foreground: 34 34 34;
+    --primary: 69 39 164; /* #4527a4 - Appway primary purple */
+    --primary-foreground: 255 255 255;
+    --secondary: 119 119 119; /* #777777 - Appway text color */
+    --secondary-foreground: 34 34 34; /* #222222 - Appway heading color */
+    --muted: 189 189 189; /* #bdbdbd - Appway border color */
+    --muted-foreground: 119 119 119;
+    --accent: 69 39 164;
+    --accent-foreground: 255 255 255;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 189 189 189;
+    --input: 189 189 189;
+    --ring: 69 39 164;
+    --background: 255 255 255;
+    --foreground: 34 34 34;
+    --card: 255 255 255;
+    --card-foreground: 34 34 34;
+    --popover: 255 255 255;
+    --popover-foreground: 34 34 34;
 }
 
 * {
-  @apply border-border;
+    @apply border-border;
 }
 
 body {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 15px;
-  line-height: 30px;
-  font-weight: 400;
-  color: #777777;
-  background: #ffffff;
-  -webkit-font-smoothing: antialiased;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 400;
+    color: #777777;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Appway-style buttons */
 .theme-btn {
-  @apply relative inline-block overflow-hidden text-[15px] h-[50px] px-10 py-3 bg-transparent leading-[26px] text-[#4527a4] border border-[#4527a4] font-medium rounded-[30px] capitalize transition-all duration-500 cursor-pointer z-[1];
+    @apply relative inline-block overflow-hidden text-[15px] h-[50px] px-10 py-3 bg-transparent leading-[26px] text-[#4527a4] border border-[#4527a4] font-medium rounded-[30px] capitalize transition-all duration-500 cursor-pointer z-[1];
 }
 
 .theme-btn:hover {
-  @apply text-white;
+    @apply text-white;
 }
 
 .theme-btn::before {
-  content: "";
-  @apply absolute left-0 top-0 z-[-1] h-full w-full bg-[#4527a4] rounded-[30px] scale-x-0 origin-top-right transition-transform duration-500;
-  transition-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    content: "";
+    @apply absolute left-0 top-0 z-[-1] h-full w-full bg-[#4527a4] rounded-[30px] scale-x-0 origin-top-right transition-transform duration-500;
+    transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
 }
 
 .theme-btn:hover::before {
-  @apply scale-x-100 origin-bottom-left;
+    @apply scale-x-100 origin-bottom-left;
 }
 
 .theme-btn-two {
-  @apply relative inline-block overflow-hidden text-base font-medium text-white bg-[#4527a4] rounded-[30px] text-center px-8 py-3 cursor-pointer z-[1] transition-all duration-500;
+    @apply relative inline-block overflow-hidden text-base font-medium text-white bg-[#4527a4] rounded-[30px] text-center px-8 py-3 cursor-pointer z-[1] transition-all duration-500;
 }
 
 .theme-btn-two::before {
-  content: '';
-  @apply absolute top-0 left-0 w-full h-full opacity-0 bg-white transition-all duration-500 scale-x-[0.2] z-[-1];
+    content: "";
+    @apply absolute top-0 left-0 w-full h-full opacity-0 bg-white transition-all duration-500 scale-x-[0.2] z-[-1];
 }
 
 .theme-btn-two:hover::before {
-  @apply opacity-100 scale-x-100;
+    @apply opacity-100 scale-x-100;
 }
 
 .theme-btn-two:hover {
-  @apply text-[#4527a4] bg-white;
-  box-shadow: 0 0 15px rgba(69, 39, 164, 0.5);
+    @apply text-[#4527a4] bg-white;
+    box-shadow: 0 0 15px rgba(69, 39, 164, 0.5);
 }
 
 /* Section padding */
 .sec-pad {
-  @apply py-[154px] px-0;
+    @apply py-[100px] px-0; /* Further reduced for better spacing with waves */
 }
 
 .sec-pad-two {
-  @apply py-[100px] px-0;
+    @apply py-[100px] px-0;
 }
 
 /* Section titles */
 .sec-title {
-  @apply relative block;
+    @apply relative block;
 }
 
 .sec-title.center {
-  @apply text-center;
+    @apply text-center;
 }
 
 .sec-title h2 {
-  @apply relative block text-[36px] leading-[48px] text-[#222222] font-normal mb-4;
+    @apply relative block text-[36px] leading-[48px] text-[#222222] font-normal mb-4;
 }
 
 .sec-title p {
-  @apply text-[#777777] text-base leading-[30px];
+    @apply text-[#777777] text-base leading-[30px];
 }
 
 /* Container styles */
 .container-width {
-  @apply max-w-[1200px] mx-auto px-[15px];
+    @apply max-w-[1200px] mx-auto px-[15px];
 }
 
 .section-padding {
-  @apply px-[15px];
+    @apply px-[15px];
 }
 
 /* Gradient text */
 .gradient-text {
-  @apply bg-gradient-to-r from-[#4527a4] to-[#6a4c93] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#4527a4] to-[#6a4c93] bg-clip-text text-transparent;
 }
 
 /* Hover lift effect */
 .hover-lift {
-  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
 }
 
 /* Animation and wow classes */
 .wow {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .wow.animated {
-  visibility: visible;
+    visibility: visible;
 }
 
 /* Appway specific animations */
 .flipInY {
-  animation: flipInY 1.5s ease-in-out;
+    animation: flipInY 1.5s ease-in-out;
 }
 
 @keyframes flipInY {
-  0% {
-    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
-    opacity: 0;
-  }
-  40% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
-  }
-  60% {
-    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
-  }
-  80% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
-  }
-  100% {
-    transform: perspective(400px);
-    opacity: 1;
-  }
+    0% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    }
+    60% {
+        transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    }
+    80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+    }
+    100% {
+        transform: perspective(400px);
+        opacity: 1;
+    }
 }
 
 .fadeInLeft {
-  animation: fadeInLeft 1.5s ease-in-out;
+    animation: fadeInLeft 1.5s ease-in-out;
 }
 
 @keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .fadeInRight {
-  animation: fadeInRight 1.5s ease-in-out;
+    animation: fadeInRight 1.5s ease-in-out;
 }
 
 @keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .slideInLeft {
-  animation: slideInLeft 1.5s ease-in-out;
+    animation: slideInLeft 1.5s ease-in-out;
 }
 
 @keyframes slideInLeft {
-  0% {
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .slideInRight {
-  animation: slideInRight 1.5s ease-in-out;
+    animation: slideInRight 1.5s ease-in-out;
 }
 
 @keyframes slideInRight {
-  0% {
-    transform: translate3d(100%, 0, 0);
-    visibility: visible;
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    0% {
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 /* Preloader */
 .preloader {
-  @apply fixed left-0 top-0 h-full w-full z-[999999] bg-[#4527a4] bg-center bg-no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath opacity='.2' fill='%23fff' d='M20.201 5.169c-8.254 0-14.946 6.692-14.946 14.946 0 8.255 6.692 14.946 14.946 14.946s14.946-6.691 14.946-14.946c-.001-8.254-6.692-14.946-14.946-14.946zM20.201 31.749c-6.425 0-11.634-5.208-11.634-11.634 0-6.425 5.209-11.634 11.634-11.634 6.425 0 11.633 5.209 11.633 11.634 0 6.426-5.208 11.634-11.633 11.634z'/%3E%3Cpath fill='%23fff' d='M26.013 10.047l1.654-2.866a14.855 14.855 0 00-16.318 0l1.654 2.866a11.881 11.881 0 0112.01 0z'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 20 20' to='360 20 20' dur='1s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
+    @apply fixed left-0 top-0 h-full w-full z-[999999] bg-[#4527a4] bg-center bg-no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath opacity='.2' fill='%23fff' d='M20.201 5.169c-8.254 0-14.946 6.692-14.946 14.946 0 8.255 6.692 14.946 14.946 14.946s14.946-6.691 14.946-14.946c-.001-8.254-6.692-14.946-14.946-14.946zM20.201 31.749c-6.425 0-11.634-5.208-11.634-11.634 0-6.425 5.209-11.634 11.634-11.634 6.425 0 11.633 5.209 11.633 11.634 0 6.426-5.208 11.634-11.633 11.634z'/%3E%3Cpath fill='%23fff' d='M26.013 10.047l1.654-2.866a14.855 14.855 0 00-16.318 0l1.654 2.866a11.881 11.881 0 0112.01 0z'%3E%3CanimateTransform attributeName='transform' type='rotate' from='0 20 20' to='360 20 20' dur='1s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");
 }
 
 /* Scroll to top */
 .scroll-top {
-  @apply w-[50px] h-[50px] leading-[50px] fixed bottom-[105%] right-[50px] text-base z-[99] text-white text-center cursor-pointer bg-[#222] transition-all duration-1000;
+    @apply w-[50px] h-[50px] leading-[50px] fixed bottom-[105%] right-[50px] text-base z-[99] text-white text-center cursor-pointer bg-[#222] transition-all duration-1000;
 }
 
 .scroll-top:hover {
-  @apply bg-[#4527a4];
-  box-shadow: 2px 2px 0px #222;
+    @apply bg-[#4527a4];
+    box-shadow: 2px 2px 0px #222;
 }
 
 .scroll-top.open {
-  @apply bottom-[30px];
+    @apply bottom-[30px];
 }
 
 /* Card styles */
 .card-appway {
-  @apply bg-white rounded-lg shadow-lg border border-[#bdbdbd] transition-all duration-300;
+    @apply bg-white rounded-lg shadow-lg border border-[#bdbdbd] transition-all duration-300;
 }
 
 .card-appway:hover {
-  @apply shadow-xl border-[#4527a4];
+    @apply shadow-xl border-[#4527a4];
 }
 
 /* Form styles */
 .input-appway {
-  @apply w-full px-4 py-3 border border-[#bdbdbd] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4527a4] focus:border-transparent transition-all duration-300;
+    @apply w-full px-4 py-3 border border-[#bdbdbd] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4527a4] focus:border-transparent transition-all duration-300;
 }
 
 /* Navigation styles */
 .nav-appway {
-  @apply bg-white/80 backdrop-blur-sm border-b border-white/20 sticky top-0 z-50;
+    @apply bg-white/80 backdrop-blur-sm border-b border-white/20 sticky top-0 z-50;
 }
 
 /* Feature icons */
 .feature-icon {
-  @apply w-12 h-12 rounded-lg flex items-center justify-center text-[#4527a4] bg-[#4527a4]/10;
+    @apply w-12 h-12 rounded-lg flex items-center justify-center text-[#4527a4] bg-[#4527a4]/10;
 }
 
 /* Testimonial styles */
 .testimonial-card {
-  @apply bg-white rounded-lg shadow-lg p-6 border-l-4 border-[#4527a4];
+    @apply bg-white rounded-lg shadow-lg p-6 border-l-4 border-[#4527a4];
 }
 
 /* Pricing styles */
 .pricing-card {
-  @apply bg-white rounded-lg shadow-lg border-2 border-[#bdbdbd] transition-all duration-300;
+    @apply bg-white rounded-lg shadow-lg border-2 border-[#bdbdbd] transition-all duration-300;
 }
 
 .pricing-card:hover {
-  @apply border-[#4527a4] shadow-xl;
+    @apply border-[#4527a4] shadow-xl;
 }
 
 .pricing-card.featured {
-  @apply border-[#4527a4] relative;
+    @apply border-[#4527a4] relative;
 }
 
 .pricing-card.featured::before {
-  content: "Most Popular";
-  @apply absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#4527a4] text-white px-4 py-1 rounded-full text-sm font-medium;
+    content: "Most Popular";
+    @apply absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#4527a4] text-white px-4 py-1 rounded-full text-sm font-medium;
 }
 
 /* Stats counter */
 .stats-counter {
-  @apply text-3xl font-bold text-[#4527a4] mb-2;
+    @apply text-3xl font-bold text-[#4527a4] mb-2;
 }
 
 .stats-label {
-  @apply text-[#777777] text-sm;
+    @apply text-[#777777] text-sm;
 }
 
 /* Appway pattern backgrounds */
 .pattern-bg {
-  background-image: 
-    radial-gradient(circle at 1px 1px, rgba(69, 39, 164, 0.1) 1px, transparent 0);
-  background-size: 20px 20px;
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(69, 39, 164, 0.1) 1px,
+        transparent 0
+    );
+    background-size: 20px 20px;
 }
 
 .pattern-bg1 {
-  background-image: 
-    radial-gradient(circle at 2px 2px, rgba(69, 39, 164, 0.08) 2px, transparent 0);
-  background-size: 30px 30px;
+    background-image: radial-gradient(
+        circle at 2px 2px,
+        rgba(69, 39, 164, 0.08) 2px,
+        transparent 0
+    );
+    background-size: 30px 30px;
 }
 
 .pattern-bg2 {
-  background-image: 
-    linear-gradient(45deg, rgba(69, 39, 164, 0.05) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(69, 39, 164, 0.05) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(69, 39, 164, 0.05) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(69, 39, 164, 0.05) 75%);
-  background-size: 20px 20px;
+    background-image:
+        linear-gradient(45deg, rgba(69, 39, 164, 0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(69, 39, 164, 0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(69, 39, 164, 0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(69, 39, 164, 0.05) 75%);
+    background-size: 20px 20px;
 }
 
 /* Banner specific styles */
 .banner-style-11 {
-  @apply relative overflow-hidden;
-  margin-bottom: -1px; /* Ensure seamless connection with wave */
+    @apply relative overflow-hidden;
+    margin-bottom: -1px; /* Create seamless connection with wave */
 }
 
 .banner-style-11::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(69, 39, 164, 0.05) 0%, rgba(106, 76, 147, 0.05) 100%);
-  z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(69, 39, 164, 0.05) 0%,
+        rgba(106, 76, 147, 0.05) 100%
+    );
+    z-index: 1;
 }
 
-/* Wave transition styles */
+/* Reduce bottom spacing for banner section */
+.banner-style-11 {
+    margin-bottom: -1px; /* Ensure perfect connection with next section */
+}
+
+/* Multilayered Wave transition styles - Appway Style */
 .wave-divider {
-  @apply absolute left-0 w-full overflow-hidden;
+    @apply absolute left-0 w-full overflow-hidden;
+    line-height: 0;
 }
 
 .wave-divider svg {
-  @apply relative block w-full;
-  display: block;
+    @apply relative block w-full;
+    display: block;
 }
 
+/* Multi-layered wave styling */
+.wave-divider path {
+    transform: translateX(0);
+}
+
+/* Specific opacity classes for wave layers */
+.opacity-100 {
+    opacity: 1;
+}
+
+.opacity-95 {
+    opacity: 0.95;
+}
+
+.opacity-90 {
+    opacity: 0.9;
+}
+
+.opacity-80 {
+    opacity: 0.8;
+}
+/* Remove hover effect for consistency */
+
 /* Organization section styles */
+.organization-section {
+    margin-top: -2px; /* Enhanced connection with the wave above */
+    background-color: white;
+}
+
 .organization-section .single-item {
-  @apply mb-8;
+    @apply mb-8;
 }
 
 .organization-section .inner-box {
-  @apply p-8 rounded-lg transition-all duration-300;
+    @apply p-8 rounded-lg transition-all duration-300;
 }
 
 /* Feature style ten */
 .feature-style-ten .inner-box {
-  @apply mb-16;
+    @apply mb-16;
 }
 
 .feature-style-ten .bg-layer {
-  @apply absolute inset-0 rounded-2xl opacity-30;
+    @apply absolute inset-0 rounded-2xl opacity-30;
 }
 
 /* Clients section */
+.clients-style-two {
+    position: relative;
+    z-index: 1;
+}
+
 .clients-style-two .thumb {
-  @apply transition-all duration-300 filter grayscale hover:grayscale-0;
+    @apply transition-all duration-300 filter grayscale hover:grayscale-0;
 }
 
 /* Software product section */
 .software-product {
-  @apply relative;
+    @apply relative;
+    margin-top: -1px; /* Ensure seamless connection with wave above */
 }
 
 .software-product::before {
-  content: '';
-  @apply absolute inset-0 bg-black/20;
+    content: "";
+    @apply absolute inset-0 bg-black/20;
 }
 
 /* Testimonial styles */
 .testimonial-style-ten .user-thumb {
-  @apply relative;
+    @apply relative;
 }
 
 .testimonial-style-ten .thumb-box {
-  @apply relative p-8;
+    @apply relative p-8;
 }
 
 /* Enhanced button hover effects */
 .theme-btn-enhanced {
-  @apply relative overflow-hidden transform transition-all duration-300 hover:scale-105;
+    @apply relative overflow-hidden transform transition-all duration-300 hover:scale-105;
 }
 
 .theme-btn-enhanced::after {
-  content: '';
-  @apply absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 transition-opacity duration-300;
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 transition-opacity duration-300;
 }
 
 .theme-btn-enhanced:hover::after {
-  @apply opacity-10;
+    @apply opacity-10;
 }
 
 /* Text balance utility for better typography */
 .text-balance {
-  text-wrap: balance;
+    text-wrap: balance;
 }
 
 /* Backdrop blur utilities */
 .backdrop-blur-glass {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Centred class for sections */
 .centred {
-  @apply text-center;
+    @apply text-center;
 }
 
 /* JS Tilt effect placeholder */
 .js-tilt {
-  @apply transition-transform duration-300 hover:scale-105;
+    @apply transition-transform duration-300 hover:scale-105;
 }
 
 /* Image clearfix */
 .clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Footer Styles - Appway Standard */
+.main-footer {
+    @apply relative;
+}
+
+.footer-column {
+    @apply relative;
+}
+
+.footer-widget {
+    @apply relative;
+}
+
+.footer-widget.about-widget .text {
+    @apply text-base leading-relaxed;
+}
+
+.footer-widget.links-widget .widget-title {
+    @apply relative pb-4 mb-6;
+}
+
+.footer-widget.links-widget .widget-title::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-12 h-0.5 bg-[#4527a4] rounded;
+}
+
+.footer-list li {
+    @apply relative transition-all duration-300;
+}
+
+.footer-list li:hover {
+    @apply translate-x-1;
+}
+
+.footer-bottom {
+    @apply relative;
+}
+
+.social-links a {
+    @apply transition-all duration-300 transform hover:scale-110;
 }
 
 /* Responsive utilities */
 @media (max-width: 768px) {
-  .sec-pad {
-    @apply py-[80px] px-0;
-  }
-  
-  .sec-pad-two {
-    @apply py-[60px] px-0;
-  }
-  
-  .sec-title h2 {
-    @apply text-[28px] leading-[36px];
-  }
-  
-  .container-width {
-    @apply px-4;
-  }
-}
+    .sec-pad {
+        @apply py-[80px] px-0;
+    }
 
+    .sec-pad-two {
+        @apply py-[60px] px-0;
+    }
+
+    .sec-title h2 {
+        @apply text-[28px] leading-[36px];
+    }
+
+    .container-width {
+        @apply px-4;
+    }
+
+    .footer-nav ul {
+        @apply justify-start;
+    }
+
+    .footer-widget.links-widget .widget-title {
+        @apply text-lg;
+    }
+}
