@@ -52,7 +52,8 @@ body {
 
 .theme-btn::before {
   content: "";
-  @apply absolute left-0 top-0 z-[-1] h-full w-full bg-[#4527a4] rounded-[30px] scale-x-0 origin-top-right transition-transform duration-500 ease-[cubic-bezier(0.860,0.000,0.070,1.000)];
+  @apply absolute left-0 top-0 z-[-1] h-full w-full bg-[#4527a4] rounded-[30px] scale-x-0 origin-top-right transition-transform duration-500;
+  transition-timing-function: cubic-bezier(0.860, 0.000, 0.070, 1.000);
 }
 
 .theme-btn:hover::before {
@@ -65,7 +66,7 @@ body {
 
 .theme-btn-two::before {
   content: '';
-  @apply absolute top-0 left-0 w-full h-full opacity-0 bg-white transition-all duration-400 scale-x-[0.2] z-[-1];
+  @apply absolute top-0 left-0 w-full h-full opacity-0 bg-white transition-all duration-500 scale-x-[0.2] z-[-1];
 }
 
 .theme-btn-two:hover::before {

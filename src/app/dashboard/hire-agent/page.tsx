@@ -107,8 +107,8 @@ export default function HireAgentPage() {
       if (response.ok) {
         router.push("/dashboard");
       }
-    } catch (error) {
-      console.error("Error creating agent:", error);
+    } catch (_error) {
+      // Error creating agent
     }
   };
 

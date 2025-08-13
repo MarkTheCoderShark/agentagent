@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,7 +34,7 @@ export default function SignInPage() {
       } else {
         router.push("/dashboard");
       }
-    } catch (error) {
+    } catch (_error) {
       setError("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
@@ -45,7 +45,7 @@ export default function SignInPage() {
     setIsLoading(true);
     try {
       await signIn("google", { callbackUrl: "/dashboard" });
-    } catch (error) {
+    } catch (_error) {
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }

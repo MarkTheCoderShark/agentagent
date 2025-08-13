@@ -41,8 +41,8 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(agent, { status: 201 });
-  } catch (error) {
-    console.error("Error creating agent:", error);
+  } catch (_error) {
+    // Error creating agent
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -71,8 +71,8 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json(agents);
-  } catch (error) {
-    console.error("Error fetching agents:", error);
+  } catch (_error) {
+    // Error fetching agents
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
