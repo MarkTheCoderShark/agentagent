@@ -195,12 +195,24 @@ export default function HomePage() {
             <p className="text-[#555] mt-3">Plug into tools your teams use daily.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center justify-items-center">
-            <img src="/logos/spmg.svg" alt="SPMG" className="h-8 opacity-80" />
-            <img src="/logos/seo-web-pros.svg" alt="SEO & Web Pros" className="h-8 opacity-80" />
-            <img src="/logos/novascale.svg" alt="NovaScale" className="h-8 opacity-80" />
-            <img src="/logos/quantum-ops.svg" alt="QuantumOps" className="h-8 opacity-80" />
-            <img src="/logos/blue-orbit.svg" alt="BlueOrbit" className="h-8 opacity-80" />
-            <img src="/logos/apex-forge.svg" alt="ApexForge" className="h-8 opacity-80" />
+            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
+              <span className="text-sm font-medium text-[#333]">Slack</span>
+            </div>
+            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
+              <span className="text-sm font-medium text-[#333]">HubSpot</span>
+            </div>
+            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
+              <span className="text-sm font-medium text-[#333]">Notion</span>
+            </div>
+            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
+              <span className="text-sm font-medium text-[#333]">Salesforce</span>
+            </div>
+            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
+              <span className="text-sm font-medium text-[#333]">Google Workspace</span>
+            </div>
+            <div className="flex items-center justify-center h-12 px-4 bg-white rounded-lg shadow-sm border">
+              <span className="text-sm font-medium text-[#333]">Microsoft Teams</span>
+            </div>
           </div>
         </div>
       </section>
