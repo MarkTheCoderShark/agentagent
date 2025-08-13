@@ -34,6 +34,22 @@ export default function DashboardPage() {
   const [recentTasks, setRecentTasks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  async function runDemoTask(agentId: string, agentName: string) {
+    await fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: `Intro message from ${agentName}`,
+        description: `Introduce yourself and list 3 ways you can help as ${agentName}.`,
+        type: 'demo',
+        agentId,
+      }),
+    });
+    // refresh tasks
+    const res = await fetch('/api/tasks');
+    if (res.ok) setRecentTasks(await res.json());
+  }
+
   useEffect(() => {
     let mounted = true;
     async function load() {
@@ -207,7 +223,7 @@ export default function DashboardPage() {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="text-3xl">{agent.avatar}</div>
+                          <div className="text-3xl">{agent.avatar ?? '🤖'}</div>
                           <div>
                             <h3 className="font-semibold text-gray-900">
                               {agent.name}
@@ -241,17 +257,8 @@ export default function DashboardPage() {
                           </Badge>
 
                           <div className="flex items-center space-x-2">
-                            <Button size="sm" variant="outline">
-                              <Play className="w-4 h-4 mr-1" /> Start
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <Pause className="w-4 h-4 mr-1" /> Pause
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <Settings className="w-4 h-4" />
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <MoreVertical className="w-4 h-4" />
+                            <Button size="sm" variant="outline" onClick={() => runDemoTask(agent.id, agent.name)}>
+                              <Play className="w-4 h-4 mr-1" /> Run Demo Task
                             </Button>
                           </div>
                         </div>
