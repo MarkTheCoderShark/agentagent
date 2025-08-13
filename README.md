@@ -148,7 +148,18 @@ Update the CSS variables in `src/app/globals.css`:
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+### Netlify (Recommended)
+1. Push your code to GitHub
+2. Connect your repository to Netlify
+3. Set the build command to: `bash scripts/build.sh`
+4. Set the publish directory to: `.next`
+5. Add environment variables:
+   - `DATABASE_URL`: Your PostgreSQL database URL
+   - `NEXTAUTH_SECRET`: A secure random string
+   - `GOOGLE_CLIENT_ID`: Your Google OAuth client ID
+   - `GOOGLE_CLIENT_SECRET`: Your Google OAuth client secret
+
+### Vercel
 1. Push your code to GitHub
 2. Connect your repository to Vercel
 3. Deploy with zero configuration

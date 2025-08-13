@@ -1,0 +1,45 @@
+[build]
+  # Build command with Prisma generation
+  command = "bash scripts/build.sh"
+  
+  # Publish directory for Next.js
+  publish = ".next"
+
+[build.environment]
+  # Ensure production environment
+  NODE_ENV = "production"
+  
+  # Disable Prisma Data Proxy to avoid caching issues
+  PRISMA_GENERATE_DATAPROXY = "false"
+  
+  # Force fresh Prisma Client generation
+  PRISMA_CLIENT_ENGINE_TYPE = "library"
+
+# Disable dependency caching to ensure fresh builds
+[build.processing]
+  skip_processing = false
+
+# Environment variables for different contexts
+[context.production.environment]
+  NODE_ENV = "production"
+  
+[context.deploy-preview.environment]
+  NODE_ENV = "production"
+  
+[context.branch-deploy.environment]
+  NODE_ENV = "production"
+
+# Next.js specific configuration
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Redirects for Next.js routing
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/___netlify-handler"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
