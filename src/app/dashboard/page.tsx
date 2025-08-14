@@ -47,8 +47,9 @@ export default function DashboardPage() {
   const [recentTasks, setRecentTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [assignText, setAssignText] = useState<Record<string, string>>({});
-  const { status } = useSession();
+  const { status, data } = useSession();
   const [isOpeningPortal, setIsOpeningPortal] = useState(false);
+  const [usage, setUsage] = useState<{ agentCount: number; agentLimit: number | null; taskCountMonth: number; taskLimitMonth: number | null; subscriptionTier: string } | null>(null);
 
   async function runDemoTask(agentId: string, agentName: string) {
     await fetch('/api/tasks', {
@@ -116,13 +117,15 @@ export default function DashboardPage() {
     let mounted = true;
     async function load() {
       try {
-        const [agentsRes, tasksRes] = await Promise.all([
+        const [agentsRes, tasksRes, usageRes] = await Promise.all([
           fetch("/api/agents"),
           fetch("/api/tasks"),
+          fetch("/api/usage"),
         ]);
         if (!mounted) return;
         if (agentsRes.ok) setAgents(await agentsRes.json());
         if (tasksRes.ok) setRecentTasks(await tasksRes.json());
+        if (usageRes.ok) setUsage(await usageRes.json());
       } catch {}
       finally { if (mounted) setLoading(false); }
     }
@@ -173,12 +176,22 @@ export default function DashboardPage() {
     }
   };
 
+  const plan = (data?.user as any)?.subscriptionTier || usage?.subscriptionTier || 'free';
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
       {/* Header bar below global nav */}
       <div className="bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-white/40">
         <div className="container-width flex h-14 items-center justify-between">
-          <h1 className="text-base md:text-lg font-semibold text-gray-800">Agent Command Center</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-base md:text-lg font-semibold text-gray-800">Agent Command Center</h1>
+            <span className="text-xs px-2 py-1 rounded-full border bg-white text-gray-700">
+              Plan: {plan}
+              {usage?.agentLimit !== null && (
+                <span className="ml-2 text-gray-500">Agents {usage?.agentCount ?? 0}/{usage?.agentLimit}</span>
+              )}
+            </span>
+          </div>
           <div className="flex items-center gap-2">
             <Link href="/dashboard/hire-agent">
               <span>
@@ -218,7 +231,7 @@ export default function DashboardPage() {
                   </CardTitle>
                   <Bot className="w-5 h-5 text-purple-600" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900">3</div>
+                <div className="text-2xl font-bold text-gray-900">{usage?.agentCount ?? 3}</div>
               </CardHeader>
             </Card>
 
@@ -226,11 +239,11 @@ export default function DashboardPage() {
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-medium text-gray-600">
-                    Tasks Today
+                    Tasks This Month
                   </CardTitle>
                   <CheckCircle className="w-5 h-5 text-green-600" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900">76</div>
+                <div className="text-2xl font-bold text-gray-900">{usage?.taskCountMonth ?? 76}{usage?.taskLimitMonth !== null ? `/${usage?.taskLimitMonth}` : ''}</div>
                 <div className="text-xs text-green-600 flex items-center">
                   <TrendingUp className="w-3 h-3 mr-1" />
                   +12% from yesterday
