@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "PRISMA_CLIENT_ENGINE_TYPE=library PRISMA_FORCE_NAPI=true prisma generate && next build",
+    "build": "rm -rf node_modules/@prisma/client node_modules/.prisma && PRISMA_CLIENT_ENGINE_TYPE=library PRISMA_FORCE_NAPI=true prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",

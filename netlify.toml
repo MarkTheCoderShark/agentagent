@@ -9,6 +9,10 @@
   PRISMA_CLIENT_ENGINE_TYPE = "library"
   PRISMA_FORCE_NAPI = "true"
 
+# Ensure cache clear prebuild
+[build.lifecycle]
+  onBuild = "rm -rf node_modules/@prisma/client node_modules/.prisma .next/cache/prisma"
+
 # Migration function
 [[redirects]]
   from = "/api/migrate"
