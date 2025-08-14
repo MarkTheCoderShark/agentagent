@@ -64,14 +64,16 @@ Last updated: current sprint
 ### Billing & Plans
 - [ ] Stripe setup
   - [x] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc. (init added; envs pending)
-  - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url` (skeleton with pricing fallback). Includes user metadata.
-  - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (temp: creates customer by email; fallback to pricing until customer linkage stored).
-  - [x] Webhook: `src/app/api/webhooks/stripe/route.ts` → skeleton validates signature and updates user subscription fields on events
+  - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url` (skeleton with pricing fallback). Includes user metadata and uses stored `stripeCustomerId` when present.
+  - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (uses/stores `stripeCustomerId` as needed; fallback to pricing otherwise)
+  - [x] Webhook: `src/app/api/webhooks/stripe/route.ts` → skeleton validates signature and updates user subscription fields on events; backfills `stripeCustomerId`
   - [x] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
   - [x] Entitlements: enforce limits in APIs (initial)
     - [x] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
     - [x] `POST /api/tasks` → cap monthly tasks by tier (free: 200, starter: 1k, pro: 5k, enterprise: unlimited)
     - [ ] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month) [partially added, refine as Track A evolves]
+  - [x] Extend session payload with subscription fields (tier/status/end).
+  - [ ] Migration pending: add `stripeCustomerId` to `users` table in DB (blocked locally without `DATABASE_URL`).
 
 ### Signup & Onboarding Flow
 - [x] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)

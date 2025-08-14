@@ -18,18 +18,23 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // Lookup customerId when Track A adds it to the User table
-    const user = await prisma.user.findUnique({ where: { id: session.user.id }, select: { email: true } });
-    const customer = user?.email
-      ? await stripe.customers.create({ email: user.email }).catch(() => null)
-      : null;
+    const user = await prisma.user.findUnique({ where: { id: session.user.id }, select: { email: true, stripeCustomerId: true } });
 
-    if (!customer?.id) {
+    let customerId = user?.stripeCustomerId || undefined;
+    if (!customerId && user?.email) {
+      const customer = await stripe.customers.create({ email: user.email }).catch(() => null);
+      if (customer?.id) {
+        customerId = customer.id;
+        await prisma.user.update({ where: { id: session.user.id }, data: { stripeCustomerId: customerId } });
+      }
+    }
+
+    if (!customerId) {
       return NextResponse.json({ url: `${origin}/pricing` }, { status: 200 });
     }
 
     const portal = await stripe.billingPortal.sessions.create({
-      customer: customer.id,
+      customer: customerId,
       return_url: `${origin}/dashboard`,
     });
 

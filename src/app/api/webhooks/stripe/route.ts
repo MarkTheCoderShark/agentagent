@@ -30,13 +30,13 @@ export async function POST(req: NextRequest) {
         const session = event.data.object as any;
         const userId = session.metadata?.userId as string | undefined;
         const plan = session.metadata?.plan as string | undefined;
-        if (userId && plan) {
+        const customerId = session.customer as string | undefined;
+        if (userId) {
           await prisma.user.update({
             where: { id: userId },
             data: {
-              subscriptionTier: plan,
-              subscriptionStatus: "active",
-              subscriptionEndDate: null,
+              ...(plan ? { subscriptionTier: plan, subscriptionStatus: "active", subscriptionEndDate: null } : {}),
+              ...(customerId ? { stripeCustomerId: customerId } : {}),
             },
           });
         }
@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
         const userId = sub.metadata?.userId as string | undefined;
         const status = sub.status as string | undefined;
         const currentPeriodEnd = sub.current_period_end ? new Date(sub.current_period_end * 1000) : null;
+        const customerId = sub.customer as string | undefined;
         if (userId) {
           await prisma.user.update({
             where: { id: userId },
@@ -56,6 +57,7 @@ export async function POST(req: NextRequest) {
               subscriptionTier: plan || undefined,
               subscriptionStatus: status || undefined,
               subscriptionEndDate: currentPeriodEnd,
+              ...(customerId ? { stripeCustomerId: customerId } : {}),
             },
           });
         }
@@ -64,11 +66,13 @@ export async function POST(req: NextRequest) {
       case "customer.subscription.deleted": {
         const sub = event.data.object as any;
         const userId = sub.metadata?.userId as string | undefined;
+        const customerId = sub.customer as string | undefined;
         if (userId) {
           await prisma.user.update({
             where: { id: userId },
             data: {
               subscriptionStatus: "canceled",
+              ...(customerId ? { stripeCustomerId: customerId } : {}),
             },
           });
         }

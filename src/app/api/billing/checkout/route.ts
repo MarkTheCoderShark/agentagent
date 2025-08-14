@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe, getPlanPriceId, type SubscriptionPlan } from "@/lib/stripe";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,7 +25,12 @@ export async function POST(req: NextRequest) {
     const origin = req.headers.get("origin") || req.nextUrl.origin;
     const sessionAuth = await getServerSession(authOptions);
     const userId = sessionAuth?.user?.id || "";
-    const userEmail = sessionAuth?.user?.email || undefined;
+
+    const dbUser = userId
+      ? await prisma.user.findUnique({ where: { id: userId }, select: { email: true, stripeCustomerId: true } })
+      : null;
+
+    const hasCustomer = Boolean(dbUser?.stripeCustomerId);
 
     const session = await stripe.checkout.sessions.create({
       mode,
@@ -37,7 +43,8 @@ export async function POST(req: NextRequest) {
       allow_promotion_codes: true,
       success_url: `${origin}/dashboard?purchase=success`,
       cancel_url: `${origin}/pricing?canceled=1`,
-      customer_email: userEmail,
+      customer: hasCustomer ? (dbUser!.stripeCustomerId as string) : undefined,
+      customer_email: hasCustomer ? undefined : dbUser?.email,
       client_reference_id: userId || undefined,
       metadata: { userId, plan },
       subscription_data: {
