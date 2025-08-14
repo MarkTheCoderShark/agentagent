@@ -33,8 +33,8 @@ Last updated: current sprint
   - [ ] Queue + worker (BullMQ + Upstash/Redis) for non-demo tasks
   - [ ] Retry and error reporting
 - Integrations (first 1–2 end-to-end)
-  - [ ] Google OAuth connect; encrypted token storage in `Integration.config`
-  - [ ] Actions: Gmail draft email; Google Sheets append row
+  - [x] Google OAuth connect; encrypted token storage in `Integration.config`
+  - [x] Actions: Gmail draft email; Google Sheets append row
 - Workflows (starter templates)
   - [ ] Role-based templates (2–3 each) with manual run + cron schedule
   - [ ] API/UI to enable/disable templates per agent

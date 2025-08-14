@@ -27,6 +27,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "express": "^4.21.2",
+    "googleapis": "^156.0.0",
     "gsap": "^3.13.0",
     "ioredis": "^5.7.0",
     "lucide-react": "^0.539.0",
