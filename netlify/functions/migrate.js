@@ -54,8 +54,11 @@ exports.handler = async (event, context) => {
 
     // Create all required tables
     const migrations = [
-      // Users table
-      `CREATE TABLE IF NOT EXISTS users (
+      // Drop and recreate users table with correct schema
+      `DROP TABLE IF EXISTS users CASCADE;`,
+      
+      // Users table with correct snake_case columns
+      `CREATE TABLE users (
         id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         name VARCHAR(255),
         email VARCHAR(255) UNIQUE NOT NULL,
@@ -67,76 +70,8 @@ exports.handler = async (event, context) => {
         stripe_customer_id VARCHAR(255)
       );`,
 
-      // Agents table
-      `CREATE TABLE IF NOT EXISTS agents (
-        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
-        name VARCHAR(255) NOT NULL,
-        description TEXT,
-        instructions TEXT,
-        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP DEFAULT NOW()
-      );`,
-
-      // Workflows table
-      `CREATE TABLE IF NOT EXISTS workflows (
-        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
-        name VARCHAR(255) NOT NULL,
-        description TEXT,
-        agent_id VARCHAR(255) NOT NULL REFERENCES agents(id) ON DELETE CASCADE,
-        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        schedule VARCHAR(255),
-        is_active BOOLEAN DEFAULT true,
-        last_run_at TIMESTAMP,
-        next_run_at TIMESTAMP,
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP DEFAULT NOW()
-      );`,
-
-      // Tasks table
-      `CREATE TABLE IF NOT EXISTS tasks (
-        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
-        title VARCHAR(255) NOT NULL,
-        description TEXT,
-        status VARCHAR(50) DEFAULT 'pending',
-        result TEXT,
-        agent_id VARCHAR(255) NOT NULL REFERENCES agents(id) ON DELETE CASCADE,
-        workflow_id VARCHAR(255) REFERENCES workflows(id) ON DELETE SET NULL,
-        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP DEFAULT NOW()
-      );`,
-
-      // Integrations table
-      `CREATE TABLE IF NOT EXISTS integrations (
-        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
-        name VARCHAR(255) NOT NULL,
-        type VARCHAR(255) NOT NULL,
-        encrypted_tokens TEXT,
-        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP DEFAULT NOW(),
-        UNIQUE(user_id, name)
-      );`,
-
-      // Events table (for logging)
-      `CREATE TABLE IF NOT EXISTS events (
-        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
-        type VARCHAR(255) NOT NULL,
-        payload JSONB,
-        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP DEFAULT NOW()
-      );`,
-
-      // Create indexes for better performance
-      `CREATE INDEX IF NOT EXISTS idx_agents_user_id ON agents(user_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_workflows_user_id ON workflows(user_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_workflows_agent_id ON workflows(agent_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_tasks_agent_id ON tasks(agent_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_tasks_workflow_id ON tasks(workflow_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_integrations_user_id ON integrations(user_id);`,
-      `CREATE INDEX IF NOT EXISTS idx_events_user_id ON events(user_id);`,
+      // Create a simple index on email for fast lookups
+      `CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);`,
     ];
 
     // Run all migrations
