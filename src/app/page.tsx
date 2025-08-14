@@ -48,11 +48,11 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl text-center">
             <AnimatedHeadline
               id="hero-heading"
-              text="Automate Knowledge Work with Intelligent AI Agents"
+              text="Your Workforce That Never Sleeps"
               className="text-4xl md:text-6xl font-bold leading-tight"
             />
             <p className="mt-4 text-lg md:text-xl text-white/90">
-              AgentForce deploys AI Agent Employees that collaborate with your team, streamline workflows, and deliver measurable ROI—safely and at scale.
+              Deploy AI agents that work 24/7, never take breaks, and scale your business operations around the clock. Get more done while you focus on what matters most.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
