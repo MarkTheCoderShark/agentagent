@@ -26,6 +26,11 @@
   to = "/.netlify/functions/env-check"
   status = 200
 
+[[redirects]]
+  from = "/api/list-users"
+  to = "/.netlify/functions/list-users"
+  status = 200
+
 # Catch-all redirect must be LAST
 [[redirects]]
   from = "/*"
