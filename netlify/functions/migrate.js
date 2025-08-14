@@ -1,3 +1,8 @@
+// Force Prisma to use library engine before importing
+process.env.PRISMA_CLIENT_ENGINE_TYPE = "library";
+process.env.PRISMA_FORCE_NAPI = "true";
+process.env.PRISMA_GENERATE_DATAPROXY = "false";
+
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
@@ -33,9 +38,18 @@ exports.handler = async (event, context) => {
     
     // Run database push (safer than migrate deploy for schema changes)
     const { execSync } = require('child_process');
+    
+    // Set environment variables for the child process
+    const env = {
+      ...process.env,
+      PRISMA_CLIENT_ENGINE_TYPE: "library",
+      PRISMA_FORCE_NAPI: "true",
+      PRISMA_GENERATE_DATAPROXY: "false"
+    };
+    
     const result = execSync('npx prisma db push --accept-data-loss', { 
       encoding: 'utf8',
-      env: process.env 
+      env: env
     });
 
     await prisma.$disconnect();

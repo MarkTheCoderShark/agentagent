@@ -15,4 +15,10 @@
   to = "/.netlify/functions/migrate"
   status = 200
 
+# Test Prisma function
+[[redirects]]
+  from = "/api/test-prisma"
+  to = "/.netlify/functions/test-prisma"
+  status = 200
+
 # Removed custom redirects so Next.js runtime handles API and page routes 
