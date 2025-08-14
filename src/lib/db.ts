@@ -1,46 +1,55 @@
 import { Pool } from 'pg';
 
-const DATABASE_URL = process.env.DATABASE_URL || '';
-
 let pool: Pool | null = null;
 
 function getPool(): Pool {
   if (!pool) {
-    // Clean the DATABASE_URL for pooled connections
-    let connectionString = DATABASE_URL;
+    // Prioritize Neon database URLs (auto-provisioned by Netlify)
+    let connectionString = process.env.NETLIFY_DATABASE_URL || 
+                          process.env.NETLIFY_DATABASE_URL_UNPOOLED || 
+                          process.env.DATABASE_URL;
     
-    // Remove sslmode parameter for pooled connections
+    if (!connectionString) {
+      throw new Error('No database connection string found. Please set NETLIFY_DATABASE_URL or DATABASE_URL.');
+    }
+
+    // Clean connection string for different database providers
+    // For Neon (via Netlify), no special handling needed - it's optimized for serverless
+    // For legacy Supabase pooled connections, remove sslmode parameter
     if (connectionString.includes('pooler.supabase.com')) {
       connectionString = connectionString.replace('?sslmode=require', '');
     }
-    
-    // Determine SSL configuration
-    const isDirectConnection = DATABASE_URL.includes('db.') && DATABASE_URL.includes('.supabase.co');
-    const isPooledConnection = DATABASE_URL.includes('pooler.supabase.com');
-    
+
+    // Determine SSL configuration based on provider
     let sslConfig;
-    if (isPooledConnection) {
-      // Pooled connections don't use SSL
+    if (connectionString.includes('neon.tech') || connectionString.includes('netlify')) {
+      // Neon handles SSL automatically - use default
+      sslConfig = undefined;
+    } else if (connectionString.includes('pooler.supabase.com')) {
+      // Supabase pooled connections don't need SSL
       sslConfig = false;
-    } else if (isDirectConnection) {
-      // Direct connections to Supabase require SSL
-      sslConfig = { rejectUnauthorized: false };
-    } else if (DATABASE_URL.includes('supabase.co')) {
-      // Default for other Supabase connections
+    } else if (connectionString.includes('supabase.co')) {
+      // Supabase direct connections need SSL with self-signed cert acceptance
       sslConfig = { rejectUnauthorized: false };
     } else {
-      // Local or other databases
+      // Default for other providers
       sslConfig = undefined;
     }
 
     pool = new Pool({
-      connectionString: connectionString,
+      connectionString,
       ssl: sslConfig,
       max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 2000,
     });
+
+    // Handle connection errors
+    pool.on('error', (err) => {
+      console.error('Database pool error:', err);
+    });
   }
+
   return pool;
 }
 

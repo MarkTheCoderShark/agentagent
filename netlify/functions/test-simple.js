@@ -1,16 +1,36 @@
 const { Pool } = require('pg');
 
-// Clean the DATABASE_URL for pooled connections
-let connectionString = process.env.DATABASE_URL;
+// Prioritize Neon database URLs (auto-provisioned by Netlify)
+let connectionString = process.env.NETLIFY_DATABASE_URL || 
+                      process.env.NETLIFY_DATABASE_URL_UNPOOLED || 
+                      process.env.DATABASE_URL;
 
-// Remove sslmode parameter for pooled connections
-if (connectionString && connectionString.includes('pooler.supabase.com')) {
+if (!connectionString) {
+  throw new Error('No database connection string found');
+}
+
+// Clean connection string for different database providers
+// For Neon (via Netlify), no special handling needed - it's optimized for serverless
+// For legacy Supabase pooled connections, remove sslmode parameter
+if (connectionString.includes('pooler.supabase.com')) {
   connectionString = connectionString.replace('?sslmode=require', '');
 }
 
-// Determine SSL configuration
-const isPooledConnection = connectionString && connectionString.includes('pooler.supabase.com');
-const sslConfig = isPooledConnection ? false : undefined;
+// Determine SSL configuration based on provider
+let sslConfig;
+if (connectionString.includes('neon.tech') || connectionString.includes('netlify')) {
+  // Neon handles SSL automatically - use default
+  sslConfig = undefined;
+} else if (connectionString.includes('pooler.supabase.com')) {
+  // Supabase pooled connections don't need SSL
+  sslConfig = false;
+} else if (connectionString.includes('supabase.co')) {
+  // Supabase direct connections need SSL with self-signed cert acceptance
+  sslConfig = { rejectUnauthorized: false };
+} else {
+  // Default for other providers
+  sslConfig = undefined;
+}
 
 const pool = new Pool({
   connectionString: connectionString,
