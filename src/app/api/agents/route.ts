@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getAgentLimitForTier } from "@/lib/utils";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,7 +17,6 @@ export async function POST(request: NextRequest) {
 
     const { name, role, description, tone, template } = await request.json();
 
-    // Validate input
     if (!name || !role) {
       return NextResponse.json(
         { message: "Name and role are required" },
@@ -24,7 +24,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create agent
+    const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+    if (!user) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
+    const currentAgentCount = await prisma.agent.count({ where: { userId: user.id } });
+    const agentLimit = getAgentLimitForTier(user.subscriptionTier as any);
+    if (currentAgentCount >= agentLimit) {
+      return NextResponse.json(
+        { message: "Agent limit reached for your plan" },
+        { status: 403 }
+      );
+    }
+
     const agent = await prisma.agent.create({
       data: {
         name,
@@ -40,7 +53,6 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Auto-create welcome task
     await prisma.task.create({
       data: {
         title: `Welcome task for ${agent.name}`,
@@ -58,7 +70,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(agent, { status: 201 });
   } catch (_error) {
-    // Error creating agent
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
@@ -88,7 +99,6 @@ export async function GET(_request: NextRequest) {
 
     return NextResponse.json(agents);
   } catch (_error) {
-    // Error fetching agents
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }

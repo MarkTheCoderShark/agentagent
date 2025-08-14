@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { generateText } from "@/lib/llm";
+import { getMonthlyTaskLimitPerAgentForTier, getMonthRange } from "@/lib/utils";
 
 export async function GET(_request: NextRequest) {
 	try {
@@ -33,6 +34,27 @@ export async function POST(request: NextRequest) {
 		if (!title) {
 			return NextResponse.json({ message: "Title is required" }, { status: 400 });
 		}
+
+		// Entitlement: monthly task cap per agent
+		const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+		if (!user) {
+			return NextResponse.json({ message: "User not found" }, { status: 404 });
+		}
+		if (agentId) {
+			const { start, end } = getMonthRange();
+			const monthlyLimit = getMonthlyTaskLimitPerAgentForTier(user.subscriptionTier as any);
+			const count = await prisma.task.count({
+				where: {
+					userId: session.user.id,
+					agentId,
+					createdAt: { gte: start, lt: end },
+				},
+			});
+			if (count >= monthlyLimit) {
+				return NextResponse.json({ message: "Monthly task limit reached for this agent" }, { status: 403 });
+			}
+		}
+
 		// Create the task base
 		const task = await prisma.task.create({
 			data: {
@@ -53,8 +75,8 @@ export async function POST(request: NextRequest) {
 		// Demo path (immediate complete)
 		if (type === "demo") {
 			const system = `You are an AI Agent Employee that writes helpful, concise outputs.`;
-			const user = description || "Introduce yourself and summarize how you can help.";
-			const content = await generateText(system, user);
+			const userPrompt = description || "Introduce yourself and summarize how you can help.";
+			const content = await generateText(system, userPrompt);
 			const completed = await prisma.task.update({
 				where: { id: task.id },
 				data: {
@@ -74,8 +96,8 @@ export async function POST(request: NextRequest) {
 			const system = agent
 				? `You are ${agent.name}, a ${agent.role}. Respond in a ${agent.tone || 'professional'} tone, concise and actionable.`
 				: `You are an AI Agent Employee who writes concise, actionable outputs.`;
-			const user = description || title;
-			const content = await generateText(system, user);
+			const userPrompt = description || title;
+			const content = await generateText(system, userPrompt);
 			const updated = await prisma.task.update({
 				where: { id: task.id },
 				data: {

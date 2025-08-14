@@ -57,6 +57,7 @@ model User {
   subscriptionTier String @default("free") // free, starter, pro, enterprise
   subscriptionStatus String @default("active") // active, canceled, past_due
   subscriptionEndDate DateTime?
+  stripeCustomerId String? @unique
 
   // Relations
   accounts Account[]
