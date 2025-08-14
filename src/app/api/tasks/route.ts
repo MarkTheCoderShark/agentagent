@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { generateText } from "@/lib/llm";
 import { getMonthlyTaskLimitPerAgentForTier, getMonthRange } from "@/lib/utils";
+import { enqueueTaskExecute } from "@/lib/queue";
 
 export async function GET(_request: NextRequest) {
 	try {
@@ -90,25 +91,39 @@ export async function POST(request: NextRequest) {
 			return NextResponse.json(completed, { status: 201 });
 		}
 
-		// Execute path (LLM, mark for review)
+		// Non-demo execute → enqueue and mark in_progress
 		if (execute) {
-			const agent = agentId ? await prisma.agent.findUnique({ where: { id: agentId } }) : null;
-			const system = agent
-				? `You are ${agent.name}, a ${agent.role}. Respond in a ${agent.tone || 'professional'} tone, concise and actionable.`
-				: `You are an AI Agent Employee who writes concise, actionable outputs.`;
-			const userPrompt = description || title;
-			const content = await generateText(system, userPrompt);
-			const updated = await prisma.task.update({
-				where: { id: task.id },
-				data: {
-					status: "needs_review",
-					output: { text: content },
-					startedAt: new Date(),
-					completedAt: new Date(),
-				},
-				include: { agent: { select: { name: true, role: true } } },
-			});
-			return NextResponse.json(updated, { status: 201 });
+			const enqueued = await enqueueTaskExecute({ taskId: task.id, userId: session.user.id });
+			if (enqueued) {
+				const updated = await prisma.task.update({
+					where: { id: task.id },
+					data: {
+						status: "in_progress",
+						startedAt: new Date(),
+					},
+					include: { agent: { select: { name: true, role: true } } },
+				});
+				return NextResponse.json(updated, { status: 201 });
+			} else {
+				// Fallback: inline LLM execution if queue not configured
+				const agent = agentId ? await prisma.agent.findUnique({ where: { id: agentId } }) : null;
+				const system = agent
+					? `You are ${agent.name}, a ${agent.role}. Respond in a ${agent.tone || 'professional'} tone, concise and actionable.`
+					: `You are an AI Agent Employee who writes concise, actionable outputs.`;
+				const userPrompt = description || title;
+				const content = await generateText(system, userPrompt);
+				const updated = await prisma.task.update({
+					where: { id: task.id },
+					data: {
+						status: "needs_review",
+						output: { text: content },
+						startedAt: new Date(),
+						completedAt: new Date(),
+					},
+					include: { agent: { select: { name: true, role: true } } },
+				});
+				return NextResponse.json(updated, { status: 201 });
+			}
 		}
 
 		return NextResponse.json(task, { status: 201 });

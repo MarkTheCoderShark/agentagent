@@ -39,9 +39,10 @@ Last updated: current sprint
   - [ ] Role-based templates (2–3 each) with manual run + cron schedule
   - [ ] API/UI to enable/disable templates per agent
 - Billing & Plans
-  - [ ] Stripe Checkout + Customer Portal
-  - [ ] Webhooks for provisioning entitlements (agent limits, plan tier)
-  - [ ] Enforce limits in UI/API
+  - [x] Stripe Checkout + Customer Portal (backend endpoints)
+  - [x] Webhooks for provisioning entitlements (plan tier/status/end date)
+  - [x] Enforce limits in API (agents/tasks)
+  - [ ] Wire UI buttons to checkout/portal
 - Analytics & ROI
   - [ ] Real metrics in dashboard from `Task` data (time saved, cost savings)
 - Production Readiness
@@ -62,16 +63,16 @@ Last updated: current sprint
 ## Next Sprint Plan (Billing, Agents, Tasks & Integrations)
 
 ### Billing & Plans
-- [ ] Stripe setup
-  - [ ] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc.
-  - [ ] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url`
-  - [ ] API: `GET /api/billing/portal` → creates Billing Portal Session
-  - [ ] Webhook: `src/app/api/webhooks/stripe/route.ts` → handle `checkout.session.completed`, `invoice.payment_succeeded|failed`, `customer.subscription.updated|deleted` to set `User.subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
+- [x] Stripe setup
+  - [x] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc.
+  - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url`
+  - [x] API: `GET /api/billing/portal` → creates Billing Portal Session
+  - [x] Webhook: `src/app/api/webhooks/stripe/route.ts` → handle `checkout.session.completed`, `invoice.payment_succeeded|failed`, `customer.subscription.updated|deleted` to set `User.subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
   - [ ] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
-  - [ ] Entitlements: enforce limits in APIs
-    - [ ] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
-    - [ ] `POST /api/tasks` → cap monthly tasks per agent by tier (starter: 1k, pro: 5k, enterprise: unlimited)
-    - [ ] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month)
+  - [x] Entitlements: enforce limits in APIs
+    - [x] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
+    - [x] `POST /api/tasks` → cap monthly tasks per agent by tier (starter: 1k, pro: 5k, enterprise: unlimited)
+    - [x] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month)
 
 ### Signup & Onboarding Flow
 - [ ] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)
@@ -90,6 +91,8 @@ Last updated: current sprint
   - [ ] Update `POST /api/tasks`: when `execute && type!=="demo"`, enqueue job and set `status: in_progress`
   - [ ] Add retry/backoff and error handling; on failure mark `status: failed`, set `error`
 - [ ] UI: Realtime-ish refresh (polling or SSE later) for task rows
+
+Progress: Billing backend completed (endpoints, webhook), API entitlements enforced. Next: queue scaffold and integrations.
 
 ### Integrations (initial 2)
 - [ ] Google OAuth connect
