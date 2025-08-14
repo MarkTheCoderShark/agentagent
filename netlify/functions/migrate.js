@@ -87,7 +87,7 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         message: 'Database migration completed successfully',
-        tablesCreated: ['users', 'agents', 'workflows', 'tasks', 'integrations', 'events'],
+        tablesCreated: ['users'],
         timestamp: new Date().toISOString(),
       }),
     };
@@ -103,6 +103,10 @@ exports.handler = async (event, context) => {
       }),
     };
   } finally {
-    await pool.end();
+    try {
+      await pool.end();
+    } catch (e) {
+      console.error('Error closing pool:', e.message);
+    }
   }
 }; 
