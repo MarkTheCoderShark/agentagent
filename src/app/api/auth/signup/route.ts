@@ -14,6 +14,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate name
+    if (name.trim().length < 2) {
+      return NextResponse.json(
+        { message: "Name must be at least 2 characters long" },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { message: "Please enter a valid email address" },
+        { status: 400 }
+      );
+    }
+
     if (password.length < 6) {
       return NextResponse.json(
         { message: "Password must be at least 6 characters long" },
@@ -39,8 +56,8 @@ export async function POST(request: NextRequest) {
     // Create user
     const user = await prisma.user.create({
       data: {
-        name,
-        email,
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
         password: hashedPassword,
       },
     });

@@ -33,6 +33,39 @@ export default function SignUpPage() {
     setError("");
     setSuccess("");
 
+    // Client-side validation
+    if (!formData.name.trim()) {
+      setError("Name is required");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      setError("Email is required");
+      setIsLoading(false);
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("Please enter a valid email address");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!formData.password) {
+      setError("Password is required");
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      setIsLoading(false);
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setIsLoading(false);
@@ -46,8 +79,8 @@ export default function SignUpPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
+          name: formData.name.trim(),
+          email: formData.email.trim().toLowerCase(),
           password: formData.password,
         }),
       });
@@ -87,7 +120,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 flex items-center justify-center p-4 pt-24">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -136,6 +169,8 @@ export default function SignUpPage() {
                     onChange={handleInputChange}
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
+                    minLength={2}
+                    maxLength={50}
                   />
                 </div>
               </div>
@@ -155,6 +190,7 @@ export default function SignUpPage() {
                     onChange={handleInputChange}
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
+                    autoComplete="email"
                   />
                 </div>
               </div>
@@ -174,6 +210,8 @@ export default function SignUpPage() {
                     onChange={handleInputChange}
                     className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
+                    minLength={6}
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
@@ -200,6 +238,8 @@ export default function SignUpPage() {
                     onChange={handleInputChange}
                     className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
+                    minLength={6}
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
