@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  if (event.httpMethod !== 'POST') {
+  if (event.httpMethod !== 'GET' && event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
       headers,
