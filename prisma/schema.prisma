@@ -66,6 +66,7 @@ model User {
   workflows Workflow[]
   tasks    Task[]
   integrations Integration[]
+  events       Event[]
 
   @@map("users")
   @@schema("public")
@@ -118,6 +119,8 @@ model Workflow {
   
   // Scheduling
   schedule    Json?    // Cron expression or schedule config
+  lastRunAt   DateTime?
+  nextRunAt   DateTime?
   
   // Relations
   userId  String
@@ -194,5 +197,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@schema("public")
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  payload   Json
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("events")
   @@schema("public")
 }

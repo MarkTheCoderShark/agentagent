@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getPlanFromPriceId, getStripe } from "@/lib/stripe";
+import { captureError } from "@/lib/sentry";
 
 export const runtime = "nodejs";
 
@@ -25,7 +26,8 @@ export async function POST(request: NextRequest) {
   let event;
   try {
     event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
-  } catch (_err) {
+  } catch (err) {
+    captureError(err, { scope: "stripe.webhook", reason: "invalid_signature" });
     return NextResponse.json({ message: "Invalid signature" }, { status: 400 });
   }
 
@@ -99,7 +101,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ received: true }, { status: 200 });
-  } catch (_err) {
+  } catch (err) {
+    captureError(err, { scope: "stripe.webhook", reason: "handler_error", type: event?.type });
     return NextResponse.json({ message: "Webhook handler error" }, { status: 500 });
   }
 } 

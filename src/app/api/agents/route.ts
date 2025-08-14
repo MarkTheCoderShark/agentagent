@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getAgentLimitForTier } from "@/lib/utils";
+import { rateLimitCheck } from "@/lib/rate-limit";
+import { logEvent } from "@/lib/log";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,6 +16,9 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
+
+    const ok = rateLimitCheck({ key: `create-agent:${session.user.id}`, limit: 5, windowMs: 60_000 });
+    if (!ok) return NextResponse.json({ message: "Too many requests" }, { status: 429 });
 
     const { name, role, description, tone, template } = await request.json();
 
@@ -67,6 +72,8 @@ export async function POST(request: NextRequest) {
         completedAt: new Date(),
       },
     });
+
+    logEvent(session.user.id, "agent.created", { agentId: agent.id, name: agent.name, role: agent.role });
 
     return NextResponse.json(agent, { status: 201 });
   } catch (_error) {

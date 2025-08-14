@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 import { generateText } from "@/lib/llm";
 import { getMonthlyTaskLimitPerAgentForTier, getMonthRange } from "@/lib/utils";
 import { enqueueTaskExecute } from "@/lib/queue";
+import { rateLimitCheck } from "@/lib/rate-limit";
+import { logEvent } from "@/lib/log";
 
 export async function GET(_request: NextRequest) {
 	try {
@@ -30,6 +32,10 @@ export async function POST(request: NextRequest) {
 		if (!session?.user?.id) {
 			return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 		}
+
+		const ok = rateLimitCheck({ key: `create-task:${session.user.id}`, limit: 20, windowMs: 60_000 });
+		if (!ok) return NextResponse.json({ message: "Too many requests" }, { status: 429 });
+
 		const body = await request.json();
 		const { title, type = "content", description, agentId, workflowId, status = "pending", input, execute } = body || {};
 		if (!title) {
@@ -73,6 +79,8 @@ export async function POST(request: NextRequest) {
 			include: { agent: { select: { name: true, role: true } } },
 		});
 
+		logEvent(session.user.id, "task.created", { taskId: task.id, title: task.title, type: task.type });
+
 		// Demo path (immediate complete)
 		if (type === "demo") {
 			const system = `You are an AI Agent Employee that writes helpful, concise outputs.`;
@@ -88,6 +96,7 @@ export async function POST(request: NextRequest) {
 				},
 				include: { agent: { select: { name: true, role: true } } },
 			});
+			logEvent(session.user.id, "task.completed", { taskId: completed.id });
 			return NextResponse.json(completed, { status: 201 });
 		}
 
@@ -103,6 +112,7 @@ export async function POST(request: NextRequest) {
 					},
 					include: { agent: { select: { name: true, role: true } } },
 				});
+				logEvent(session.user.id, "task.enqueued", { taskId: updated.id });
 				return NextResponse.json(updated, { status: 201 });
 			} else {
 				// Fallback: inline LLM execution if queue not configured
@@ -122,6 +132,7 @@ export async function POST(request: NextRequest) {
 					},
 					include: { agent: { select: { name: true, role: true } } },
 				});
+				logEvent(session.user.id, "task.completed_inline", { taskId: updated.id });
 				return NextResponse.json(updated, { status: 201 });
 			}
 		}
