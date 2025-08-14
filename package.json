@@ -7,7 +7,7 @@
     "build": "rm -rf node_modules/@prisma/client node_modules/.prisma && PRISMA_CLIENT_ENGINE_TYPE=library PRISMA_FORCE_NAPI=true prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
+    "postinstall": "rm -rf node_modules/@prisma/client node_modules/.prisma && prisma generate",
     "serve": "node server.js"
   },
   "dependencies": {
