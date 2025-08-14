@@ -8,7 +8,9 @@ function getPool(): Pool {
   if (!pool) {
     pool = new Pool({
       connectionString: DATABASE_URL,
-      ssl: DATABASE_URL.includes('supabase.co') ? { rejectUnauthorized: false } : false,
+      ssl: DATABASE_URL.includes('supabase.co') ? { 
+        rejectUnauthorized: false
+      } : undefined,
       max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 2000,
