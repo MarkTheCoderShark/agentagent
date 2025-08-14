@@ -12,6 +12,9 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      subscriptionTier?: string | null;
+      subscriptionStatus?: string | null;
+      subscriptionEndDate?: Date | null;
     };
   }
   
@@ -20,6 +23,15 @@ declare module "next-auth" {
     name?: string | null;
     email?: string | null;
     image?: string | null;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id?: string;
+    subscriptionTier?: string | null;
+    subscriptionStatus?: string | null;
+    subscriptionEndDate?: Date | null;
   }
 }
 
@@ -77,11 +89,25 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
       }
+      if (token.id) {
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: token.id as string },
+            select: { subscriptionTier: true, subscriptionStatus: true, subscriptionEndDate: true },
+          });
+          token.subscriptionTier = dbUser?.subscriptionTier ?? null;
+          token.subscriptionStatus = dbUser?.subscriptionStatus ?? null;
+          token.subscriptionEndDate = dbUser?.subscriptionEndDate ?? null;
+        } catch {}
+      }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string;
+        session.user.subscriptionTier = (token as any).subscriptionTier ?? null;
+        session.user.subscriptionStatus = (token as any).subscriptionStatus ?? null;
+        session.user.subscriptionEndDate = (token as any).subscriptionEndDate ?? null;
       }
       return session;
     },

@@ -65,7 +65,7 @@ Last updated: current sprint
 - [ ] Stripe setup
   - [x] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc. (init added; envs pending)
   - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url` (skeleton with pricing fallback). Includes user metadata.
-  - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (skeleton returns pricing until customer linkage is wired)
+  - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (temp: creates customer by email; fallback to pricing until customer linkage stored).
   - [x] Webhook: `src/app/api/webhooks/stripe/route.ts` → skeleton validates signature and updates user subscription fields on events
   - [x] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
   - [x] Entitlements: enforce limits in APIs (initial)
@@ -90,20 +90,6 @@ Last updated: current sprint
   - [ ] Update `POST /api/tasks`: when `execute && type!=="demo"`, enqueue job and set `status: in_progress`
   - [ ] Add retry/backoff and error handling; on failure mark `status: failed`, set `error`
 - [ ] UI: Realtime-ish refresh (polling or SSE later) for task rows
-
-### Integrations (initial 2)
-- [ ] Google OAuth connect
-  - [ ] UI: Connect button (Onboarding step 3 and Dashboard Integrations)
-  - [ ] API: OAuth callback stores tokens in `Integration.config` (encrypted), `scopes`
-- [ ] Actions
-  - [ ] Gmail draft email action: input `{to, subject, body}` → save Draft
-  - [ ] Google Sheets append row: input `{spreadsheetId, range, values}`
-  - [ ] Agent tool routing: allow task to specify action inputs; map via simple router before/after LLM
-
-### Workflows (starter templates)
-- [ ] Define 2–3 templates per role (marketing/support/analyst) with `triggers`, `actions`, `schedule`
-- [ ] API: enable/disable per agent, manual run endpoint
-- [ ] Scheduling: cron-based kickoff that enqueues workflow tasks
 
 ### Dashboard & UX
 - [x] Agents list: quick actions (Run Demo, Assign Task, Settings)
