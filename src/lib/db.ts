@@ -22,9 +22,9 @@ function getPool(): Pool {
 
     // Determine SSL configuration based on provider
     let sslConfig;
-    if (connectionString.includes('neon.tech') || connectionString.includes('netlify')) {
-      // Neon requires SSL but handles certificates properly
-      sslConfig = true;
+    if (connectionString.includes('neon.tech')) {
+      // Neon - let Node.js handle SSL automatically
+      sslConfig = undefined;
     } else if (connectionString.includes('pooler.supabase.com')) {
       // Supabase pooled connections don't need SSL
       sslConfig = false;
