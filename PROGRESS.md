@@ -80,7 +80,7 @@ Last updated: current sprint
 - [ ] Keep Google sign-up callback to `/onboarding`
 
 ### Agents (MVP complete + settings)
-- [ ] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
+- [x] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
 - [ ] UI: Agent Settings drawer/page from Dashboard list
 - [ ] Display memory capabilities and recent performance metrics on per-agent card
 
@@ -105,7 +105,7 @@ Progress: Billing backend completed (endpoints, webhook), API entitlements enfor
 
 ### Workflows (starter templates)
 - [ ] Define 2–3 templates per role (marketing/support/analyst) with `triggers`, `actions`, `schedule`
-- [ ] API: enable/disable per agent, manual run endpoint
+- [x] API: enable/disable per agent, manual run endpoint (list/create, update, run)
 - [ ] Scheduling: cron-based kickoff that enqueues workflow tasks
 
 ### Dashboard & UX
