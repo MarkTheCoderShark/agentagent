@@ -63,11 +63,11 @@ Last updated: current sprint
 
 ### Billing & Plans
 - [ ] Stripe setup
-  - [ ] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc.
-  - [ ] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url`
-  - [ ] API: `GET /api/billing/portal` → creates Billing Portal Session
+  - [x] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc. (init added; envs pending)
+  - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url` (skeleton with pricing fallback)
+  - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (skeleton returns pricing until customer linkage is wired)
   - [ ] Webhook: `src/app/api/webhooks/stripe/route.ts` → handle `checkout.session.completed`, `invoice.payment_succeeded|failed`, `customer.subscription.updated|deleted` to set `User.subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
-  - [ ] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
+  - [x] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
   - [ ] Entitlements: enforce limits in APIs
     - [ ] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
     - [ ] `POST /api/tasks` → cap monthly tasks per agent by tier (starter: 1k, pro: 5k, enterprise: unlimited)
@@ -128,8 +128,8 @@ Last updated: current sprint
 
 ### Track A — Assistant (You/GPT) [Owner: Assistant]
 - [ ] Billing & Plans (Backend)
-  - [ ] Create `src/lib/stripe.ts`; validate env on boot; safe errors in dev
-  - [ ] `POST /api/billing/checkout` and `GET /api/billing/portal`
+  - [x] Create `src/lib/stripe.ts`; validate env on boot; safe errors in dev
+  - [x] `POST /api/billing/checkout` and `GET /api/billing/portal` (skeletons)
   - [ ] Webhook `src/app/api/webhooks/stripe/route.ts` to set `subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
   - [ ] Entitlements middleware/helpers; enforce in `POST /api/agents`, `POST /api/tasks`
   - [ ] Unit tests for entitlement logic and webhook handlers
