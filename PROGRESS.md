@@ -64,9 +64,9 @@ Last updated: current sprint
 ### Billing & Plans
 - [ ] Stripe setup
   - [x] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc. (init added; envs pending)
-  - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url` (skeleton with pricing fallback)
+  - [x] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url` (skeleton with pricing fallback). Includes user metadata.
   - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (skeleton returns pricing until customer linkage is wired)
-  - [ ] Webhook: `src/app/api/webhooks/stripe/route.ts` → handle `checkout.session.completed`, `invoice.payment_succeeded|failed`, `customer.subscription.updated|deleted` to set `User.subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
+  - [x] Webhook: `src/app/api/webhooks/stripe/route.ts` → skeleton validates signature and updates user subscription fields on events
   - [x] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
   - [x] Entitlements: enforce limits in APIs (initial)
     - [x] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
@@ -130,7 +130,7 @@ Last updated: current sprint
 - [ ] Billing & Plans (Backend)
   - [x] Create `src/lib/stripe.ts`; validate env on boot; safe errors in dev
   - [x] `POST /api/billing/checkout` and `GET /api/billing/portal` (skeletons)
-  - [ ] Webhook `src/app/api/webhooks/stripe/route.ts` to set `subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
+  - [x] Webhook `src/app/api/webhooks/stripe/route.ts` skeleton (signature validation + user subscription updates)
   - [ ] Entitlements middleware/helpers; enforce in `POST /api/agents`, `POST /api/tasks`
   - [ ] Unit tests for entitlement logic and webhook handlers
 - [ ] Task Execution Engine

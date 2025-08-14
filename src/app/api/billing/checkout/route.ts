@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe, getPlanPriceId, type SubscriptionPlan } from "@/lib/stripe";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,6 +22,9 @@ export async function POST(req: NextRequest) {
     }
 
     const origin = req.headers.get("origin") || req.nextUrl.origin;
+    const sessionAuth = await getServerSession(authOptions);
+    const userId = sessionAuth?.user?.id || "";
+    const userEmail = sessionAuth?.user?.email || undefined;
 
     const session = await stripe.checkout.sessions.create({
       mode,
@@ -32,6 +37,12 @@ export async function POST(req: NextRequest) {
       allow_promotion_codes: true,
       success_url: `${origin}/dashboard?purchase=success`,
       cancel_url: `${origin}/pricing?canceled=1`,
+      customer_email: userEmail,
+      client_reference_id: userId || undefined,
+      metadata: { userId, plan },
+      subscription_data: {
+        metadata: { userId, plan },
+      },
     });
 
     return NextResponse.json({ url: session.url }, { status: 200 });
