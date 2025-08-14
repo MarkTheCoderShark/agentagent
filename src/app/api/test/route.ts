@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { testConnection, initDatabase } from "@/lib/db";
 
 export async function GET() {
   try {
@@ -14,9 +14,14 @@ export async function GET() {
     // Test database connection
     let dbStatus = "UNKNOWN";
     try {
-      await prisma.$connect();
-      dbStatus = "CONNECTED";
-      await prisma.$disconnect();
+      const isConnected = await testConnection();
+      if (isConnected) {
+        dbStatus = "CONNECTED";
+        // Initialize database schema if needed
+        await initDatabase();
+      } else {
+        dbStatus = "CONNECTION_FAILED";
+      }
     } catch (dbError) {
       dbStatus = `ERROR: ${dbError instanceof Error ? dbError.message : 'Unknown error'}`;
     }

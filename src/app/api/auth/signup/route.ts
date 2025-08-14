@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
+import { query, queryOne, testConnection } from "@/lib/db";
 
 export const runtime = "nodejs";
 
@@ -40,10 +40,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Test database connection
+    const isConnected = await testConnection();
+    if (!isConnected) {
+      return NextResponse.json(
+        { message: "Database connection failed" },
+        { status: 500 }
+      );
+    }
+
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
+    const existingUser = await queryOne(
+      'SELECT id FROM users WHERE email = $1',
+      [email.trim().toLowerCase()]
+    );
 
     if (existingUser) {
       return NextResponse.json(
@@ -56,35 +66,25 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Create user
-    const user = await prisma.user.create({
-      data: {
-        name: name.trim(),
-        email: email.trim().toLowerCase(),
-        password: hashedPassword,
-      },
-    });
-
-    // Remove password from response
-    const { password: _, ...userWithoutPassword } = user;
+    const [user] = await query(
+      `INSERT INTO users (name, email, password) 
+       VALUES ($1, $2, $3) 
+       RETURNING id, name, email, created_at, updated_at, subscription_tier, subscription_status`,
+      [name.trim(), email.trim().toLowerCase(), hashedPassword]
+    );
 
     return NextResponse.json(
       { 
         message: "User created successfully",
-        user: userWithoutPassword 
+        user: user
       },
       { status: 201 }
     );
-  } catch (_error) {
-    // Check if it's a database configuration error
-    if (_error instanceof Error && _error.message.includes("DATABASE_URL")) {
-      return NextResponse.json(
-        { message: "Database configuration error" },
-        { status: 500 }
-      );
-    }
-
-    // Check if it's a Prisma connection error
-    if (_error instanceof Error && _error.message.includes("connect")) {
+  } catch (error) {
+    console.error('Signup error:', error);
+    
+    // Check if it's a database connection error
+    if (error instanceof Error && error.message.includes("connect")) {
       return NextResponse.json(
         { message: "Database connection failed" },
         { status: 500 }

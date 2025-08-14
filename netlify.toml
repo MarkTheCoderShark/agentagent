@@ -5,13 +5,12 @@
 
 [build.environment]
   NODE_ENV = "production"
-  PRISMA_GENERATE_DATAPROXY = "false"
-  PRISMA_CLIENT_ENGINE_TYPE = "library"
-  PRISMA_FORCE_NAPI = "true"
 
-# Ensure cache clear prebuild
-[build.lifecycle]
-  onBuild = "rm -rf node_modules/@prisma/client node_modules/.prisma .next/cache/prisma"
+# Test simple PostgreSQL connection
+[[redirects]]
+  from = "/api/test-simple"
+  to = "/.netlify/functions/test-simple"
+  status = 200
 
 # Migration function
 [[redirects]]
