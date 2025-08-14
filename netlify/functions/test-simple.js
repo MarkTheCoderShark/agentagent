@@ -1,9 +1,14 @@
 const { Pool } = require('pg');
 
 // Prioritize Neon database URLs (auto-provisioned by Netlify)
+// Ignore legacy DATABASE_URL if Neon is available
 let connectionString = process.env.NETLIFY_DATABASE_URL || 
-                      process.env.NETLIFY_DATABASE_URL_UNPOOLED || 
-                      process.env.DATABASE_URL;
+                      process.env.NETLIFY_DATABASE_URL_UNPOOLED;
+
+// Only fall back to DATABASE_URL if no Neon URLs are available
+if (!connectionString) {
+  connectionString = process.env.DATABASE_URL;
+}
 
 if (!connectionString) {
   throw new Error('No database connection string found');
