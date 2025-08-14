@@ -74,7 +74,7 @@ Last updated: current sprint
     - [ ] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month)
 
 ### Signup & Onboarding Flow
-- [ ] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)
+- [x] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)
 - [ ] Optional plan step: if user not subscribed and starts paid feature, prompt to upgrade (guard routes/components)
 - [ ] Keep Google sign-up callback to `/onboarding`
 
@@ -106,9 +106,11 @@ Last updated: current sprint
 - [ ] Scheduling: cron-based kickoff that enqueues workflow tasks
 
 ### Dashboard & UX
-- [ ] Agents list: quick actions (Run Demo, Assign Task, Settings)
-- [ ] Tasks list: status chips, Approve/Reject (already supported via `PATCH /api/tasks/[id]`)
+- [x] Agents list: quick actions (Run Demo, Assign Task, Settings)
+- [x] Tasks list: status chips, Approve/Reject (already supported via `PATCH /api/tasks/[id]`)
 - [ ] Empty states and error toasts wired to API responses
+- [x] Pricing CTAs: wire buttons to call checkout endpoint (auth-aware). If unauthenticated, redirect to `/auth/signin?next=/pricing&plan=<plan>`.
+- [x] Dashboard: Add "Manage Billing" button → calls portal endpoint when authenticated.
 
 ### Analytics & Reliability
 - [ ] Basic event logging (task created/completed, agent created)
@@ -151,7 +153,7 @@ Last updated: current sprint
   - [ ] API reference (endpoints, params, examples)
   - [ ] Env/ops runbook (Stripe, Upstash, webhooks, worker)
 
-Acceptance checks (Track A)
+#### Acceptance checks (Track A)
 - [ ] Stripe checkout/portal works with test keys; webhooks mutate user fields correctly
 - [ ] Non-demo tasks run via queue/worker with retry; failures recorded; statuses transition properly
 - [ ] Google connect stores encrypted tokens and actions succeed with test accounts
@@ -159,12 +161,12 @@ Acceptance checks (Track A)
 - [ ] Agent settings update persists and reflects in subsequent task prompts
 
 ### Track B — Builder Agent (Co-Dev) [Owner: Dev Agent]
-- [ ] Pricing & Billing UI
-  - [ ] Wire pricing CTAs → `POST /api/billing/checkout` (handle unauthenticated: redirect to signin then back)
-  - [ ] Add "Manage Billing" button to account/settings → `GET /api/billing/portal`
+- [x] Pricing & Billing UI
+  - [x] Wire pricing CTAs → `POST /api/billing/checkout` (handle unauthenticated: redirect to signin then back)
+  - [x] Add "Manage Billing" button to account/settings → `GET /api/billing/portal` (placed on Dashboard header for now)
   - [ ] Plan badges and tier-aware feature gating in UI
-- [ ] Signup & Onboarding UX
-  - [ ] Credentials signup: auto-login on success then `router.push('/onboarding')`
+- [x] Signup & Onboarding UX
+  - [x] Credentials signup: auto-login on success then `router.push('/onboarding')`
   - [ ] Add plan guard: when paid feature used on free tier, show upgrade modal → call checkout
 - [ ] Dashboard & Agents UI
   - [ ] Agent Settings drawer/page (edit name/role/description/tone)
@@ -180,12 +182,12 @@ Acceptance checks (Track A)
   - [ ] E2E happy paths: checkout, portal, create agent, run demo, run execute, approve
   - [ ] Short user guide: "Getting started in 5 minutes"
 
-Dependencies & Coordination
+#### Dependencies & Coordination
 - **Track B depends on Track A** for: billing endpoints/webhook, entitlements, integrations backend, workflows API, agent PATCH.
 - Daily sync: confirm endpoint contracts; provide mocked responses until backend merges.
 - Feature flags: guard new menus until backend is ready.
 
-Milestones
+#### Milestones
 - Day 1–2: Track A (webhook skeleton, checkout/portal endpoints, queue scaffold); Track B (UI wiring stubs, upgrade modal)
 - Day 3–4: Track A (entitlements, agent PATCH, Google OAuth backend); Track B (agent settings UI, pricing CTAs complete)
 - Day 5: Track A (actions + worker integration, workflow enable/run); Track B (integrations UI, workflows UI)

@@ -20,6 +20,8 @@ import {
   X,
   Plus,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -70,6 +72,39 @@ export default function PricingPage() {
       excluded: []
     }
   };
+  const router = useRouter();
+  const { status } = useSession();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  async function startCheckout(plan: "starter" | "pro" | "enterprise") {
+    if (plan === "enterprise") {
+      router.push("/contact");
+      return;
+    }
+    if (status !== "authenticated") {
+      router.push(`/auth/signin?next=/pricing&plan=${plan}`);
+      return;
+    }
+    try {
+      setLoadingPlan(plan);
+      const res = await fetch("/api/billing/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, mode: "subscription", interval: isAnnual ? "year" : "month" }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.url) {
+        window.location.href = data.url as string;
+      } else {
+        throw new Error(data?.message || "Unable to start checkout");
+      }
+    } catch (_err) {
+      alert("Checkout is not available yet. Please try again later.");
+    } finally {
+      setLoadingPlan(null);
+    }
+  }
+
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -145,8 +180,8 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full" variant="outline" size="lg">
-                  Start Free Trial
+                <Button className="w-full" variant="outline" size="lg" onClick={() => startCheckout("starter")} disabled={loadingPlan === 'starter'}>
+                  {loadingPlan === 'starter' ? 'Starting…' : 'Start Free Trial'}
                 </Button>
                 <p className="text-xs text-gray-500 text-center mt-3">
                   14-day free trial • No credit card required
@@ -187,8 +222,8 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700" size="lg">
-                  Start Free Trial
+                <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700" size="lg" onClick={() => startCheckout("pro")} disabled={loadingPlan === 'pro'}>
+                  {loadingPlan === 'pro' ? 'Starting…' : 'Start Free Trial'}
                 </Button>
                 <p className="text-xs text-gray-500 text-center mt-3">
                   14-day free trial • No credit card required
@@ -223,7 +258,7 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full" variant="outline" size="lg">
+                <Button className="w-full" variant="outline" size="lg" onClick={() => startCheckout("enterprise")}>
                   Contact Sales
                 </Button>
                 <p className="text-xs text-gray-500 text-center mt-3">
@@ -373,14 +408,15 @@ export default function PricingPage() {
             Start your free trial today and see the difference AI agents can make
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="px-8 py-4 text-lg">
-              Start Free Trial
+            <Button size="lg" variant="secondary" className="px-8 py-4 text-lg" onClick={() => startCheckout("pro")} disabled={loadingPlan === 'pro'}>
+              {loadingPlan === 'pro' ? 'Starting…' : 'Start Free Trial'}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="px-8 py-4 text-lg border-white text-white hover:bg-[#4527a4] hover:text-white"
+              onClick={() => router.push('/contact')}
             >
               Contact Sales
             </Button>

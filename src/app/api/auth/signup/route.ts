@@ -73,16 +73,14 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Signup error:", error);
-    
-    // Check if it's a database connection error
+    // Check if it's a database configuration error
     if (error instanceof Error && error.message.includes("DATABASE_URL")) {
       return NextResponse.json(
         { message: "Database configuration error" },
         { status: 500 }
       );
     }
-    
+
     // Check if it's a Prisma connection error
     if (error instanceof Error && error.message.includes("connect")) {
       return NextResponse.json(
@@ -90,7 +88,7 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-    
+
     // Generic error
     return NextResponse.json(
       { message: "Internal server error" },

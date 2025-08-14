@@ -91,11 +91,20 @@ export default function SignUpPage() {
         throw new Error(data.message || "Something went wrong");
       }
 
-      // Redirect to signin page after successful signup
+      // Auto-login then go to onboarding
       try {
-        router.push("/auth/signin?message=Account created successfully! Please sign in.");
-      } catch (routerError) {
-        // Fallback: show success message and manual redirect
+        const signInResult = await signIn("credentials", {
+          email: formData.email.trim().toLowerCase(),
+          password: formData.password,
+          redirect: false,
+        });
+        if (signInResult?.error) {
+          // fallback to signin with message
+          router.push("/auth/signin?message=Account created successfully! Please sign in.");
+        } else {
+          router.push("/onboarding");
+        }
+      } catch (_routerError) {
         setSuccess("Account created successfully! Please go to the signin page.");
       }
     } catch (error) {

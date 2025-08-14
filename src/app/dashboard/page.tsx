@@ -23,6 +23,7 @@ import {
   FileText,
 } from "lucide-react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 interface Agent {
   id: string;
@@ -46,6 +47,8 @@ export default function DashboardPage() {
   const [recentTasks, setRecentTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [assignText, setAssignText] = useState<Record<string, string>>({});
+  const { status } = useSession();
+  const [isOpeningPortal, setIsOpeningPortal] = useState(false);
 
   async function runDemoTask(agentId: string, agentName: string) {
     await fetch('/api/tasks', {
@@ -90,6 +93,23 @@ export default function DashboardPage() {
     });
     const res = await fetch('/api/tasks');
     if (res.ok) setRecentTasks(await res.json());
+  }
+
+  async function openBillingPortal() {
+    try {
+      setIsOpeningPortal(true);
+      const res = await fetch('/api/billing/portal');
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.url) {
+        window.location.href = data.url as string;
+      } else {
+        throw new Error(data?.message || 'Unable to open billing portal');
+      }
+    } catch (_err) {
+      alert('Billing portal is not available yet.');
+    } finally {
+      setIsOpeningPortal(false);
+    }
   }
 
   useEffect(() => {
@@ -159,13 +179,20 @@ export default function DashboardPage() {
       <div className="bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-white/40">
         <div className="container-width flex h-14 items-center justify-between">
           <h1 className="text-base md:text-lg font-semibold text-gray-800">Agent Command Center</h1>
-          <Link href="/dashboard/hire-agent">
-            <span>
-              <Button size="sm" className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#4527a4]/90 hover:to-[#6a4c93]/90">
-                <Plus className="w-4 h-4 mr-1"/> Hire Agent
+          <div className="flex items-center gap-2">
+            <Link href="/dashboard/hire-agent">
+              <span>
+                <Button size="sm" className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#4527a4]/90 hover:to-[#6a4c93]/90">
+                  <Plus className="w-4 h-4 mr-1"/> Hire Agent
+                </Button>
+              </span>
+            </Link>
+            {status === 'authenticated' && (
+              <Button size="sm" variant="outline" onClick={openBillingPortal} disabled={isOpeningPortal}>
+                {isOpeningPortal ? 'Opening…' : 'Manage Billing'}
               </Button>
-            </span>
-          </Link>
+            )}
+          </div>
         </div>
       </div>
 
