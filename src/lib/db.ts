@@ -6,11 +6,36 @@ let pool: Pool | null = null;
 
 function getPool(): Pool {
   if (!pool) {
+    // Clean the DATABASE_URL for pooled connections
+    let connectionString = DATABASE_URL;
+    
+    // Remove sslmode parameter for pooled connections
+    if (connectionString.includes('pooler.supabase.com')) {
+      connectionString = connectionString.replace('?sslmode=require', '');
+    }
+    
+    // Determine SSL configuration
+    const isDirectConnection = DATABASE_URL.includes('db.') && DATABASE_URL.includes('.supabase.co');
+    const isPooledConnection = DATABASE_URL.includes('pooler.supabase.com');
+    
+    let sslConfig;
+    if (isPooledConnection) {
+      // Pooled connections don't use SSL
+      sslConfig = false;
+    } else if (isDirectConnection) {
+      // Direct connections to Supabase require SSL
+      sslConfig = { rejectUnauthorized: false };
+    } else if (DATABASE_URL.includes('supabase.co')) {
+      // Default for other Supabase connections
+      sslConfig = { rejectUnauthorized: false };
+    } else {
+      // Local or other databases
+      sslConfig = undefined;
+    }
+
     pool = new Pool({
-      connectionString: DATABASE_URL,
-      ssl: DATABASE_URL.includes('supabase.co') ? { 
-        rejectUnauthorized: false
-      } : undefined,
+      connectionString: connectionString,
+      ssl: sslConfig,
       max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 2000,
