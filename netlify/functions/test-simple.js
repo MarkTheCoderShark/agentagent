@@ -1,10 +1,20 @@
 const { Pool } = require('pg');
 
+// Clean the DATABASE_URL for pooled connections
+let connectionString = process.env.DATABASE_URL;
+
+// Remove sslmode parameter for pooled connections
+if (connectionString && connectionString.includes('pooler.supabase.com')) {
+  connectionString = connectionString.replace('?sslmode=require', '');
+}
+
+// Determine SSL configuration
+const isPooledConnection = connectionString && connectionString.includes('pooler.supabase.com');
+const sslConfig = isPooledConnection ? false : undefined;
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('supabase.co') ? { 
-    rejectUnauthorized: false 
-  } : undefined,
+  connectionString: connectionString,
+  ssl: sslConfig,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
@@ -44,7 +54,7 @@ exports.handler = async (event, context) => {
         status: "ok",
         database: "CONNECTED",
         timestamp: result.rows[0].timestamp,
-        version: result.rows[0].version,
+        version: result.rows[0].version.substring(0, 50) + '...',
         message: "Direct PostgreSQL connection successful, users table ready"
       }),
     };

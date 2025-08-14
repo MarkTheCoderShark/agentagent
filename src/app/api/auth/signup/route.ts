@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     const [user] = await query(
       `INSERT INTO users (name, email, password) 
        VALUES ($1, $2, $3) 
-       RETURNING id, name, email, created_at, updated_at, subscription_tier, subscription_status`,
+       RETURNING id, name, email, "createdAt", "updatedAt", subscription_tier, subscription_status`,
       [name.trim(), email.trim().toLowerCase(), hashedPassword]
     );
 
