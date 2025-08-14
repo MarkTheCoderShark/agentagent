@@ -58,3 +58,135 @@ Last updated: current sprint
 ### Environment Notes
 - `OPENAI_API_KEY` optional; when absent, LLM returns safe fallback text for demo/execute flows.
 - Ensure `DATABASE_URL` set for Prisma; run migrations before deploying. 
+
+## Next Sprint Plan (Billing, Agents, Tasks & Integrations)
+
+### Billing & Plans
+- [ ] Stripe setup
+  - [ ] Add `src/lib/stripe.ts` (Stripe SDK init) and env vars: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_STARTER`, `STRIPE_PRICE_PRO`, etc.
+  - [ ] API: `POST /api/billing/checkout` → creates Checkout Session by `plan` (starter|pro|enterprise) + mode (subscription), returns `url`
+  - [ ] API: `GET /api/billing/portal` → creates Billing Portal Session
+  - [ ] Webhook: `src/app/api/webhooks/stripe/route.ts` → handle `checkout.session.completed`, `invoice.payment_succeeded|failed`, `customer.subscription.updated|deleted` to set `User.subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
+  - [ ] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
+  - [ ] Entitlements: enforce limits in APIs
+    - [ ] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
+    - [ ] `POST /api/tasks` → cap monthly tasks per agent by tier (starter: 1k, pro: 5k, enterprise: unlimited)
+    - [ ] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month)
+
+### Signup & Onboarding Flow
+- [ ] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)
+- [ ] Optional plan step: if user not subscribed and starts paid feature, prompt to upgrade (guard routes/components)
+- [ ] Keep Google sign-up callback to `/onboarding`
+
+### Agents (MVP complete + settings)
+- [ ] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
+- [ ] UI: Agent Settings drawer/page from Dashboard list
+- [ ] Display memory capabilities and recent performance metrics on per-agent card
+
+### Task Execution Engine (queue + async)
+- [ ] Queue: BullMQ + Upstash Redis
+  - [ ] `src/lib/queue.ts` for queue and job types
+  - [ ] `scripts/worker.ts` Node worker (process jobs, call LLM/tooling, update Task rows)
+  - [ ] Update `POST /api/tasks`: when `execute && type!=="demo"`, enqueue job and set `status: in_progress`
+  - [ ] Add retry/backoff and error handling; on failure mark `status: failed`, set `error`
+- [ ] UI: Realtime-ish refresh (polling or SSE later) for task rows
+
+### Integrations (initial 2)
+- [ ] Google OAuth connect
+  - [ ] UI: Connect button (Onboarding step 3 and Dashboard Integrations)
+  - [ ] API: OAuth callback stores tokens in `Integration.config` (encrypted), `scopes`
+- [ ] Actions
+  - [ ] Gmail draft email action: input `{to, subject, body}` → save Draft
+  - [ ] Google Sheets append row: input `{spreadsheetId, range, values}`
+  - [ ] Agent tool routing: allow task to specify action inputs; map via simple router before/after LLM
+
+### Workflows (starter templates)
+- [ ] Define 2–3 templates per role (marketing/support/analyst) with `triggers`, `actions`, `schedule`
+- [ ] API: enable/disable per agent, manual run endpoint
+- [ ] Scheduling: cron-based kickoff that enqueues workflow tasks
+
+### Dashboard & UX
+- [ ] Agents list: quick actions (Run Demo, Assign Task, Settings)
+- [ ] Tasks list: status chips, Approve/Reject (already supported via `PATCH /api/tasks/[id]`)
+- [ ] Empty states and error toasts wired to API responses
+
+### Analytics & Reliability
+- [ ] Basic event logging (task created/completed, agent created)
+- [ ] Error reporting (Sentry) and API rate limits on write endpoints
+
+### Definition of Done
+- Billing: users can purchase plans, portal available, entitlements enforced in API/UI
+- Agents: create, edit, view metrics; first agent created via onboarding
+- Tasks: demo executes inline; non-demo enqueued and processed by worker; approve/reject flows
+- Integrations: connect Google, run Gmail draft + Sheets append end-to-end from a task or workflow 
+
+## Two-Agent Work Allocation (Parallel Tracks)
+
+### Track A — Assistant (You/GPT) [Owner: Assistant]
+- [ ] Billing & Plans (Backend)
+  - [ ] Create `src/lib/stripe.ts`; validate env on boot; safe errors in dev
+  - [ ] `POST /api/billing/checkout` and `GET /api/billing/portal`
+  - [ ] Webhook `src/app/api/webhooks/stripe/route.ts` to set `subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
+  - [ ] Entitlements middleware/helpers; enforce in `POST /api/agents`, `POST /api/tasks`
+  - [ ] Unit tests for entitlement logic and webhook handlers
+- [ ] Task Execution Engine
+  - [ ] `src/lib/queue.ts` (BullMQ + Upstash); job types for task execution
+  - [ ] `scripts/worker.ts` processes jobs (LLM + integrations), retries/backoff, failure recording
+  - [ ] Update `POST /api/tasks` to enqueue non-demo tasks, set `in_progress`
+- [ ] Integrations (Backend)
+  - [ ] Google OAuth flow (callback handler), encrypt tokens in `Integration.config`
+  - [ ] Action modules: `gmailDraftEmail`, `sheetsAppendRow`
+  - [ ] Simple action router used by worker with input validation
+- [ ] Workflows (Backend)
+  - [ ] Template schema + seed role templates
+  - [ ] API: enable/disable per agent; manual run endpoint that enqueues jobs
+  - [ ] Schedule runner (cron) → enqueues according to `schedule`
+- [ ] Agents API
+  - [ ] `PATCH /api/agents/[id]` to update profile, tone, permissions, working hours
+  - [ ] Server-side validations and audit fields
+- [ ] Analytics & Reliability
+  - [ ] Add Sentry; add rate limits on write endpoints
+  - [ ] Basic event logging for agent/task lifecycle
+- [ ] Documentation
+  - [ ] API reference (endpoints, params, examples)
+  - [ ] Env/ops runbook (Stripe, Upstash, webhooks, worker)
+
+Acceptance checks (Track A)
+- [ ] Stripe checkout/portal works with test keys; webhooks mutate user fields correctly
+- [ ] Non-demo tasks run via queue/worker with retry; failures recorded; statuses transition properly
+- [ ] Google connect stores encrypted tokens and actions succeed with test accounts
+- [ ] Workflow template can be enabled and scheduled task is enqueued and processed
+- [ ] Agent settings update persists and reflects in subsequent task prompts
+
+### Track B — Builder Agent (Co-Dev) [Owner: Dev Agent]
+- [ ] Pricing & Billing UI
+  - [ ] Wire pricing CTAs → `POST /api/billing/checkout` (handle unauthenticated: redirect to signin then back)
+  - [ ] Add "Manage Billing" button to account/settings → `GET /api/billing/portal`
+  - [ ] Plan badges and tier-aware feature gating in UI
+- [ ] Signup & Onboarding UX
+  - [ ] Credentials signup: auto-login on success then `router.push('/onboarding')`
+  - [ ] Add plan guard: when paid feature used on free tier, show upgrade modal → call checkout
+- [ ] Dashboard & Agents UI
+  - [ ] Agent Settings drawer/page (edit name/role/description/tone)
+  - [ ] Improve task list with status chips; poll for updates; Approve/Reject toasts
+  - [ ] Empty/error states
+- [ ] Integrations UI
+  - [ ] Connect Google button (onboarding step + dashboard)
+  - [ ] Forms to trigger Gmail Draft and Sheets Append with validation and success messages
+- [ ] Workflows UI
+  - [ ] Enable/disable templates per agent; "Run now" CTA
+  - [ ] Schedule summary chips and next-run indicator
+- [ ] QA & Docs
+  - [ ] E2E happy paths: checkout, portal, create agent, run demo, run execute, approve
+  - [ ] Short user guide: "Getting started in 5 minutes"
+
+Dependencies & Coordination
+- **Track B depends on Track A** for: billing endpoints/webhook, entitlements, integrations backend, workflows API, agent PATCH.
+- Daily sync: confirm endpoint contracts; provide mocked responses until backend merges.
+- Feature flags: guard new menus until backend is ready.
+
+Milestones
+- Day 1–2: Track A (webhook skeleton, checkout/portal endpoints, queue scaffold); Track B (UI wiring stubs, upgrade modal)
+- Day 3–4: Track A (entitlements, agent PATCH, Google OAuth backend); Track B (agent settings UI, pricing CTAs complete)
+- Day 5: Track A (actions + worker integration, workflow enable/run); Track B (integrations UI, workflows UI)
+- Day 6–7: Stabilization, tests, docs, DoD verification 
