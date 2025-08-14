@@ -1,12 +1,20 @@
-# Next.js specific configuration
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [build]
   command = "npm run build"
   publish = ".next"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_ENV = "production"
   PRISMA_GENERATE_DATAPROXY = "false"
-  PRISMA_CLIENT_ENGINE_TYPE = "library" 
+  PRISMA_CLIENT_ENGINE_TYPE = "library"
+
+# Redirects for API functions
+[[redirects]]
+  from = "/api/auth/signup"
+  to = "/.netlify/functions/api-signup"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
