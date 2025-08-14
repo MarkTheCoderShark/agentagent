@@ -42,11 +42,11 @@ export async function POST(request: Request) {
     }
 
     console.log('👤 Creating new user...');
-    // Create user
+    // Create user - simplified without timestamp columns
     const [user] = await query(
       `INSERT INTO users (name, email, password) 
        VALUES ($1, $2, $3) 
-       RETURNING id, name, email, created_at, updated_at, subscription_tier, subscription_status`,
+       RETURNING id, name, email, subscription_tier, subscription_status`,
       [name.trim(), email.trim().toLowerCase(), hashedPassword]
     );
 
@@ -58,7 +58,6 @@ export async function POST(request: Request) {
         id: user.id,
         name: user.name,
         email: user.email,
-        createdAt: user.created_at,
         subscriptionTier: user.subscription_tier
       }
     }, { status: 201 });
