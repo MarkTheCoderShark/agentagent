@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Bot, ArrowLeft, ArrowRight, Sparkles, MessageSquare, BarChart3, FileText, Users, Zap, Clock } from "lucide-react";
 import Link from "next/link";
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 const agentTemplates = [
   {
@@ -78,12 +79,46 @@ export default function HireAgentPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
 
+  const [agentCount, setAgentCount] = useState<number | null>(null);
+  const [showUpgrade, setShowUpgrade] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    async function loadAgents() {
+      try {
+        const res = await fetch('/api/agents');
+        if (!mounted) return;
+        if (res.ok) {
+          const data = await res.json();
+          setAgentCount(Array.isArray(data) ? data.length : 0);
+        } else {
+          setAgentCount(0);
+        }
+      } catch {
+        setAgentCount(0);
+      }
+    }
+    loadAgents();
+    return () => { mounted = false };
+  }, []);
+
+  const reachedFreeLimit = (agentCount ?? 0) >= 1; // free tier allows 1 agent
+
   const selectedAgent = agentTemplates.find(template => template.id === selectedTemplate);
 
   const handleNext = () => {
     if (currentStep === 1 && selectedTemplate) {
+      if (reachedFreeLimit) {
+        setShowUpgrade(true);
+        return;
+      }
       setCurrentStep(2);
     } else if (currentStep === 2 && agentName) {
+      if (reachedFreeLimit) {
+        setShowUpgrade(true);
+        return;
+      }
       handleCreateAgent();
     }
   };
@@ -111,6 +146,28 @@ export default function HireAgentPage() {
       // Error creating agent
     }
   };
+
+  async function startCheckout(plan: "pro") {
+    try {
+      setLoadingPlan(plan);
+      const res = await fetch('/api/billing/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan, mode: 'subscription' }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.url) {
+        window.location.href = data.url as string;
+      } else {
+        // Fallback to pricing page if backend not ready
+        router.push(`/pricing?plan=${plan}`);
+      }
+    } catch (_err) {
+      router.push(`/pricing?plan=${plan}`);
+    } finally {
+      setLoadingPlan(null);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
@@ -306,6 +363,31 @@ export default function HireAgentPage() {
           </div>
         </div>
       </div>
+
+      {/* Upgrade Modal (Sheet) */}
+      <Sheet open={showUpgrade} onOpenChange={setShowUpgrade}>
+        <SheetContent side="bottom" className="rounded-t-2xl">
+          <SheetHeader>
+            <SheetTitle>Upgrade to add more agents</SheetTitle>
+            <SheetDescription>
+              You're on the Free plan (1 agent). Upgrade to Pro to hire additional AI agents and unlock higher task limits and advanced workflows.
+            </SheetDescription>
+          </SheetHeader>
+          <div className="p-4 space-y-3">
+            <ul className="text-sm text-gray-600 list-disc pl-5">
+              <li>Up to 10 agents</li>
+              <li>5,000 tasks/month per agent</li>
+              <li>Advanced workflows & priority support</li>
+            </ul>
+          </div>
+          <SheetFooter>
+            <Button onClick={() => startCheckout('pro')} disabled={loadingPlan === 'pro'} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+              {loadingPlan === 'pro' ? 'Starting…' : 'Upgrade to Pro'}
+            </Button>
+            <Button variant="outline" onClick={() => setShowUpgrade(false)}>Maybe later</Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 } 

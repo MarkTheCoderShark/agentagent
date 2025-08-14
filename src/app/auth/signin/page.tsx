@@ -32,6 +32,7 @@ function SignInForm() {
     setError("");
 
     try {
+      const next = searchParams.get("next") || "/dashboard";
       const result = await signIn("credentials", {
         email,
         password,
@@ -41,7 +42,7 @@ function SignInForm() {
       if (result?.error) {
         setError("Invalid email or password");
       } else {
-        router.push("/dashboard");
+        router.push(next);
       }
     } catch (_error) {
       setError("An error occurred. Please try again.");
