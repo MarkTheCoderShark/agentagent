@@ -49,6 +49,15 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
+  // Create a fresh pool instance for this migration
+  const migrationPool = new Pool({
+    connectionString: connectionString,
+    ssl: sslConfig,
+    max: 5,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 5000,
+  });
+
   try {
     console.log('Starting database migration...');
 
@@ -77,7 +86,7 @@ exports.handler = async (event, context) => {
     // Run all migrations
     for (const migration of migrations) {
       console.log('Running migration:', migration.substring(0, 50) + '...');
-      await pool.query(migration);
+      await migrationPool.query(migration);
     }
 
     console.log('Database migration completed successfully');
@@ -104,9 +113,9 @@ exports.handler = async (event, context) => {
     };
   } finally {
     try {
-      await pool.end();
+      await migrationPool.end();
     } catch (e) {
-      console.error('Error closing pool:', e.message);
+      console.error('Error closing migration pool:', e.message);
     }
   }
 }; 
