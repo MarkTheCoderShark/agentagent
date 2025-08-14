@@ -8,8 +8,8 @@
 
 # Test simple PostgreSQL connection
 [[redirects]]
-  from = "/api/test-simple"
-  to = "/.netlify/functions/test-simple"
+  from = "/api/auth/signup"
+  to = "/.netlify/functions/signup"
   status = 200
 
 # Migration function
@@ -31,3 +31,7 @@
   status = 200
 
 # Removed custom redirects so Next.js runtime handles API and page routes 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
