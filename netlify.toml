@@ -6,31 +6,27 @@
 [build.environment]
   NODE_ENV = "production"
 
-# Test simple PostgreSQL connection
 [[redirects]]
   from = "/api/auth/signup"
   to = "/.netlify/functions/signup"
   status = 200
 
-# Migration function
 [[redirects]]
   from = "/api/migrate"
   to = "/.netlify/functions/migrate"
   status = 200
 
-# Test Prisma function
 [[redirects]]
-  from = "/api/test-prisma"
-  to = "/.netlify/functions/test-prisma"
+  from = "/api/test-simple"  
+  to = "/.netlify/functions/test-simple"
   status = 200
 
-# Environment check function
 [[redirects]]
   from = "/api/env-check"
   to = "/.netlify/functions/env-check"
   status = 200
 
-# Removed custom redirects so Next.js runtime handles API and page routes 
+# Catch-all redirect must be LAST
 [[redirects]]
   from = "/*"
   to = "/index.html"
