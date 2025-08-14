@@ -21,4 +21,10 @@
   to = "/.netlify/functions/test-prisma"
   status = 200
 
+# Environment check function
+[[redirects]]
+  from = "/api/env-check"
+  to = "/.netlify/functions/env-check"
+  status = 200
+
 # Removed custom redirects so Next.js runtime handles API and page routes 
