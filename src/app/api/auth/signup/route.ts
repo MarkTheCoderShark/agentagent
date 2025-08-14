@@ -4,67 +4,44 @@ import { query, queryOne, testConnection } from "@/lib/db";
 
 export const runtime = "nodejs";
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const { name, email, password } = await request.json();
+    console.log('🔍 Signup attempt started');
+    const body = await request.json();
+    const { name, email, password } = body;
 
-    // Validate input
+    console.log('📧 Email:', email);
+    console.log('🏗️ Name:', name);
+
+    // Validation
     if (!name || !email || !password) {
-      return NextResponse.json(
-        { message: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-
-    // Validate name
-    if (name.trim().length < 2) {
-      return NextResponse.json(
-        { message: "Name must be at least 2 characters long" },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { message: "Please enter a valid email address" },
-        { status: 400 }
-      );
+      console.log('❌ Missing required fields');
+      return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
     }
 
     if (password.length < 6) {
-      return NextResponse.json(
-        { message: "Password must be at least 6 characters long" },
-        { status: 400 }
-      );
+      console.log('❌ Password too short');
+      return NextResponse.json({ message: "Password must be at least 6 characters" }, { status: 400 });
     }
 
-    // Test database connection
-    const isConnected = await testConnection();
-    if (!isConnected) {
-      return NextResponse.json(
-        { message: "Database connection failed" },
-        { status: 500 }
-      );
-    }
+    console.log('🔐 Hashing password...');
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 12);
+    console.log('✅ Password hashed successfully');
 
+    console.log('🗄️ Checking for existing user...');
     // Check if user already exists
-    const existingUser = await queryOne(
-      'SELECT id FROM users WHERE email = $1',
+    const existingUsers = await query(
+      `SELECT id FROM users WHERE email = $1`,
       [email.trim().toLowerCase()]
     );
 
-    if (existingUser) {
-      return NextResponse.json(
-        { message: "User with this email already exists" },
-        { status: 409 }
-      );
+    if (existingUsers.length > 0) {
+      console.log('❌ User already exists');
+      return NextResponse.json({ message: "User already exists" }, { status: 409 });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 12);
-
+    console.log('👤 Creating new user...');
     // Create user
     const [user] = await query(
       `INSERT INTO users (name, email, password) 
@@ -73,28 +50,26 @@ export async function POST(request: NextRequest) {
       [name.trim(), email.trim().toLowerCase(), hashedPassword]
     );
 
-    return NextResponse.json(
-      { 
-        message: "User created successfully",
-        user: user
-      },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error('Signup error:', error);
-    
-    // Check if it's a database connection error
-    if (error instanceof Error && error.message.includes("connect")) {
-      return NextResponse.json(
-        { message: "Database connection failed" },
-        { status: 500 }
-      );
-    }
+    console.log('✅ User created successfully:', user.id);
 
-    // Generic error
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ 
+      message: "User created successfully",
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt,
+        subscriptionTier: user.subscription_tier
+      }
+    }, { status: 201 });
+
+  } catch (error) {
+    console.error('💥 Signup error:', error);
+    console.error('💥 Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      code: error && typeof error === 'object' && 'code' in error ? error.code : undefined,
+      stack: error instanceof Error ? error.stack : undefined
+    });
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 } 
