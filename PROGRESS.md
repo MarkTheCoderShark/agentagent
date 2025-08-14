@@ -102,6 +102,7 @@ Last updated: current sprint
 - [x] Plan gating (UI): Show upgrade modal on `Hire Agent` when free-tier user already has 1 agent; Upgrade routes to checkout/pricing.
 - [x] Sign-in: respect `next` param to return users to the intended page after authentication.
 - [x] Usage API: `GET /api/usage` returns tier, agent/task usage; dashboard shows plan badge and usage limits.
+- [x] Dashboard gating: prevent hiring beyond free limit and assigning tasks past monthly cap; show upgrade modal with checkout.
 
 ### Analytics & Reliability
 - [ ] Basic event logging (task created/completed, agent created)

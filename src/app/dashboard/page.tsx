@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { useRouter } from "next/navigation";
 
 interface Agent {
   id: string;
@@ -50,6 +52,9 @@ export default function DashboardPage() {
   const { status, data } = useSession();
   const [isOpeningPortal, setIsOpeningPortal] = useState(false);
   const [usage, setUsage] = useState<{ agentCount: number; agentLimit: number | null; taskCountMonth: number; taskLimitMonth: number | null; subscriptionTier: string } | null>(null);
+  const [showUpgrade, setShowUpgrade] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const router = useRouter();
 
   async function runDemoTask(agentId: string, agentName: string) {
     await fetch('/api/tasks', {
@@ -70,6 +75,21 @@ export default function DashboardPage() {
   async function assignTask(agentId: string, agentName: string) {
     const description = assignText[agentId]?.trim();
     if (!description) return;
+
+    // Refresh usage and gate if monthly task limit reached
+    try {
+      const usageRes = await fetch('/api/usage');
+      if (usageRes.ok) {
+        const latest = await usageRes.json();
+        setUsage(latest);
+        const limit = latest.taskLimitMonth;
+        if (limit !== null && latest.taskCountMonth >= limit) {
+          setShowUpgrade(true);
+          return;
+        }
+      }
+    } catch {}
+
     await fetch('/api/tasks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -84,6 +104,9 @@ export default function DashboardPage() {
     setAssignText(prev => ({ ...prev, [agentId]: '' }));
     const res = await fetch('/api/tasks');
     if (res.ok) setRecentTasks(await res.json());
+
+    // bump local usage count if we track a finite limit
+    setUsage(prev => prev ? { ...prev, taskCountMonth: prev.taskCountMonth + 1 } : prev);
   }
 
   async function updateTaskStatus(id: string, status: string) {
@@ -110,6 +133,27 @@ export default function DashboardPage() {
       alert('Billing portal is not available yet.');
     } finally {
       setIsOpeningPortal(false);
+    }
+  }
+
+  async function startCheckout(plan: 'pro') {
+    try {
+      setLoadingPlan(plan);
+      const res = await fetch('/api/billing/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan, mode: 'subscription' }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.url) {
+        window.location.href = data.url as string;
+      } else {
+        router.push(`/pricing?plan=${plan}`);
+      }
+    } catch {
+      router.push(`/pricing?plan=${plan}`);
+    } finally {
+      setLoadingPlan(null);
     }
   }
 
@@ -177,6 +221,15 @@ export default function DashboardPage() {
   };
 
   const plan = (data?.user as any)?.subscriptionTier || usage?.subscriptionTier || 'free';
+  const reachedAgentLimit = usage?.agentLimit !== null && (usage?.agentCount ?? 0) >= (usage?.agentLimit ?? 0);
+
+  function onHireAgentClick() {
+    if (reachedAgentLimit) {
+      setShowUpgrade(true);
+      return;
+    }
+    router.push('/dashboard/hire-agent');
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
@@ -193,13 +246,9 @@ export default function DashboardPage() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/dashboard/hire-agent">
-              <span>
-                <Button size="sm" className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#4527a4]/90 hover:to-[#6a4c93]/90">
-                  <Plus className="w-4 h-4 mr-1"/> Hire Agent
-                </Button>
-              </span>
-            </Link>
+            <Button size="sm" className="bg-gradient-to-r from-[#4527a4] to-[#6a4c93] hover:from-[#4527a4]/90 hover:to-[#6a4c93]/90" onClick={onHireAgentClick}>
+              <Plus className="w-4 h-4 mr-1"/> Hire Agent
+            </Button>
             {status === 'authenticated' && (
               <Button size="sm" variant="outline" onClick={openBillingPortal} disabled={isOpeningPortal}>
                 {isOpeningPortal ? 'Opening…' : 'Manage Billing'}
@@ -285,18 +334,15 @@ export default function DashboardPage() {
                 <h2 className="text-xl font-semibold text-gray-900">
                   Your AI Agents
                 </h2>
-                <Link href="/dashboard/hire-agent">
-                  <span>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="text-purple-600 border-purple-200 hover:bg-purple-50"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Add Agent
-                    </Button>
-                  </span>
-                </Link>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="text-purple-600 border-purple-200 hover:bg-purple-50"
+                  onClick={onHireAgentClick}
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Agent
+                </Button>
               </div>
 
               <div className="space-y-4">
@@ -386,6 +432,31 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Upgrade Modal (Sheet) */}
+      <Sheet open={showUpgrade} onOpenChange={setShowUpgrade}>
+        <SheetContent side="bottom" className="rounded-t-2xl">
+          <SheetHeader>
+            <SheetTitle>Upgrade your plan</SheetTitle>
+            <SheetDescription>
+              You’ve reached your current plan’s limit. Upgrade to Pro to add more agents and unlock higher task limits and advanced workflows.
+            </SheetDescription>
+          </SheetHeader>
+          <div className="p-4 space-y-3">
+            <ul className="text-sm text-gray-600 list-disc pl-5">
+              <li>Up to 10 agents</li>
+              <li>5,000 tasks/month per agent</li>
+              <li>Advanced workflows & priority support</li>
+            </ul>
+          </div>
+          <SheetFooter>
+            <Button onClick={() => startCheckout('pro')} disabled={loadingPlan === 'pro'} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+              {loadingPlan === 'pro' ? 'Starting…' : 'Upgrade to Pro'}
+            </Button>
+            <Button variant="outline" onClick={() => setShowUpgrade(false)}>Maybe later</Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
