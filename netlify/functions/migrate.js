@@ -60,8 +60,8 @@ exports.handler = async (event, context) => {
         name VARCHAR(255),
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255),
-        "createdAt" TIMESTAMP DEFAULT NOW(),
-        "updatedAt" TIMESTAMP DEFAULT NOW(),
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW(),
         subscription_tier VARCHAR(50) DEFAULT 'free',
         subscription_status VARCHAR(50) DEFAULT 'active',
         stripe_customer_id VARCHAR(255)
@@ -73,9 +73,9 @@ exports.handler = async (event, context) => {
         name VARCHAR(255) NOT NULL,
         description TEXT,
         instructions TEXT,
-        "userId" VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        "createdAt" TIMESTAMP DEFAULT NOW(),
-        "updatedAt" TIMESTAMP DEFAULT NOW()
+        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
       );`,
 
       // Workflows table
@@ -83,14 +83,14 @@ exports.handler = async (event, context) => {
         id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         name VARCHAR(255) NOT NULL,
         description TEXT,
-        "agentId" VARCHAR(255) NOT NULL REFERENCES agents(id) ON DELETE CASCADE,
-        "userId" VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        agent_id VARCHAR(255) NOT NULL REFERENCES agents(id) ON DELETE CASCADE,
+        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         schedule VARCHAR(255),
-        "isActive" BOOLEAN DEFAULT true,
-        "lastRunAt" TIMESTAMP,
-        "nextRunAt" TIMESTAMP,
-        "createdAt" TIMESTAMP DEFAULT NOW(),
-        "updatedAt" TIMESTAMP DEFAULT NOW()
+        is_active BOOLEAN DEFAULT true,
+        last_run_at TIMESTAMP,
+        next_run_at TIMESTAMP,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
       );`,
 
       // Tasks table
@@ -100,11 +100,11 @@ exports.handler = async (event, context) => {
         description TEXT,
         status VARCHAR(50) DEFAULT 'pending',
         result TEXT,
-        "agentId" VARCHAR(255) NOT NULL REFERENCES agents(id) ON DELETE CASCADE,
-        "workflowId" VARCHAR(255) REFERENCES workflows(id) ON DELETE SET NULL,
-        "userId" VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        "createdAt" TIMESTAMP DEFAULT NOW(),
-        "updatedAt" TIMESTAMP DEFAULT NOW()
+        agent_id VARCHAR(255) NOT NULL REFERENCES agents(id) ON DELETE CASCADE,
+        workflow_id VARCHAR(255) REFERENCES workflows(id) ON DELETE SET NULL,
+        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
       );`,
 
       // Integrations table
@@ -112,11 +112,11 @@ exports.handler = async (event, context) => {
         id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         name VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
-        "encryptedTokens" TEXT,
-        "userId" VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        "createdAt" TIMESTAMP DEFAULT NOW(),
-        "updatedAt" TIMESTAMP DEFAULT NOW(),
-        UNIQUE("userId", name)
+        encrypted_tokens TEXT,
+        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW(),
+        UNIQUE(user_id, name)
       );`,
 
       // Events table (for logging)
@@ -124,19 +124,19 @@ exports.handler = async (event, context) => {
         id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         type VARCHAR(255) NOT NULL,
         payload JSONB,
-        "userId" VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        "createdAt" TIMESTAMP DEFAULT NOW()
+        user_id VARCHAR(255) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        created_at TIMESTAMP DEFAULT NOW()
       );`,
 
       // Create indexes for better performance
-      `CREATE INDEX IF NOT EXISTS idx_agents_user_id ON agents("userId");`,
-      `CREATE INDEX IF NOT EXISTS idx_workflows_user_id ON workflows("userId");`,
-      `CREATE INDEX IF NOT EXISTS idx_workflows_agent_id ON workflows("agentId");`,
-      `CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks("userId");`,
-      `CREATE INDEX IF NOT EXISTS idx_tasks_agent_id ON tasks("agentId");`,
-      `CREATE INDEX IF NOT EXISTS idx_tasks_workflow_id ON tasks("workflowId");`,
-      `CREATE INDEX IF NOT EXISTS idx_integrations_user_id ON integrations("userId");`,
-      `CREATE INDEX IF NOT EXISTS idx_events_user_id ON events("userId");`,
+      `CREATE INDEX IF NOT EXISTS idx_agents_user_id ON agents(user_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_workflows_user_id ON workflows(user_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_workflows_agent_id ON workflows(agent_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_tasks_agent_id ON tasks(agent_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_tasks_workflow_id ON tasks(workflow_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_integrations_user_id ON integrations(user_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_events_user_id ON events(user_id);`,
     ];
 
     // Run all migrations
