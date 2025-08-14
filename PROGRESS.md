@@ -68,10 +68,10 @@ Last updated: current sprint
   - [x] API: `GET /api/billing/portal` → creates Billing Portal Session (skeleton returns pricing until customer linkage is wired)
   - [ ] Webhook: `src/app/api/webhooks/stripe/route.ts` → handle `checkout.session.completed`, `invoice.payment_succeeded|failed`, `customer.subscription.updated|deleted` to set `User.subscriptionTier`, `subscriptionStatus`, `subscriptionEndDate`
   - [x] Update `src/app/pricing/page.tsx` buttons to hit Checkout (if not signed-in, redirect to `/auth/signin?next=/pricing&plan=pro`)
-  - [ ] Entitlements: enforce limits in APIs
-    - [ ] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
-    - [ ] `POST /api/tasks` → cap monthly tasks per agent by tier (starter: 1k, pro: 5k, enterprise: unlimited)
-    - [ ] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month)
+  - [x] Entitlements: enforce limits in APIs (initial)
+    - [x] `POST /api/agents` → cap number of agents by tier (free: 1, starter: 3, pro: 10, enterprise: unlimited)
+    - [x] `POST /api/tasks` → cap monthly tasks by tier (free: 200, starter: 1k, pro: 5k, enterprise: unlimited)
+    - [ ] Add helpers in `src/lib/utils.ts` to compute allowances + current usage (query `Task` count for current month) [partially added, refine as Track A evolves]
 
 ### Signup & Onboarding Flow
 - [x] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)
