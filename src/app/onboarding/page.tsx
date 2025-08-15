@@ -156,6 +156,13 @@ export default function OnboardingPage() {
                     <button key={t} onClick={() => toggleTool(t)} className={`p-3 rounded-lg border-2 text-sm transition ${selectedTools.includes(t) ? 'border-[#4527a4] bg-purple-50 text-[#4527a4]' : 'border-gray-200 hover:border-gray-300'}`}>{selectedTools.includes(t) ? <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-4 h-4"/>{t}</span> : t}</button>
                   ))}
                 </div>
+                <div className="mt-4">
+                  <Link href="/integrations">
+                    <span>
+                      <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">Connect Google</Button>
+                    </span>
+                  </Link>
+                </div>
               </CardContent>
             </Card>
           )}

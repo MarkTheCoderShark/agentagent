@@ -73,7 +73,7 @@ Last updated: current sprint
 ### Signup & Onboarding Flow
 - [x] Credentials signup → auto-login and redirect to `/onboarding` (after successful `/api/auth/signup`, call `signIn('credentials')` on the client)
 - [ ] Optional plan step: if user not subscribed and starts paid feature, prompt to upgrade (guard routes/components)
-- [ ] Keep Google sign-up callback to `/onboarding`
+- [x] Add Connect Google button to onboarding step (routes to Integrations page for now)
 
 ### Agents (MVP complete + settings)
 - [x] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
@@ -102,7 +102,7 @@ Last updated: current sprint
 
 ### Integrations UI (Builder)
 - [x] Integrations page with Connect Google stub and action forms (Gmail Draft, Sheets Append) using toasts
-- [ ] Add Connect Google button to onboarding step
+- [x] Add Connect Google button to onboarding step
 - [ ] Wire forms to backend actions when available
 
 ### Analytics & Reliability
