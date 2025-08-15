@@ -22,7 +22,6 @@ import {
   MessageSquare,
   FileText,
 } from "lucide-react";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useRouter } from "next/navigation";
@@ -67,19 +66,24 @@ export default function DashboardPage() {
   const { show } = useToast();
 
   async function runDemoTask(agentId: string, agentName: string) {
-    await fetch('/api/tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: `Intro message from ${agentName}`,
-        description: `Introduce yourself and list 3 ways you can help as ${agentName}.`,
-        type: 'demo',
-        agentId,
-      }),
-    });
-    // refresh tasks
-    const res = await fetch('/api/tasks');
-    if (res.ok) setRecentTasks(await res.json());
+    try {
+      const res = await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `Intro message from ${agentName}`,
+          description: `Introduce yourself and list 3 ways you can help as ${agentName}.`,
+          type: 'demo',
+          agentId,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to run demo task');
+      const tasksRes = await fetch('/api/tasks');
+      if (tasksRes.ok) setRecentTasks(await tasksRes.json());
+      show({ title: 'Demo task started', description: `${agentName} is responding.` });
+    } catch (e) {
+      show({ title: 'Error', description: 'Could not run demo task.' });
+    }
   }
 
   function openAgentSettings(agent: Agent) {
@@ -97,18 +101,20 @@ export default function DashboardPage() {
 
   async function saveAgentSettings() {
     if (!editingAgent) return;
-    const res = await fetch(`/api/agents/${editingAgent.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(agentForm),
-    });
-    if (res.ok) {
+    try {
+      const res = await fetch(`/api/agents/${editingAgent.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(agentForm),
+      });
+      if (!res.ok) throw new Error('Failed to update agent');
       const updated = await res.json();
       setAgents(prev => prev.map(a => a.id === updated.id ? { ...a, ...updated } : a));
       setSettingsOpen(false);
       setEditingAgent(null);
-    } else {
-      alert('Failed to update agent');
+      show({ title: 'Agent updated', description: 'Changes saved successfully.' });
+    } catch {
+      show({ title: 'Error', description: 'Failed to update agent.' });
     }
   }
 
@@ -116,7 +122,6 @@ export default function DashboardPage() {
     const description = assignText[agentId]?.trim();
     if (!description) return;
 
-    // Refresh usage and gate if monthly task limit reached
     try {
       const usageRes = await fetch('/api/usage');
       if (usageRes.ok) {
@@ -128,36 +133,47 @@ export default function DashboardPage() {
           return;
         }
       }
-    } catch {}
+    } catch {
+      show({ title: 'Warning', description: 'Could not check usage limits.' });
+    }
 
-    await fetch('/api/tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: `Task for ${agentName}`,
-        description,
-        type: 'content',
-        agentId,
-        execute: true,
-      }),
-    });
-    setAssignText(prev => ({ ...prev, [agentId]: '' }));
-    const res = await fetch('/api/tasks');
-    if (res.ok) setRecentTasks(await res.json());
-
-    // bump local usage count if we track a finite limit
-    setUsage(prev => prev ? { ...prev, taskCountMonth: prev.taskCountMonth + 1 } : prev);
+    try {
+      const res = await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `Task for ${agentName}`,
+          description,
+          type: 'content',
+          agentId,
+          execute: true,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to assign task');
+      setAssignText(prev => ({ ...prev, [agentId]: '' }));
+      const tasksRes = await fetch('/api/tasks');
+      if (tasksRes.ok) setRecentTasks(await tasksRes.json());
+      setUsage(prev => prev ? { ...prev, taskCountMonth: prev.taskCountMonth + 1 } : prev);
+      show({ title: 'Task assigned', description: `Assigned to ${agentName}.` });
+    } catch {
+      show({ title: 'Error', description: 'Failed to assign task.' });
+    }
   }
 
   async function updateTaskStatus(id: string, status: string) {
-    await fetch(`/api/tasks/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status }),
-    });
-    const res = await fetch('/api/tasks');
-    if (res.ok) setRecentTasks(await res.json());
-    show({ title: `Task ${status}`, description: `Task has been ${status}.` });
+    try {
+      const res = await fetch(`/api/tasks/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+      });
+      if (!res.ok) throw new Error('Failed to update task status');
+      const listRes = await fetch('/api/tasks');
+      if (listRes.ok) setRecentTasks(await listRes.json());
+      show({ title: `Task ${status}`, description: `Task has been ${status}.` });
+    } catch {
+      show({ title: 'Error', description: 'Could not update task status.' });
+    }
   }
 
   async function openBillingPortal() {
@@ -171,7 +187,7 @@ export default function DashboardPage() {
         throw new Error(data?.message || 'Unable to open billing portal');
       }
     } catch (_err) {
-      alert('Billing portal is not available yet.');
+      show({ title: 'Error', description: 'Billing portal is not available yet.' });
     } finally {
       setIsOpeningPortal(false);
     }
@@ -208,10 +224,10 @@ export default function DashboardPage() {
           fetch("/api/usage"),
         ]);
         if (!mounted) return;
-        if (agentsRes.ok) setAgents(await agentsRes.json());
-        if (tasksRes.ok) setRecentTasks(await tasksRes.json());
+        if (agentsRes.ok) setAgents(await agentsRes.json()); else show({ title: 'Error', description: 'Failed to load agents.' });
+        if (tasksRes.ok) setRecentTasks(await tasksRes.json()); else show({ title: 'Error', description: 'Failed to load tasks.' });
         if (usageRes.ok) setUsage(await usageRes.json());
-      } catch {}
+      } catch { show({ title: 'Error', description: 'Failed to load dashboard data.' }); }
       finally { if (mounted) setLoading(false); }
     }
     load();
@@ -219,7 +235,6 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    // Poll recent tasks every 8s
     const interval = setInterval(async () => {
       try {
         const res = await fetch('/api/tasks');
@@ -297,7 +312,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-      {/* Header bar below global nav */}
       <div className="bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-white/40">
         <div className="container-width flex h-14 items-center justify-between">
           <div className="flex items-center gap-3">
@@ -324,7 +338,6 @@ export default function DashboardPage() {
 
       <div className="section-padding py-8">
         <div className="container-width">
-          {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Agent Command Center
@@ -334,7 +347,6 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          {/* Stats Overview */}
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             <Card className="border-0 shadow-lg">
               <CardHeader className="pb-3">
@@ -344,7 +356,7 @@ export default function DashboardPage() {
                   </CardTitle>
                   <Bot className="w-5 h-5 text-purple-600" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900">{usage?.agentCount ?? 3}</div>
+                <div className="text-2xl font-bold text-gray-900">{usage?.agentCount ?? agents.length}</div>
               </CardHeader>
             </Card>
 
@@ -356,7 +368,7 @@ export default function DashboardPage() {
                   </CardTitle>
                   <CheckCircle className="w-5 h-5 text-green-600" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900">{usage?.taskCountMonth ?? 76}{usage?.taskLimitMonth !== null ? `/${usage?.taskLimitMonth}` : ''}</div>
+                <div className="text-2xl font-bold text-gray-900">{usage?.taskCountMonth ?? 0}{usage?.taskLimitMonth !== null ? `/${usage?.taskLimitMonth}` : ''}</div>
                 <div className="text-xs text-green-600 flex items-center">
                   <TrendingUp className="w-3 h-3 mr-1" />
                   +12% from yesterday
@@ -392,7 +404,6 @@ export default function DashboardPage() {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Agents Panel */}
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">
@@ -409,44 +420,54 @@ export default function DashboardPage() {
                 </Button>
               </div>
 
-              <div className="space-y-4">
-                {agents.map((agent) => (
-                  <Card key={agent.id} className="border-0 shadow-lg hover-lift">
-                    <CardContent className="p-6 space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className="text-3xl">{agent.avatar ?? '🤖'}</div>
-                          <div>
-                            <h3 className="font-semibold text-gray-900">{agent.name}</h3>
-                            <p className="text-sm text-gray-600">{agent.role}</p>
+              {(!loading && agents.length === 0) ? (
+                <Card className="border-0 shadow-lg">
+                  <CardContent className="p-8 text-center">
+                    <div className="text-4xl mb-2">🤖</div>
+                    <div className="text-gray-800 font-medium mb-2">No agents yet</div>
+                    <div className="text-gray-600 mb-4">Hire your first AI agent to get started.</div>
+                    <Button onClick={onHireAgentClick}>Hire Agent</Button>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="space-y-4">
+                  {agents.map((agent) => (
+                    <Card key={agent.id} className="border-0 shadow-lg hover-lift">
+                      <CardContent className="p-6 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4">
+                            <div className="text-3xl">{agent.avatar ?? '🤖'}</div>
+                            <div>
+                              <h3 className="font-semibold text-gray-900">{agent.name}</h3>
+                              <p className="text-sm text-gray-600">{agent.role}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Button size="sm" variant="outline" onClick={() => runDemoTask(agent.id, agent.name)}>
+                              <Play className="w-4 h-4 mr-1" /> Run Demo Task
+                            </Button>
+                            <Button size="sm" variant="outline" onClick={() => openAgentSettings(agent)}>Settings</Button>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <Button size="sm" variant="outline" onClick={() => runDemoTask(agent.id, agent.name)}>
-                            <Play className="w-4 h-4 mr-1" /> Run Demo Task
-                          </Button>
-                          <Button size="sm" variant="outline" onClick={() => openAgentSettings(agent)}>Settings</Button>
-                        </div>
-                      </div>
 
-                      <div className="flex items-center gap-2">
-                        <input
-                          value={assignText[agent.id] || ''}
-                          onChange={(e) => setAssignText(prev => ({ ...prev, [agent.id]: e.target.value }))}
-                          placeholder={`Ask ${agent.name} to do something...`}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        />
-                        <Button onClick={() => assignTask(agent.id, agent.name)} disabled={!assignText[agent.id]?.trim()}>
-                          Assign
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                        <div className="flex items-center gap-2">
+                          <input
+                            value={assignText[agent.id] || ''}
+                            onChange={(e) => setAssignText(prev => ({ ...prev, [agent.id]: e.target.value }))}
+                            placeholder={`Ask ${agent.name} to do something...`}
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          />
+                          <Button onClick={() => assignTask(agent.id, agent.name)} disabled={!assignText[agent.id]?.trim()}>
+                            Assign
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Recent Activity */}
             <div>
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
                 Recent Activity
@@ -459,37 +480,37 @@ export default function DashboardPage() {
                       <div className="p-6 text-sm text-gray-500">{loading ? 'Loading...' : 'No recent tasks yet.'}</div>
                     )}
                     {recentTasks.map((task) => (
-                        <div key={task.id} className="p-4 space-y-2">
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-start space-x-3">
-                              <div className="mt-1 text-purple-600">
-                                {getTaskIcon(task.type)}
-                              </div>
-                              <div>
-                                <p className="text-sm text-gray-900">
-                                  <span className="font-medium">{task.agent?.name ?? 'Agent'}</span>{' '}
-                                  {task.title}
-                                </p>
-                                <p className="text-xs text-gray-500 mt-1">
-                                  {new Date(task.createdAt ?? Date.now()).toLocaleString()}
-                                </p>
-                                {task.output?.text && (
-                                  <pre className="mt-2 text-xs bg-gray-50 p-2 rounded border border-gray-100 whitespace-pre-wrap">{task.output.text}</pre>
-                                )}
-                              </div>
+                      <div key={task.id} className="p-4 space-y-2">
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-start space-x-3">
+                            <div className="mt-1 text-purple-600">
+                              {getTaskIcon(task.type)}
                             </div>
-                            <div className={`text-xs font-medium ${getTaskStatusColor(task.status)}`}>
-                              {renderStatusChip(task.status)}
+                            <div>
+                              <p className="text-sm text-gray-900">
+                                <span className="font-medium">{task.agent?.name ?? 'Agent'}</span>{' '}
+                                {task.title}
+                              </p>
+                              <p className="text-xs text-gray-500 mt-1">
+                                {new Date(task.createdAt ?? Date.now()).toLocaleString()}
+                              </p>
+                              {task.output?.text && (
+                                <pre className="mt-2 text-xs bg-gray-50 p-2 rounded border border-gray-100 whitespace-pre-wrap">{task.output.text}</pre>
+                              )}
                             </div>
                           </div>
-                          {task.status === 'needs_review' && (
-                            <div className="flex items-center gap-2 pt-1">
-                              <Button size="sm" variant="outline" onClick={() => updateTaskStatus(task.id, 'approved')}>Approve</Button>
-                              <Button size="sm" variant="outline" onClick={() => updateTaskStatus(task.id, 'rejected')}>Reject</Button>
-                            </div>
-                          )}
+                          <div className={`text-xs font-medium ${getTaskStatusColor(task.status)}`}>
+                            {renderStatusChip(task.status)}
+                          </div>
                         </div>
-                      ))}
+                        {task.status === 'needs_review' && (
+                          <div className="flex items-center gap-2 pt-1">
+                            <Button size="sm" variant="outline" onClick={() => updateTaskStatus(task.id, 'approved')}>Approve</Button>
+                            <Button size="sm" variant="outline" onClick={() => updateTaskStatus(task.id, 'rejected')}>Reject</Button>
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
@@ -498,7 +519,6 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Upgrade Modal (Sheet) */}
       <Sheet open={showUpgrade} onOpenChange={setShowUpgrade}>
         <SheetContent side="bottom" className="rounded-t-2xl">
           <SheetHeader>
@@ -523,7 +543,6 @@ export default function DashboardPage() {
         </SheetContent>
       </Sheet>
 
-      {/* Agent Settings (Sheet) */}
       <Sheet open={settingsOpen} onOpenChange={setSettingsOpen}>
         <SheetContent side="right">
           <SheetHeader>
