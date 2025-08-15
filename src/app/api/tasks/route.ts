@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { generateText } from "@/lib/llm";
 import { getTaskMonthlyLimitForTier, getCurrentMonthRange } from "@/lib/utils";
+import { enqueueTask, getTaskQueue } from "@/lib/queue";
 
 export async function GET(_request: NextRequest) {
 	try {
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Create the task base
-		const task = await prisma.task.create({
+		let task = await prisma.task.create({
 			data: {
 				title,
 				description,
@@ -88,25 +89,33 @@ export async function POST(request: NextRequest) {
 			return NextResponse.json(completed, { status: 201 });
 		}
 
-		// Execute path (LLM, mark for review)
-		if (execute) {
-			const agent = agentId ? await prisma.agent.findUnique({ where: { id: agentId } }) : null;
-			const system = agent
-				? `You are ${agent.name}, a ${agent.role}. Respond in a ${agent.tone || 'professional'} tone, concise and actionable.`
-				: `You are an AI Agent Employee who writes concise, actionable outputs.`;
-			const userPrompt = description || title;
-			const content = await generateText(system, userPrompt);
-			const updated = await prisma.task.update({
-				where: { id: task.id },
-				data: {
-					status: "needs_review",
-					output: { text: content },
-					startedAt: new Date(),
-					completedAt: new Date(),
-				},
-				include: { agent: { select: { name: true, role: true } } },
-			});
-			return NextResponse.json(updated, { status: 201 });
+		// Execute path: enqueue when queue available, else inline
+		if (execute && type !== "demo") {
+			if (getTaskQueue()) {
+				// mark in progress and enqueue
+				task = await prisma.task.update({ where: { id: task.id }, data: { status: 'in_progress' }, include: { agent: { select: { name: true, role: true } } } })
+				await enqueueTask({ userId: session.user.id, taskId: task.id, agentId: agentId || null, type, description })
+				return NextResponse.json(task, { status: 201 })
+			} else {
+				// fallback inline
+				const agent = agentId ? await prisma.agent.findUnique({ where: { id: agentId } }) : null;
+				const system = agent
+					? `You are ${agent.name}, a ${agent.role}. Respond in a ${agent.tone || 'professional'} tone, concise and actionable.`
+					: `You are an AI Agent Employee who writes concise, actionable outputs.`;
+				const userPrompt = description || title;
+				const content = await generateText(system, userPrompt);
+				const updated = await prisma.task.update({
+					where: { id: task.id },
+					data: {
+						status: "needs_review",
+						output: { text: content },
+						startedAt: new Date(),
+						completedAt: new Date(),
+					},
+					include: { agent: { select: { name: true, role: true } } },
+				});
+				return NextResponse.json(updated, { status: 201 });
+			}
 		}
 
 		return NextResponse.json(task, { status: 201 });

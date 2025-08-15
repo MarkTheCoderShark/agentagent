@@ -21,17 +21,12 @@ Last updated: current sprint
     - `execute: true` runs via LLM and marks `needs_review`
   - `GET /api/tasks` lists tasks (with agent name/role)
   - `PATCH /api/tasks/[id]` updates status (approve/reject)
-- Dashboard
-  - Loads agents/tasks from APIs
-  - Per-agent: Run Demo Task
-  - Per-agent: Assign Task input (executes with review)
-  - Recent Activity shows outputs and Approve/Reject controls
-  - Removed page-level duplicate nav; uses global header
 
 ### In Progress / Remaining for MVP
 - Execution Engine (background)
-  - [ ] Queue + worker (BullMQ + Upstash/Redis) for non-demo tasks
-  - [ ] Retry and error reporting
+  - [x] Queue scaffold (BullMQ + Upstash/Redis envs) + worker script
+  - [x] `POST /api/tasks`: enqueue non-demo `execute` when queue configured, else fallback inline
+  - [ ] Retry and error reporting (expand), job metadata
 - Integrations (first 1–2 end-to-end)
   - [ ] Google OAuth connect; encrypted token storage in `Integration.config`
   - [ ] Actions: Gmail draft email; Google Sheets append row
@@ -86,10 +81,10 @@ Last updated: current sprint
 - [ ] Display memory capabilities and recent performance metrics on per-agent card
 
 ### Task Execution Engine (queue + async)
-- [ ] Queue: BullMQ + Upstash Redis
-  - [ ] `src/lib/queue.ts` for queue and job types
-  - [ ] `scripts/worker.ts` Node worker (process jobs, call LLM/tooling, update Task rows)
-  - [ ] Update `POST /api/tasks`: when `execute && type!=="demo"`, enqueue job and set `status: in_progress`
+- [x] Queue: BullMQ + Upstash Redis scaffold
+  - [x] `src/lib/queue.ts` for queue and job types
+  - [x] `scripts/worker.ts` Node worker (LLM execution, mark `needs_review`, record failures)
+  - [x] Update `POST /api/tasks`: enqueue non-demo tasks, set `in_progress` (fallback inline when queue missing)
   - [ ] Add retry/backoff and error handling; on failure mark `status: failed`, set `error`
 - [ ] UI: Realtime-ish refresh (polling or SSE later) for task rows
 
