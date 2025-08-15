@@ -288,7 +288,11 @@ export default function DashboardPage() {
   };
 
   const plan = (data?.user as any)?.subscriptionTier || usage?.subscriptionTier || 'free';
-  const reachedAgentLimit = usage?.agentLimit !== null && (usage?.agentCount ?? 0) >= (usage?.agentLimit ?? 0);
+  // Only enforce limit once usage is loaded and the backend reports a finite limit
+  const reachedAgentLimit =
+    usage !== null &&
+    usage.agentLimit !== null &&
+    (usage.agentCount ?? 0) >= (usage.agentLimit ?? 0);
 
   function onHireAgentClick() {
     if (reachedAgentLimit) {
