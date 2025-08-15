@@ -76,6 +76,8 @@ export default function HireAgentPage() {
   const [agentName, setAgentName] = useState("");
   const [agentTone, setAgentTone] = useState("professional");
   const [currentStep, setCurrentStep] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const selectedAgent = agentTemplates.find(template => template.id === selectedTemplate);
@@ -89,6 +91,8 @@ export default function HireAgentPage() {
   };
 
   const handleCreateAgent = async () => {
+    setSubmitting(true);
+    setError(null);
     try {
       const response = await fetch("/api/agents", {
         method: "POST",
@@ -104,11 +108,26 @@ export default function HireAgentPage() {
         }),
       });
 
+      if (response.status === 401) {
+        router.push(`/auth/signin?callbackUrl=${encodeURIComponent("/dashboard/hire-agent")}`);
+        return;
+      }
+
       if (response.ok) {
         router.push("/dashboard");
+        return;
       }
+
+      let message = "Failed to create agent";
+      try {
+        const data = await response.json();
+        if (data?.message) message = data.message;
+      } catch {}
+      setError(message);
     } catch (_error) {
-      // Error creating agent
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -151,6 +170,12 @@ export default function HireAgentPage() {
               </span>
             </div>
           </div>
+
+          {error && (
+            <div className="mb-6 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
 
           {currentStep === 1 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -277,7 +302,7 @@ export default function HireAgentPage() {
             <Button
               variant="outline"
               onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
-              disabled={currentStep === 1}
+              disabled={currentStep === 1 || submitting}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
@@ -286,12 +311,15 @@ export default function HireAgentPage() {
             <Button
               onClick={handleNext}
               disabled={
+                submitting ||
                 (currentStep === 1 && !selectedTemplate) ||
                 (currentStep === 2 && !agentName)
               }
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
             >
-              {currentStep === 1 ? (
+              {submitting ? (
+                "Creating..."
+              ) : currentStep === 1 ? (
                 <>
                   Next
                   <ArrowRight className="w-4 h-4 ml-2" />
