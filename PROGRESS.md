@@ -81,7 +81,7 @@ Last updated: current sprint
 - [ ] Keep Google sign-up callback to `/onboarding`
 
 ### Agents (MVP complete + settings)
-- [ ] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
+- [x] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
 - [ ] UI: Agent Settings drawer/page from Dashboard list
 - [ ] Display memory capabilities and recent performance metrics on per-agent card
 
@@ -124,6 +124,9 @@ Last updated: current sprint
   - [x] Webhook `src/app/api/webhooks/stripe/route.ts` skeleton (signature validation + user subscription updates)
   - [ ] Entitlements middleware/helpers; enforce in `POST /api/agents`, `POST /api/tasks`
   - [ ] Unit tests for entitlement logic and webhook handlers
+- [x] Agents API
+  - [x] `PATCH /api/agents/[id]` to update profile, tone, permissions, working hours
+  - [ ] Server-side validations and audit fields
 - [ ] Task Execution Engine
   - [ ] `src/lib/queue.ts` (BullMQ + Upstash); job types for task execution
   - [ ] `scripts/worker.ts` processes jobs (LLM + integrations), retries/backoff, failure recording
@@ -136,22 +139,12 @@ Last updated: current sprint
   - [ ] Template schema + seed role templates
   - [ ] API: enable/disable per agent; manual run endpoint that enqueues jobs
   - [ ] Schedule runner (cron) → enqueues according to `schedule`
-- [ ] Agents API
-  - [ ] `PATCH /api/agents/[id]` to update profile, tone, permissions, working hours
-  - [ ] Server-side validations and audit fields
 - [ ] Analytics & Reliability
   - [ ] Add Sentry; add rate limits on write endpoints
   - [ ] Basic event logging for agent/task lifecycle
 - [ ] Documentation
   - [ ] API reference (endpoints, params, examples)
   - [ ] Env/ops runbook (Stripe, Upstash, webhooks, worker)
-
-#### Acceptance checks (Track A)
-- [ ] Stripe checkout/portal works with test keys; webhooks mutate user fields correctly
-- [ ] Non-demo tasks run via queue/worker with retry; failures recorded; statuses transition properly
-- [ ] Google connect stores encrypted tokens and actions succeed with test accounts
-- [ ] Workflow template can be enabled and scheduled task is enqueued and processed
-- [ ] Agent settings update persists and reflects in subsequent task prompts
 
 ### Track B — Builder Agent (Co-Dev) [Owner: Dev Agent]
 - [x] Pricing & Billing UI
