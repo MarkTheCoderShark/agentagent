@@ -140,3 +140,25 @@ Last updated: current sprint
 - [ ] Documentation
   - [ ] API reference (endpoints, params, examples)
   - [ ] Env/ops runbook (Stripe, Upstash, webhooks, worker) 
+
+### Track B — Builder Agent (Co-Dev) [Owner: Dev Agent]
+- [x] Pricing & Billing UI
+  - [x] Wire pricing CTAs → `POST /api/billing/checkout` (handle unauthenticated: redirect to signin then back)
+  - [x] Add "Manage Billing" button to account/settings → `GET /api/billing/portal`
+  - [x] Plan badges and tier-aware feature gating in UI (plan badge on Dashboard; gating on Hire Agent and Assign Task)
+- [x] Signup & Onboarding UX
+  - [x] Credentials signup: auto-login on success then `router.push('/onboarding')`
+  - [x] Plan guard: when paid/limited feature used on free tier, show upgrade modal → call checkout
+- [x] Dashboard & Agents UI
+  - [x] Agent Settings drawer/page (edit name/role/description/tone/status/avatar) wired to PATCH
+  - [ ] Improve task list with status chips; poll for updates; Approve/Reject toasts
+  - [ ] Empty/error states
+- [ ] Integrations UI
+  - [ ] Connect Google button (onboarding step + dashboard)
+  - [ ] Forms to trigger Gmail Draft and Sheets Append with validation and success messages
+- [ ] Workflows UI
+  - [ ] Enable/disable templates per agent; "Run now" CTA
+  - [ ] Schedule summary chips and next-run indicator
+- [ ] QA & Docs
+  - [ ] E2E happy paths: checkout, portal, create agent, run demo, run execute, approve
+  - [ ] Short user guide: "Getting started in 5 minutes" 
