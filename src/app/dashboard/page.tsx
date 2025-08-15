@@ -28,6 +28,7 @@ import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetT
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/toast";
 
 interface Agent {
   id: string;
@@ -63,6 +64,7 @@ export default function DashboardPage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [editingAgent, setEditingAgent] = useState<Agent | null>(null);
   const [agentForm, setAgentForm] = useState<{ name: string; role: string; description: string; tone: string; status: string; avatar: string }>({ name: '', role: '', description: '', tone: 'professional', status: 'active', avatar: '' });
+  const { show } = useToast();
 
   async function runDemoTask(agentId: string, agentName: string) {
     await fetch('/api/tasks', {
@@ -155,6 +157,7 @@ export default function DashboardPage() {
     });
     const res = await fetch('/api/tasks');
     if (res.ok) setRecentTasks(await res.json());
+    show({ title: `Task ${status}`, description: `Task has been ${status}.` });
   }
 
   async function openBillingPortal() {
@@ -215,6 +218,17 @@ export default function DashboardPage() {
     return () => { mounted = false }
   }, []);
 
+  useEffect(() => {
+    // Poll recent tasks every 8s
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch('/api/tasks');
+        if (res.ok) setRecentTasks(await res.json());
+      } catch {}
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
   const _getStatusColor = (status: string) => {
     switch (status) {
       case "active":
@@ -268,6 +282,18 @@ export default function DashboardPage() {
     }
     router.push('/dashboard/hire-agent');
   }
+
+  const renderStatusChip = (status: string) => {
+    const base = 'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium';
+    const map: Record<string, string> = {
+      completed: 'bg-green-100 text-green-700',
+      in_progress: 'bg-blue-100 text-blue-700',
+      needs_review: 'bg-orange-100 text-orange-700',
+      failed: 'bg-red-100 text-red-700',
+      pending: 'bg-gray-100 text-gray-700',
+    };
+    return <span className={`${base} ${map[status] || map['pending']}`}>{status}</span>;
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
@@ -453,7 +479,7 @@ export default function DashboardPage() {
                               </div>
                             </div>
                             <div className={`text-xs font-medium ${getTaskStatusColor(task.status)}`}>
-                              {task.status}
+                              {renderStatusChip(task.status)}
                             </div>
                           </div>
                           {task.status === 'needs_review' && (

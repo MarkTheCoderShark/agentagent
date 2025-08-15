@@ -151,7 +151,7 @@ Last updated: current sprint
   - [x] Plan guard: when paid/limited feature used on free tier, show upgrade modal → call checkout
 - [x] Dashboard & Agents UI
   - [x] Agent Settings drawer/page (edit name/role/description/tone/status/avatar) wired to PATCH
-  - [ ] Improve task list with status chips; poll for updates; Approve/Reject toasts
+  - [x] Improve task list with status chips; poll for updates; Approve/Reject toasts
   - [ ] Empty/error states
 - [ ] Integrations UI
   - [ ] Connect Google button (onboarding step + dashboard)
