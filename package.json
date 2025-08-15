@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "prisma generate",
+    "prebuild": "sh -c 'DBURL=${NETLIFY_DATABASE_URL_UNPOOLED:-$NETLIFY_DATABASE_URL}; DATABASE_URL=$DBURL prisma generate && DATABASE_URL=$DBURL prisma db push --accept-data-loss'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

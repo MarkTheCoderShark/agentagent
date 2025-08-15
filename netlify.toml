@@ -36,8 +36,4 @@
   to = "/.netlify/functions/simple-users"
   status = 200
 
-# Catch-all redirect must be LAST
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200 
+# Removed the static catch-all redirect so Next.js runtime can handle routing 
