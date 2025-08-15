@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bot, ArrowLeft, ArrowRight, Sparkles, MessageSquare, BarChart3, FileText, Users, Zap, Clock } from "lucide-react";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { useToast } from "@/components/ui/toast";
 
 const agentTemplates = [
   {
@@ -78,10 +79,12 @@ export default function HireAgentPage() {
   const [agentTone, setAgentTone] = useState("professional");
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
+  const { show } = useToast();
 
   const [agentCount, setAgentCount] = useState<number | null>(null);
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -125,6 +128,7 @@ export default function HireAgentPage() {
 
   const handleCreateAgent = async () => {
     try {
+      setIsCreating(true);
       const response = await fetch("/api/agents", {
         method: "POST",
         headers: {
@@ -138,12 +142,26 @@ export default function HireAgentPage() {
           template: selectedTemplate,
         }),
       });
-
       if (response.ok) {
         router.push("/dashboard");
+        return;
       }
+      // Handle common failure cases with feedback
+      if (response.status === 401) {
+        router.push("/auth/signin?callbackUrl=/dashboard/hire-agent");
+        return;
+      }
+      if (response.status === 403) {
+        setShowUpgrade(true);
+        return;
+      }
+      const data = await response.json().catch(() => ({} as any));
+      const message = (data && (data.message || data.error)) || "Failed to create agent.";
+      show({ title: "Error", description: message });
     } catch (_error) {
-      // Error creating agent
+      show({ title: "Error", description: "Could not contact server. Please try again." });
+    } finally {
+      setIsCreating(false);
     }
   };
 
@@ -344,7 +362,7 @@ export default function HireAgentPage() {
               onClick={handleNext}
               disabled={
                 (currentStep === 1 && !selectedTemplate) ||
-                (currentStep === 2 && !agentName)
+                (currentStep === 2 && (!agentName || isCreating))
               }
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
             >
@@ -355,7 +373,7 @@ export default function HireAgentPage() {
                 </>
               ) : (
                 <>
-                  Hire Agent
+                  {isCreating ? "Hiring…" : "Hire Agent"}
                   <Sparkles className="w-4 h-4 ml-2" />
                 </>
               )}
