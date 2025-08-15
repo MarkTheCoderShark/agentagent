@@ -103,6 +103,7 @@ Last updated: current sprint
 - [x] Sign-in: respect `next` param to return users to the intended page after authentication.
 - [x] Usage API: `GET /api/usage` returns tier, agent/task usage; dashboard shows plan badge and usage limits.
 - [x] Dashboard gating: prevent hiring beyond free limit and assigning tasks past monthly cap; show upgrade modal with checkout.
+- [x] Unit tests: entitlement helpers (`src/lib/utils.test.ts`) passing with vitest.
 
 ### Analytics & Reliability
 - [ ] Basic event logging (task created/completed, agent created)
