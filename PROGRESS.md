@@ -100,6 +100,11 @@ Last updated: current sprint
 - [x] Dashboard gating: prevent hiring beyond free limit and assigning tasks past monthly cap; show upgrade modal with checkout.
 - [x] Unit tests: entitlement helpers (`src/lib/utils.test.ts`) passing with vitest.
 
+### Integrations UI (Builder)
+- [x] Integrations page with Connect Google stub and action forms (Gmail Draft, Sheets Append) using toasts
+- [ ] Add Connect Google button to onboarding step
+- [ ] Wire forms to backend actions when available
+
 ### Analytics & Reliability
 - [ ] Basic event logging (task created/completed, agent created)
 - [ ] Error reporting (Sentry) and API rate limits on write endpoints
@@ -153,9 +158,10 @@ Last updated: current sprint
   - [x] Agent Settings drawer/page (edit name/role/description/tone/status/avatar) wired to PATCH
   - [x] Improve task list with status chips; poll for updates; Approve/Reject toasts
   - [ ] Empty/error states
-- [ ] Integrations UI
-  - [ ] Connect Google button (onboarding step + dashboard)
-  - [ ] Forms to trigger Gmail Draft and Sheets Append with validation and success messages
+- [x] Integrations UI
+  - [x] Integrations page with Connect Google stub and action forms (Gmail Draft, Sheets Append) using toasts
+  - [ ] Add Connect Google button to onboarding step
+  - [ ] Wire forms to backend actions when available
 - [ ] Workflows UI
   - [ ] Enable/disable templates per agent; "Run now" CTA
   - [ ] Schedule summary chips and next-run indicator
