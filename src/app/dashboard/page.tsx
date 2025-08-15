@@ -26,12 +26,17 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface Agent {
   id: string;
   name: string;
   role: string;
   avatar?: string;
+  description?: string;
+  tone?: string;
+  status?: string;
 }
 
 interface Task {
@@ -55,6 +60,9 @@ export default function DashboardPage() {
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const router = useRouter();
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [editingAgent, setEditingAgent] = useState<Agent | null>(null);
+  const [agentForm, setAgentForm] = useState<{ name: string; role: string; description: string; tone: string; status: string; avatar: string }>({ name: '', role: '', description: '', tone: 'professional', status: 'active', avatar: '' });
 
   async function runDemoTask(agentId: string, agentName: string) {
     await fetch('/api/tasks', {
@@ -70,6 +78,36 @@ export default function DashboardPage() {
     // refresh tasks
     const res = await fetch('/api/tasks');
     if (res.ok) setRecentTasks(await res.json());
+  }
+
+  function openAgentSettings(agent: Agent) {
+    setEditingAgent(agent);
+    setAgentForm({
+      name: agent.name || '',
+      role: agent.role || '',
+      description: agent.description || '',
+      tone: agent.tone || 'professional',
+      status: agent.status || 'active',
+      avatar: (agent as any).avatar || '',
+    });
+    setSettingsOpen(true);
+  }
+
+  async function saveAgentSettings() {
+    if (!editingAgent) return;
+    const res = await fetch(`/api/agents/${editingAgent.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(agentForm),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setAgents(prev => prev.map(a => a.id === updated.id ? { ...a, ...updated } : a));
+      setSettingsOpen(false);
+      setEditingAgent(null);
+    } else {
+      alert('Failed to update agent');
+    }
   }
 
   async function assignTask(agentId: string, agentName: string) {
@@ -361,6 +399,7 @@ export default function DashboardPage() {
                           <Button size="sm" variant="outline" onClick={() => runDemoTask(agent.id, agent.name)}>
                             <Play className="w-4 h-4 mr-1" /> Run Demo Task
                           </Button>
+                          <Button size="sm" variant="outline" onClick={() => openAgentSettings(agent)}>Settings</Button>
                         </div>
                       </div>
 
@@ -454,6 +493,53 @@ export default function DashboardPage() {
               {loadingPlan === 'pro' ? 'Starting…' : 'Upgrade to Pro'}
             </Button>
             <Button variant="outline" onClick={() => setShowUpgrade(false)}>Maybe later</Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+
+      {/* Agent Settings (Sheet) */}
+      <Sheet open={settingsOpen} onOpenChange={setSettingsOpen}>
+        <SheetContent side="right">
+          <SheetHeader>
+            <SheetTitle>Edit Agent</SheetTitle>
+            <SheetDescription>Update your agent's profile and preferences.</SheetDescription>
+          </SheetHeader>
+          <div className="p-4 space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="agent-name">Name</Label>
+              <Input id="agent-name" value={agentForm.name} onChange={(e) => setAgentForm(prev => ({ ...prev, name: e.target.value }))} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="agent-role">Role</Label>
+              <Input id="agent-role" value={agentForm.role} onChange={(e) => setAgentForm(prev => ({ ...prev, role: e.target.value }))} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="agent-desc">Description</Label>
+              <Input id="agent-desc" value={agentForm.description} onChange={(e) => setAgentForm(prev => ({ ...prev, description: e.target.value }))} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="agent-tone">Tone</Label>
+              <select id="agent-tone" value={agentForm.tone} onChange={(e) => setAgentForm(prev => ({ ...prev, tone: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <option value="professional">Professional</option>
+                <option value="casual">Casual</option>
+                <option value="friendly">Friendly</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="agent-status">Status</Label>
+              <select id="agent-status" value={agentForm.status} onChange={(e) => setAgentForm(prev => ({ ...prev, status: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <option value="active">Active</option>
+                <option value="paused">Paused</option>
+                <option value="offline">Offline</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="agent-avatar">Avatar (emoji)</Label>
+              <Input id="agent-avatar" value={agentForm.avatar} onChange={(e) => setAgentForm(prev => ({ ...prev, avatar: e.target.value }))} />
+            </div>
+          </div>
+          <SheetFooter>
+            <Button onClick={saveAgentSettings} disabled={!editingAgent}>Save Changes</Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>

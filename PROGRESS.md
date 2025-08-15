@@ -82,7 +82,7 @@ Last updated: current sprint
 
 ### Agents (MVP complete + settings)
 - [x] API: `PATCH /api/agents/[id]` to update `name`, `role`, `description`, `tone`, `permissions`, `workingHours`
-- [ ] UI: Agent Settings drawer/page from Dashboard list
+- [x] UI: Agent Settings drawer in Dashboard (edit name/role/description/tone/status/avatar) wired to PATCH
 - [ ] Display memory capabilities and recent performance metrics on per-agent card
 
 ### Task Execution Engine (queue + async)
@@ -144,37 +144,4 @@ Last updated: current sprint
   - [ ] Basic event logging for agent/task lifecycle
 - [ ] Documentation
   - [ ] API reference (endpoints, params, examples)
-  - [ ] Env/ops runbook (Stripe, Upstash, webhooks, worker)
-
-### Track B — Builder Agent (Co-Dev) [Owner: Dev Agent]
-- [x] Pricing & Billing UI
-  - [x] Wire pricing CTAs → `POST /api/billing/checkout` (handle unauthenticated: redirect to signin then back)
-  - [x] Add "Manage Billing" button to account/settings → `GET /api/billing/portal` (placed on Dashboard header for now)
-  - [ ] Plan badges and tier-aware feature gating in UI
-- [x] Signup & Onboarding UX
-  - [x] Credentials signup: auto-login on success then `router.push('/onboarding')`
-  - [ ] Add plan guard: when paid feature used on free tier, show upgrade modal → call checkout
-- [ ] Dashboard & Agents UI
-  - [ ] Agent Settings drawer/page (edit name/role/description/tone)
-  - [ ] Improve task list with status chips; poll for updates; Approve/Reject toasts
-  - [ ] Empty/error states
-- [ ] Integrations UI
-  - [ ] Connect Google button (onboarding step + dashboard)
-  - [ ] Forms to trigger Gmail Draft and Sheets Append with validation and success messages
-- [ ] Workflows UI
-  - [ ] Enable/disable templates per agent; "Run now" CTA
-  - [ ] Schedule summary chips and next-run indicator
-- [ ] QA & Docs
-  - [ ] E2E happy paths: checkout, portal, create agent, run demo, run execute, approve
-  - [ ] Short user guide: "Getting started in 5 minutes"
-
-#### Dependencies & Coordination
-- **Track B depends on Track A** for: billing endpoints/webhook, entitlements, integrations backend, workflows API, agent PATCH.
-- Daily sync: confirm endpoint contracts; provide mocked responses until backend merges.
-- Feature flags: guard new menus until backend is ready.
-
-#### Milestones
-- Day 1–2: Track A (webhook skeleton, checkout/portal endpoints, queue scaffold); Track B (UI wiring stubs, upgrade modal)
-- Day 3–4: Track A (entitlements, agent PATCH, Google OAuth backend); Track B (agent settings UI, pricing CTAs complete)
-- Day 5: Track A (actions + worker integration, workflow enable/run); Track B (integrations UI, workflows UI)
-- Day 6–7: Stabilization, tests, docs, DoD verification 
+  - [ ] Env/ops runbook (Stripe, Upstash, webhooks, worker) 
